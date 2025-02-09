@@ -10,7 +10,7 @@ A Python tool for querying lending controller information from Ethereum smart co
 - Total Collateral Value: $21.81T USD
 - Analysis Duration: 573.21 seconds
 
-## Current Capabilities
+## Features
 
 - Query factory contract for active controllers
 - Get borrowed and collateral token information for each controller
@@ -21,25 +21,71 @@ A Python tool for querying lending controller information from Ethereum smart co
 - Efficient caching system for token and loan information
 - Batch processing for loan queries
 - Automatic RPC endpoint switching on rate limits
+- Type-safe implementation with full type hints
+- Configurable parameters via YAML
+- Colored terminal output
+- Context saving for analysis results
 
 ## Architecture
 
-### RPC Configuration
-The system uses multiple reliable public RPC endpoints with automatic failover:
-- eth.llamarpc.com
-- rpc.ankr.com/eth
-- eth-mainnet.public.blastapi.io
-- ethereum.publicnode.com
-- 1rpc.io/eth
-- rpc.mevblocker.io
-- cloudflare-eth.com
+### Configuration
 
-### Optimization Parameters
-- Controller Discovery Batch Size: 3
-- Loan Info Batch Size: 5
-- Max Consecutive Errors: 10
-- Token Info Cache TTL: 12 hours
-- Loan Info Cache TTL: 4 hours
+All configuration parameters are stored in `config/analyzer_config.yaml`:
+
+```yaml
+# RPC Configuration
+rpc_endpoints:
+  - https://eth.llamarpc.com
+  - https://rpc.ankr.com/eth
+  # ... more endpoints
+
+# Batch Processing
+batch_sizes:
+  controller_discovery: 3  # Controllers to query in parallel
+  loan_info: 5  # Loans to query in parallel
+
+# Error Handling
+error_limits:
+  max_consecutive_errors: 10
+  rate_limit_retries: 3
+
+# Cache Configuration
+cache:
+  token_info_ttl: 43200  # 12 hours
+  loan_info_ttl: 14400   # 4 hours
+  web3_call_ttl: 300     # 5 minutes
+```
+
+### Directory Structure
+
+```
+.
+├── config/               # Configuration files
+│   └── analyzer_config.yaml
+├── contracts/           # Contract interfaces and ABIs
+│   └── interfaces/
+├── docs/               # Documentation
+├── src/               # Source code
+│   ├── utils/         # Utility modules
+│   └── contracts/     # Contract interaction modules
+├── .cache/            # Cache directory
+├── main.py           # Entry point
+└── README.md         # Documentation link
+```
+
+### Contract Interfaces
+
+#### Factory Contract
+- Address: `0xeA6876DDE9e3467564acBeE1Ed5bac88783205E0`
+- Functions:
+  - `controllers(uint256)`: Get controller address by index
+
+#### Controller Contract
+Functions:
+- `borrowed_token()` / `borrowedToken()`: Get borrowed token address
+- `collateral_token()` / `collateralToken()`: Get collateral token address
+- `user_state(address)`: Get user loan state (collateral, debt)
+- `loans(uint256)`: Get loan addresses by index
 
 ## Setup
 
@@ -63,7 +109,7 @@ Build and run using Docker:
 docker build -t eth-loan-query .
 
 # Run the container
-docker run -v $(pwd)/cache:/app/cache eth-loan-query
+docker run -v $(pwd)/.cache:/app/.cache eth-loan-query
 ```
 
 ## Usage
@@ -75,37 +121,25 @@ python main.py
 ```
 
 The script will:
-1. Connect to Ethereum network
-2. Query the factory contract for all controllers
-3. For each controller:
+1. Load configuration from YAML
+2. Connect to Ethereum network
+3. Query the factory contract for all controllers
+4. For each controller:
    - Get borrowed and collateral token information
    - Calculate USD values using current token prices
-4. Display a summary for each controller and grand totals
-5. Save analysis context to context.json
-
-## Contract Interfaces
-
-### Factory Contract
-- Address: `0xeA6876DDE9e3467564acBeE1Ed5bac88783205E0`
-- Functions:
-  - `controllers(uint256)`: Get controller address by index
-
-### Controller Contract
-Functions:
-- `borrowed_token()` / `borrowedToken()`: Get borrowed token address
-- `collateral_token()` / `collateralToken()`: Get collateral token address
-- `user_state(address)`: Get user loan state (collateral, debt)
-- `loans(uint256)`: Get loan addresses by index
+5. Display a summary for each controller and grand totals
+6. Save analysis context to .cache/context.json
 
 ## Error Handling
 
-The tool includes:
+The tool includes sophisticated error handling:
 - Exponential backoff for rate limiting
 - Multiple RPC endpoint fallbacks
 - Support for different function naming conventions
 - Graceful handling of contract errors
 - Consecutive error detection
 - Automatic endpoint switching on rate limits
+- Type-safe operations with runtime checks
 
 ## Output Format
 
@@ -132,10 +166,10 @@ Total Collateral USD: $8.67T
 
 ## Caching System
 
-The tool implements a multi-level caching system:
+The tool implements a configurable multi-level caching system:
 - Token Information: 12-hour TTL
 - Loan Information: 4-hour TTL
-- Web3 Call Results: Request-level caching
+- Web3 Call Results: 5-minute TTL
 - Controller Data: Session-level caching
 
 ## Next Steps
@@ -157,3 +191,4 @@ Feel free to contribute by:
 4. Adding new analytics features
 5. Optimizing RPC usage patterns
 6. Enhancing caching strategies
+7. Adding tests and improving type safety
