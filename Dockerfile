@@ -14,12 +14,17 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
-COPY . .
+# Create necessary directories
+RUN mkdir -p /app/.cache /app/config /app/docs
 
-# Create cache directory and set permissions
-RUN mkdir -p /app/cache && \
-    chmod -R 777 /app/cache
+# Copy source code and configurations
+COPY src/ /app/src/
+COPY contracts/ /app/contracts/
+COPY config/ /app/config/
+COPY docs/ /app/docs/
+
+# Set cache directory permissions
+RUN chmod -R 777 /app/.cache
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
@@ -31,4 +36,4 @@ RUN useradd -m appuser && \
 USER appuser
 
 # Set default command
-CMD ["python", "main.py"]
+CMD ["python", "src/main.py"]
