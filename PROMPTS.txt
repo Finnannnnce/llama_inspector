@@ -1,0 +1,58 @@
+Crreate a README.md in markdown that explains how to use the script and install the rquirements
+
+Explain the .env file and the options needed in it.
+
+Make a description of what the script does in detail.
+
+Do not use any default prices get all token prices from Coingecko or 1inch or cowswap. Try 1inch first then if it fails try cowswap. If that fails goto coingecko. If that fails retry until coingecko works.
+
+Never outright fail a request except for the logic to get token prices. Keep retrying until it eventually suceeds. If it tries for more then 5 minutes on 1 requeest log an error and move on.
+
+While processing each vault list addresses that return true to `have_liquidity` function.
+
+Make the caching work even if the script is terminated early. Only do not cache when there is an error from the request.
+
+Reupdate the README.md
+
+Rename query_vaults.py to main.py
+Delete the old flask references that are unused
+Delete the Dockerfile
+Remake the Dockerfile to run main.py
+Make a docker-compose.yml which uses the .env file and config.yaml
+Make a .env.sample file which has all of the keys of .env but no value. Document this sample file to let the user know what variables to fill in and where to get them.
+Update the config.yaml to store the ethereum RPC's
+Create a large list of ethereum RPC's that are known good archival nodes for the config.yaml
+
+Create 3 levels of verbosity using the logging python library that is built in.
+Update the README.md
+
+Split the larger files off into smaller files to make editing quicker.
+Cowswap gives the native price in ETH convert that to USD.
+Attempt to make the script process web3 requests faster
+Update the README.md
+
+Handle keyboard interrupts safely
+Update the README.md
+
+
+Get eth / weth price before querying coingecko as it relies on the eth price to compute token price.
+
+From the vault `Contract` ther is a fnction called `loans` iterate through `loans` starting with 0 until the request fails.
+Check each address returned with the `Contract` method 	`loan_exists`. If True report that this address has an active loan for the vault it is iterating over currently.
+
+Query_vaults `vault_info` should come from 
+
+Get all loans by query Contract '0x23F5a668A9590130940eF55964ead9787976f2CC' method `loans` start from 0 and loop until web33 returns "0x0000000000000000000000000000000000000000" for the address. Add any addresses found to loan user accounts in the summary.
+
+Move fetch_abi.py, query_vaults.py, verify_controller.py and verify_vaults.py to utils folder
+
+for instance 0x0fc59C9C998537c940a9Dfc7DacDe533a9c496Fe has a loan
+he is supply weth to borrow crvUSD
+you can also goto this contract (different then the one that has n_loans` https://etherscan.io/address/0xb46aDcd1eA7E35C4EB801406C3E76E76e9a46EdF#readContract
+it has a `has_liquidity` function that returns a boolean
+you enter the user account https://etherscan.io/address/0xb46aDcd1eA7E35C4EB801406C3E76E76e9a46EdF#readContract it returns True
+if you go here and hit contract read contract and run `debt` with the account 'https://etherscan.io/address/0xaade9230AA9161880E13a38C83400d3D1995267b#readContract'
+you get a uint256 which is the debt that they have taken out aganinst the collateral token. The method `borrowed_token` is the token that is borrowed and same with collateral_token, boh return pointers to smart contracts that are ERC20 AKA tokens
+so the debt returns 106080471772132557908 and `borrowed_token_ returns `0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E` and the borrowed token is crvUSD and the collateral token is wETH
+
+The controller smart contract such as 0x23F5a668A9590130940eF55964ead9787976f2CC has a method called `loans` you can iterate over that starting from 0 until it errors out or only finds '0x0000000000000000000000000000000000000000'. Using the addresses found from the return you can build a list of user addresses that have had or have loans on this vault. If you use method `loan_exists` on that smart contract and it returns `true` the account has an active loan. To get the current debt you can query `debt` on that same smart contract and the return is the amount of debt in crbUSD in gwei.

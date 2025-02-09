@@ -1,0 +1,11 @@
+name: query
+
+ethereum:
+  mainnet:
+    default_provider: node
+    provider:
+      - name: node
+        url: https://cloudflare-eth.com
+
+etherscan:
+  api_key: ${ETHERSCAN_API_KEY}

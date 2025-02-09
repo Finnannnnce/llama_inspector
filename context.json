@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-02-09T02:35:58-06:00",
+  "summary": {
+    "total_controllers": 25,
+    "active_loans": 345,
+    "total_borrowed_usd": "16730891230327486833229824.00",
+    "total_collateral_usd": "21808526074666572769656832.00",
+    "execution_time_seconds": 573.21
+  },
+  "controllers": [
+    {
+      "address": "0x1E0165DbD2019441aB7927C018701f3138114D71",
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "price": 1.00
+      },
+      "collateral_token": {
+        "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+        "name": "Wrapped liquid staked Ether 2.0",
+        "price": 3173.25
+      },
+      "active_loans": 9,
+      "total_borrowed": "16124851658291706593280.0000",
+      "total_collateral": "8324397119440759808.0000",
+      "total_borrowed_usd": "16111032660420550721536.00",
+      "total_collateral_usd": "26415393159265392787456.00"
+    },
+    {
+      "address": "0xaade9230AA9161880E13a38C83400d3D1995267b",
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "price": 1.00
+      },
+      "collateral_token": {
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "name": "Wrapped Ether",
+        "price": 2658.05
+      },
+      "active_loans": 20,
+      "total_borrowed": "491996768056663278092288.0000",
+      "total_collateral": "384302366939861024768.0000",
+      "total_borrowed_usd": "491575126826438744866816.00",
+      "total_collateral_usd": "1021494906444497614274560.00"
+    },
+    {
+      "address": "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc",
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "price": 1.00
+      },
+      "collateral_token": {
+        "address": "0x18084fbA666a33d37592fA2633fD49a74DD93a88",
+        "name": "tBTC v2",
+        "price": 96603.00
+      },
+      "active_loans": 19,
+      "total_borrowed": "617647440828626789990400.0000",
+      "total_collateral": "12088126499562278912.0000",
+      "total_borrowed_usd": "617118116971836717662208.00",
+      "total_collateral_usd": "1167749284237214815879168.00"
+    }
+  ],
+  "rpc_endpoints": [
+    "https://eth.llamarpc.com",
+    "https://rpc.ankr.com/eth",
+    "https://eth-mainnet.public.blastapi.io",
+    "https://ethereum.publicnode.com",
+    "https://1rpc.io/eth",
+    "https://rpc.mevblocker.io",
+    "https://cloudflare-eth.com"
+  ],
+  "optimizations": {
+    "batch_size": {
+      "controller_discovery": 3,
+      "loan_info": 5
+    },
+    "max_consecutive_errors": 10,
+    "caching": {
+      "token_info_ttl_hours": 12,
+      "loan_info_ttl_hours": 4
+    }
+  }
+}

@@ -1,0 +1,55 @@
+---
+etfs:
+  btc:
+    spot:
+      # https://blockworks.co/bitcoin-etf
+      GBTC: Grayscale
+      IBIT: Blackrock
+      FBTC: Fidelity
+      ARKB: ARK
+      BITB: Bitwise - Bitwise Bitcoin ETP
+      HODL: VanEck
+      BRRR: Valkyrie
+      EZBC: Franklin Templeton
+      BTCW: WisdomTree
+      ETHE: Grayscale Ethereum Trust (ETH)
+      BITC: Bitwise Bitcoin Strategy Optm Roll ETF
+      BITX: 2x Bitcoin Strategy ETF
+      BTCO: Invesco Galaxy Bitcoin ETF
+    futures:
+  # https://ycharts.com/companies/BITO
+      BTF: Valkyrie Bitcoin and Ether Strategy ETF
+      BITS: Global X Blockchain & Bitcoin Strategy ETF
+      ARKA: ARK 21Shares Active Bitcoin Futures Strategy ETF
+      BITC: Bitwise Bitcoin Strategy Optimum Yield ETF
+      DEFI: Hashdex Bitcoin Futures ETF
+      BETH: ProShares Bitcoin & Ether Market Cap Weight Strategy ETF
+      BETE: ProShares Bitcoin & Ether Equal Weight Strategy ETF 
+      ARXY: ARK 21Shares Active Bitcoin Ethereum Strategy ETF
+      ARKC: ARK 21Shares Active On-Chain Bitcoin Strategy ETF
+      XBTF: VanEck Bitcoin Strategy ETF
+      NA: MSCI ACWI Net Total Return
+      BITO: ProShares Bitcoin Strategy ETF
+
+  eth:
+    futures:
+      Grayscale Ethereum Trust
+      Bitwise Ethereum ETF
+      Blackrock’s iShares Ethereum Trust
+      VanEck Ethereum Trust
+      ARK 21Shares Ethereum ETF
+      Invesco Galaxy Ethereum ETF
+      Fidelity Ethereum Fund
+      Franklin Ethereum ETF
+      EETH: ProShares Ether Strategy ETF
+      BTF:  Valkyrie Bitcoin and Ether Strategy ETF
+      EFUT: VanEck Ethereum Strategy ETF
+      AETH: Bitwise Ethereum Strategy ETF
+      ARKZ: ARK 21Shares Active Ethereum Futures Strategy ETF
+      BITW: Bitwise 10 Crypto Index Fund
+  eth_btc:
+    futures:
+      ARKE: ARK
+      BTF: Valkyrie Bitcoin and Ether Strategy ETF
+      BETH: ProShares ProShares Bitcoin & Ether Market Cap Weight Strategy ETF
+      BETE: ProShares ProShares Bitcoin & Ether Equal Weight Strategy ETF
