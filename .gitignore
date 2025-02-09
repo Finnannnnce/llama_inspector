@@ -4,7 +4,6 @@ __pycache__/
 *$py.class
 *.so
 .Python
-env/
 build/
 develop-eggs/
 dist/
@@ -21,15 +20,19 @@ wheels/
 .installed.cfg
 *.egg
 
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+.venv
+.env.*
+
 # Cache directories
 cache/
 **/cache/
 *.cache
 web3_cache/
-
-# Environment variables
-.env
-.env.*
 
 # IDE
 .idea/
