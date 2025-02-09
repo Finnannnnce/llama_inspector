@@ -18,6 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/.cache /app/config /app/docs
 
 # Copy source code and configurations
+COPY main.py /app/
 COPY src/ /app/src/
 COPY contracts/ /app/contracts/
 COPY config/ /app/config/
@@ -36,4 +37,4 @@ RUN useradd -m appuser && \
 USER appuser
 
 # Set default command
-CMD ["python", "src/main.py"]
+CMD ["python", "main.py"]
