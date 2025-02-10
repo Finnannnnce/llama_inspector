@@ -1,0 +1,39 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ethereum-analyzer
+spec:
+  template:
+    spec:
+      containers:
+        - image: us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: alchemy-api-key
+                  key: latest
+            - name: INFURA_PROJECT_ID
+              value: ""  # Placeholder - will be updated when Infura key is available
+            - name: ANKR_API_KEY
+              value: ""  # Placeholder - will be updated when Ankr key is available
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+          # Health checks
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
