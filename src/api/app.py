@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from .routes import router
 
 app = FastAPI(
@@ -22,6 +23,12 @@ app.add_middleware(
 
 # Include API routes
 app.include_router(router)
+
+# Root endpoint - redirect to API docs
+@app.get("/")
+async def root():
+    """Redirect to API documentation"""
+    return RedirectResponse(url="/api/docs")
 
 # Health check endpoint
 @app.get("/health")
