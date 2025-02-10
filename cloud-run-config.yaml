@@ -2,8 +2,14 @@ apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
   name: ethereum-analyzer
+  annotations:
+    run.googleapis.com/ingress: all  # Allow both internal and external traffic
 spec:
   template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/client-name: "ethereum-analyzer"
     spec:
       containers:
         - image: us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
@@ -37,3 +43,11 @@ spec:
               path: /health
               port: 8080
             initialDelaySeconds: 5
+---
+apiVersion: domains.cloudrun.com/v1alpha1
+kind: DomainMapping
+metadata:
+  name: ethereum.swacktech.com
+  namespace: default
+spec:
+  routeName: ethereum-analyzer
