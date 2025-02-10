@@ -293,6 +293,18 @@ All endpoints can return the following error responses:
 }
 ```
 
+### RpcEndpoint
+
+```typescript
+{
+  name: string;        // Name of the RPC provider
+  url: string;         // RPC endpoint URL
+  chain_id: number;    // Chain ID (1 for Ethereum mainnet)
+  is_active: boolean;  // Whether the endpoint is currently active
+  priority: number;    // Priority order for fallback (lower is higher priority)
+}
+```
+
 ## Rate Limiting
 
 Currently, there are no rate limits implemented on the API endpoints. However, the underlying web3 calls are rate-limited to prevent overloading the Ethereum node.
