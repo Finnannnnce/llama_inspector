@@ -6,6 +6,12 @@ API for querying Ethereum lending vault information. Provides endpoints for retr
 
 Base URL: `https://ethereum-analyzer-330135650610.us-east1.run.app`
 
+## Live API Documentation
+
+- Interactive API docs: [https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs](https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs)
+- ReDoc documentation: [https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc](https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc)
+- OpenAPI schema: [https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json](https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json)
+
 ## Root Endpoint
 
 The root endpoint (`/`) automatically redirects to the API documentation.
