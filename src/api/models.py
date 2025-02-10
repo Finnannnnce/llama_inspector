@@ -39,6 +39,14 @@ class UserVaultSummary(BaseModel):
     total_debt_usd: str = Field(..., description="Total debt across all vaults in USD")
     total_collateral_usd: str = Field(..., description="Total collateral across all vaults in USD")
 
+class RpcEndpoint(BaseModel):
+    """RPC endpoint information"""
+    name: str = Field(..., description="Name of the RPC provider")
+    url: str = Field(..., description="RPC endpoint URL")
+    chain_id: int = Field(..., description="Chain ID")
+    is_active: bool = Field(..., description="Whether the endpoint is currently active")
+    priority: int = Field(..., description="Priority order for fallback (lower is higher priority)")
+
 class ErrorResponse(BaseModel):
     """API error response"""
     error: str = Field(..., description="Error message")

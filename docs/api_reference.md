@@ -158,6 +158,35 @@ GET /api/v1/users/{user_address}/positions
 }
 ```
 
+### List RPC Nodes
+
+Get a list of available Ethereum RPC nodes with their status.
+
+```
+GET /api/v1/rpc-nodes
+```
+
+#### Response
+
+```json
+[
+  {
+    "name": "Local Ethereum Node",
+    "url": "http://192.168.40.201:8545",
+    "chain_id": 1,
+    "is_active": true,
+    "priority": 1
+  },
+  {
+    "name": "Alchemy",
+    "url": "https://eth-mainnet.alchemyapi.io/v2/",
+    "chain_id": 1,
+    "is_active": true,
+    "priority": 2
+  }
+]
+```
+
 ### Health Check
 
 Get API health status.

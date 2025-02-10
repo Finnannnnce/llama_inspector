@@ -3,6 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from web3 import AsyncWeb3
 from web3.providers import AsyncHTTPProvider
 from decimal import Decimal
+import os
 
 from .models import (
     VaultInfo,
@@ -10,12 +11,64 @@ from .models import (
     UserPosition,
     UserVaultSummary,
     ErrorResponse,
-    TokenInfo
+    TokenInfo,
+    RpcEndpoint
 )
 from ..utils.contract_queries import ContractQueries
-from ..utils.formatters import format_token_amount
+from ..utils.formatters import format_token_amount, format_usd_amount
 
 router = APIRouter(prefix="/api/v1")
+
+@router.get("/rpc-nodes", response_model=List[RpcEndpoint], responses={503: {"model": ErrorResponse}})
+async def list_rpc_nodes():
+    """Get list of available Ethereum RPC nodes"""
+    try:
+        # Define available RPC nodes
+        rpc_nodes = [
+            RpcEndpoint(
+                name="Local Ethereum Node",
+                url="http://192.168.40.201:8545",
+                chain_id=1,
+                is_active=True,
+                priority=1
+            ),
+            RpcEndpoint(
+                name="Alchemy",
+                url="https://eth-mainnet.alchemyapi.io/v2/",
+                chain_id=1,
+                is_active=bool(os.getenv("ALCHEMY_API_KEY")),
+                priority=2
+            ),
+            RpcEndpoint(
+                name="Infura",
+                url="https://mainnet.infura.io/v3/",
+                chain_id=1,
+                is_active=bool(os.getenv("INFURA_PROJECT_ID")),
+                priority=3
+            ),
+            RpcEndpoint(
+                name="Ankr",
+                url="https://rpc.ankr.com/eth/",
+                chain_id=1,
+                is_active=bool(os.getenv("ANKR_API_KEY")),
+                priority=4
+            )
+        ]
+        return rpc_nodes
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=str(e))
+
+@router.get("/health")
+async def health_check():
+    """Health check endpoint for Cloud Run"""
+    try:
+        # Test Web3 connection
+        w3 = await get_web3()
+        if not await w3.is_connected():
+            raise HTTPException(status_code=503, detail="Failed to connect to Ethereum node")
+        return {"status": "healthy"}
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=str(e))
 
 def contract_token_to_api_token(token_dict: Dict[str, Any]) -> TokenInfo:
     """Convert contract token info dictionary to API TokenInfo model"""
@@ -106,9 +159,9 @@ async def get_vault_stats(vault_address: str, queries: ContractQueries = Depends
                     
                 loan_info = await queries.get_loan_info_async(vault, user_address)
                 if loan_info:
-                    # Format amounts considering token decimals
-                    debt = format_token_amount(loan_info['debt'], borrowed_decimals)
-                    collateral = format_token_amount(loan_info['collateral'], collateral_decimals)
+                    # Convert amounts considering token decimals
+                    debt = Decimal(loan_info['debt']) / (Decimal(10) ** borrowed_decimals)
+                    collateral = Decimal(loan_info['collateral']) / (Decimal(10) ** collateral_decimals)
                     
                     total_debt += debt
                     total_collateral += collateral
@@ -122,12 +175,15 @@ async def get_vault_stats(vault_address: str, queries: ContractQueries = Depends
         borrowed_price = Decimal(1.0)  # Default to 1.0 for stablecoins
         collateral_price = Decimal(0.0)  # Default to 0.0 for unknown tokens
             
+        total_debt_usd = total_debt * borrowed_price
+        total_collateral_usd = total_collateral * collateral_price
+        
         return VaultStats(
             address=vault_address,
-            total_debt=str(total_debt),
-            total_collateral=str(total_collateral),
-            total_debt_usd=str(total_debt * borrowed_price),
-            total_collateral_usd=str(total_collateral * collateral_price),
+            total_debt=format_token_amount(total_debt, 0),  # Already in human readable form
+            total_collateral=format_token_amount(total_collateral, 0),  # Already in human readable form
+            total_debt_usd=format_usd_amount(total_debt_usd),
+            total_collateral_usd=format_usd_amount(total_collateral_usd),
             active_loans=active_loans
         )
         
@@ -161,20 +217,23 @@ async def get_user_position(vault_address: str, user_address: str, queries: Cont
         borrowed_decimals = token_info['borrowed_token']['decimals']
         collateral_decimals = token_info['collateral_token']['decimals']
         
-        # Format amounts considering token decimals
-        debt = format_token_amount(loan_info['debt'], borrowed_decimals)
-        collateral = format_token_amount(loan_info['collateral'], collateral_decimals)
+        # Convert amounts considering token decimals
+        debt = Decimal(loan_info['debt']) / (Decimal(10) ** borrowed_decimals)
+        collateral = Decimal(loan_info['collateral']) / (Decimal(10) ** collateral_decimals)
         
         borrowed_price = Decimal(1.0)  # Default to 1.0 for stablecoins
         collateral_price = Decimal(0.0)  # Default to 0.0 for unknown tokens
         
+        debt_usd = debt * borrowed_price
+        collateral_usd = collateral * collateral_price
+        
         return UserPosition(
             user_address=user_address,
             vault_address=vault_address,
-            debt=str(debt),
-            collateral=str(collateral),
-            debt_usd=str(debt * borrowed_price),
-            collateral_usd=str(collateral * collateral_price)
+            debt=format_token_amount(debt, 0),  # Already in human readable form
+            collateral=format_token_amount(collateral, 0),  # Already in human readable form
+            debt_usd=format_usd_amount(debt_usd),
+            collateral_usd=format_usd_amount(collateral_usd)
         )
         
     except HTTPException:
@@ -251,9 +310,9 @@ async def get_user_positions(user_address: str, queries: ContractQueries = Depen
             borrowed_decimals = token_info['borrowed_token']['decimals']
             collateral_decimals = token_info['collateral_token']['decimals']
             
-            # Format amounts considering token decimals
-            debt = format_token_amount(loan_info['debt'], borrowed_decimals)
-            collateral = format_token_amount(loan_info['collateral'], collateral_decimals)
+            # Convert amounts considering token decimals
+            debt = Decimal(loan_info['debt']) / (Decimal(10) ** borrowed_decimals)
+            collateral = Decimal(loan_info['collateral']) / (Decimal(10) ** collateral_decimals)
             
             borrowed_price = Decimal(1.0)  # Default to 1.0 for stablecoins
             collateral_price = Decimal(0.0)  # Default to 0.0 for unknown tokens
@@ -264,10 +323,10 @@ async def get_user_positions(user_address: str, queries: ContractQueries = Depen
             position = UserPosition(
                 user_address=user_address,
                 vault_address=vault_address,
-                debt=str(debt),
-                collateral=str(collateral),
-                debt_usd=str(debt_usd),
-                collateral_usd=str(collateral_usd)
+                debt=format_token_amount(debt, 0),  # Already in human readable form
+                collateral=format_token_amount(collateral, 0),  # Already in human readable form
+                debt_usd=format_usd_amount(debt_usd),
+                collateral_usd=format_usd_amount(collateral_usd)
             )
             
             positions.append(position)
@@ -280,8 +339,8 @@ async def get_user_positions(user_address: str, queries: ContractQueries = Depen
         return UserVaultSummary(
             user_address=user_address,
             positions=positions,
-            total_debt_usd=str(total_debt_usd),
-            total_collateral_usd=str(total_collateral_usd)
+            total_debt_usd=format_usd_amount(total_debt_usd),
+            total_collateral_usd=format_usd_amount(total_collateral_usd)
         )
         
     except HTTPException:
