@@ -1,5 +1,10 @@
 rpc_endpoints:
-  - "http://192.168.40.201:8545"  # Local Ethereum node
+  default:
+    - "http://192.168.40.201:8545"  # Local Ethereum node
+  gcp:
+    - "https://eth-mainnet.g.alchemy.com/v2/${ALCHEMY_API_KEY}"  # Alchemy
+    - "https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}"       # Infura
+    - "https://rpc.ankr.com/eth/${ANKR_API_KEY}"                # Ankr
 
 batch_sizes:
   vault_discovery: 10

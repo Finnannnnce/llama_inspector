@@ -7,7 +7,10 @@ WORKDIR /app
 # Set environment variables
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
-    PORT=8080
+    PORT=8080 \
+    ALCHEMY_API_KEY="" \
+    INFURA_PROJECT_ID="" \
+    ANKR_API_KEY=""
 
 # Install system dependencies
 RUN apt-get update && \

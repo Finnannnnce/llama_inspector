@@ -1,3 +1,89 @@
+# Ethereum Analyzer
+
+## Cloud Run Deployment
+
+### Prerequisites
+- Google Cloud SDK installed
+- Docker installed
+- Access to Google Cloud Console
+- Required API keys from:
+  - Alchemy
+  - Infura
+  - Ankr
+
+### Setting up Secrets
+
+1. Create a Secret Manager secret for RPC credentials:
+```bash
+# Create the secret
+gcloud secrets create rpc-credentials --replication-policy="automatic"
+
+# Add the API keys
+echo -n "your-alchemy-api-key" | gcloud secrets versions add rpc-credentials --data-file=-
+echo -n "your-infura-project-id" | gcloud secrets versions add rpc-credentials --data-file=-
+echo -n "your-ankr-api-key" | gcloud secrets versions add rpc-credentials --data-file=-
+```
+
+2. Grant Secret Manager access to Cloud Run:
+```bash
+# Get your project number
+PROJECT_NUMBER=$(gcloud projects describe $(gcloud config get-value project) --format='value(projectNumber)')
+
+# Grant access to the Cloud Run service account
+gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
+    --member="serviceAccount:service-$PROJECT_NUMBER@gcp-sa-cloudrun.iam.gserviceaccount.com" \
+    --role="roles/secretmanager.secretAccessor"
+```
+
+### Building and Deploying
+
+1. Build the Docker image:
+```bash
+# Set your project ID
+PROJECT_ID=$(gcloud config get-value project)
+
+# Build the image
+docker build -t gcr.io/$PROJECT_ID/ethereum-analyzer .
+
+# Push to Container Registry
+docker push gcr.io/$PROJECT_ID/ethereum-analyzer
+```
+
+2. Deploy to Cloud Run:
+```bash
+# Update PROJECT_ID in cloud-run-config.yaml
+sed -i "s/PROJECT_ID/$PROJECT_ID/g" cloud-run-config.yaml
+
+# Deploy the service
+gcloud run services replace cloud-run-config.yaml
+```
+
+3. Verify deployment:
+```bash
+# Get the service URL
+SERVICE_URL=$(gcloud run services describe ethereum-analyzer --format='value(status.url)')
+
+# Test the health endpoint
+curl $SERVICE_URL/health
+```
+
+### Monitoring
+
+Monitor your service through the Google Cloud Console:
+- Cloud Run dashboard for service metrics
+- Cloud Logging for application logs
+- Error Reporting for tracking issues
+- Cloud Monitoring for setting up alerts
+
+### Updating
+
+To update the service:
+1. Build and push a new image version
+2. Update the Cloud Run service:
+```bash
+gcloud run services update ethereum-analyzer \
+    --image gcr.io/$PROJECT_ID/ethereum-analyzer:latest
+```
 # Ethereum Loan Query Tool
 
 A Python tool for querying lending vault information from Ethereum smart contracts with optimized RPC handling and SQLite-based caching.
@@ -37,19 +123,30 @@ docker run -p 8080:8080 ethereum-analytics
 
 #### Cloud Run Deployment
 The API is deployed on Google Cloud Run and available at:
-https://ethereum-analytics-330135650610.us-central1.run.app
+https://ethereum-analyzer-330135650610.us-east1.run.app
 
 To deploy to Cloud Run:
 ```bash
 # Build and push the image
-gcloud builds submit --tag gcr.io/[PROJECT_ID]/ethereum-analytics-api
+gcloud builds submit --tag us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
 
 # Deploy to Cloud Run
-gcloud run deploy ethereum-analytics \
-  --image gcr.io/[PROJECT_ID]/ethereum-analytics-api \
+gcloud run deploy ethereum-analyzer \
+  --image us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest \
   --platform managed \
-  --region us-central1 \
+  --region us-east1 \
+  --port 8080 \
+  --memory 2Gi \
+  --cpu 1 \
+  --min-instances 0 \
+  --max-instances 10 \
   --allow-unauthenticated
+
+# Grant access to secrets
+gcloud run services add-iam-policy-binding ethereum-analyzer \
+  --region=us-east1 \
+  --member="allUsers" \
+  --role="roles/run.invoker"
 ```
 
 ### API Endpoints
@@ -68,9 +165,9 @@ gcloud run deploy ethereum-analytics \
 - OpenAPI schema: http://localhost:8000/api/openapi.json
 
 #### Production (Cloud Run)
-- Interactive API docs: https://ethereum-analytics-330135650610.us-central1.run.app/api/docs
-- ReDoc documentation: https://ethereum-analytics-330135650610.us-central1.run.app/api/redoc
-- OpenAPI schema: https://ethereum-analytics-330135650610.us-central1.run.app/api/openapi.json
+- Interactive API docs: https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs
+- ReDoc documentation: https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc
+- OpenAPI schema: https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json
 - Full API reference: [docs/api_reference.md](docs/api_reference.md)
 
 ## Features
@@ -186,6 +283,12 @@ python3 api.py
 The API will be available at:
 - http://localhost:8000/api/docs (Swagger UI)
 - http://localhost:8000/api/redoc (ReDoc)
+- http://localhost:8000/api/openapi.json (OpenAPI Schema)
+
+Production API is available at:
+- https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs (Swagger UI)
+- https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc (ReDoc)
+- https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json (OpenAPI Schema)
 
 ## Error Handling
 

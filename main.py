@@ -141,9 +141,59 @@ class LoanAnalyzer:
             await self.cleanup()
             raise
 
+    def _is_running_on_gcp(self) -> bool:
+        """Check if running on Google Cloud Platform"""
+        try:
+            import requests
+            # Try to access GCP metadata server
+            response = requests.get(
+                'http://metadata.google.internal',
+                headers={'Metadata-Flavor': 'Google'},
+                timeout=1
+            )
+            return response.status_code == 200
+        except:
+            return False
+
+    def _get_rpc_endpoints(self) -> List[str]:
+        """Get RPC endpoints based on environment"""
+        is_gcp = self._is_running_on_gcp()
+        env_key = 'gcp' if is_gcp else 'default'
+        endpoints = self.config['rpc_endpoints'].get(env_key, [])
+        
+        # Substitute environment variables in endpoints
+        processed_endpoints = []
+        for endpoint in endpoints:
+            try:
+                # Replace ${VAR} with environment variable values
+                import re
+                import os
+                processed = re.sub(
+                    r'\${([^}]+)}',
+                    lambda m: os.environ.get(m.group(1), ''),
+                    endpoint
+                )
+                if '${' not in processed:  # Only add if all vars were substituted
+                    processed_endpoints.append(processed)
+                else:
+                    logger.warning(f"Skipping endpoint {endpoint} due to missing environment variables")
+            except Exception as e:
+                logger.warning(f"Error processing endpoint {endpoint}: {str(e)}")
+                continue
+                
+        if not processed_endpoints:
+            logger.error(f"No valid RPC endpoints found for environment: {env_key}")
+            return []
+            
+        return processed_endpoints
+
     async def _setup_web3(self) -> Optional[AsyncWeb3]:
         """Setup Web3 connection with fallback endpoints"""
-        for endpoint in self.config['rpc_endpoints']:
+        endpoints = self._get_rpc_endpoints()
+        if not endpoints:
+            return None
+            
+        for endpoint in endpoints:
             try:
                 w3 = AsyncWeb3(AsyncWeb3.AsyncHTTPProvider(endpoint))
                 if await w3.is_connected():
