@@ -1,41 +1,36 @@
 import os
 import json
 import time
-import requests
+import sqlite3
 from typing import Any, Dict, Optional
-from web3 import Web3
+from web3 import AsyncWeb3
+from web3.contract import AsyncContract
 
 class CachedWeb3Calls:
-    def __init__(self, w3: Web3, cache_dir: str):
+    def __init__(self, w3: AsyncWeb3, cache_dir: str):
         self.w3 = w3
         self.cache_dir = cache_dir
-        self.cache_duration = 12 * 3600  # 12 hours
+        self.cache_duration = 4 * 3600  # 4 hours
         
         # Create cache directory if it doesn't exist
         os.makedirs(cache_dir, exist_ok=True)
         
-        # Initialize or load cache
-        self.cache = self._load_cache()
+        # Initialize SQLite database
+        self.db_path = os.path.join(cache_dir, 'web3_cache.db')
+        self._init_db()
 
-    def _load_cache(self) -> Dict:
-        """Load the Web3 calls cache from disk"""
-        cache_file = os.path.join(self.cache_dir, 'web3_cache.json')
-        try:
-            if os.path.exists(cache_file):
-                with open(cache_file, 'r') as f:
-                    return json.load(f)
-        except Exception as e:
-            print(f"Error loading cache: {str(e)}")
-        return {'calls': {}}
-
-    def _save_cache(self):
-        """Save the Web3 calls cache to disk"""
-        cache_file = os.path.join(self.cache_dir, 'web3_cache.json')
-        try:
-            with open(cache_file, 'w') as f:
-                json.dump(self.cache, f)
-        except Exception as e:
-            print(f"Error saving cache: {str(e)}")
+    def _init_db(self):
+        """Initialize SQLite database and create table if it doesn't exist"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute('''
+                CREATE TABLE IF NOT EXISTS web3_cache (
+                    key TEXT PRIMARY KEY,
+                    result TEXT,
+                    timestamp REAL
+                )
+            ''')
+            conn.commit()
 
     def _is_cache_valid(self, timestamp: float) -> bool:
         """Check if cached data is still valid"""
@@ -48,20 +43,31 @@ class CachedWeb3Calls:
 
     def _get_cached_call(self, key: str) -> Optional[Any]:
         """Get result from cache if valid"""
-        cache_data = self.cache['calls'].get(key)
-        if cache_data and self._is_cache_valid(cache_data['timestamp']):
-            return cache_data['result']
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                'SELECT result, timestamp FROM web3_cache WHERE key = ?',
+                (key,)
+            )
+            row = cursor.fetchone()
+            
+            if row and self._is_cache_valid(row[1]):
+                import json
+                return json.loads(row[0])
         return None
 
     def _cache_call(self, key: str, result: Any):
         """Cache a function call result"""
-        self.cache['calls'][key] = {
-            'result': result,
-            'timestamp': time.time()
-        }
-        self._save_cache()
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            import json
+            cursor.execute(
+                'INSERT OR REPLACE INTO web3_cache (key, result, timestamp) VALUES (?, ?, ?)',
+                (key, json.dumps(result), time.time())
+            )
+            conn.commit()
 
-    def call_function(self, contract: Any, function_name: str, *args) -> Optional[Any]:
+    async def call_function(self, contract: AsyncContract, function_name: str, *args) -> Optional[Any]:
         """Call a contract function with caching"""
         # Create cache key
         key = self._get_cache_key(contract.address, function_name, *args)
@@ -71,13 +77,13 @@ class CachedWeb3Calls:
         if cached_result is not None:
             return cached_result
             
-        # Make the actual call if not in cache
+        # Make the actual call if not in cache or cache is expired
         try:
             function = getattr(contract.functions, function_name)
             if args:
-                result = function(*args).call()
+                result = await function(*args).call()
             else:
-                result = function().call()
+                result = await function().call()
             
             # Cache the result
             self._cache_call(key, result)
@@ -85,4 +91,15 @@ class CachedWeb3Calls:
             return result
             
         except Exception as e:
+            print(f"Error calling function {function_name}: {str(e)}")
             return None
+
+    def clear_expired_cache(self):
+        """Clear expired cache entries"""
+        with sqlite3.connect(self.db_path) as conn:
+            cursor = conn.cursor()
+            cursor.execute(
+                'DELETE FROM web3_cache WHERE ? - timestamp > ?',
+                (time.time(), self.cache_duration)
+            )
+            conn.commit()

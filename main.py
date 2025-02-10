@@ -2,17 +2,31 @@ import os
 import json
 import time
 import yaml
-from web3 import Web3
+import asyncio
+import aiohttp
+import logging
+from web3 import AsyncWeb3
+from web3.contract import AsyncContract
+from web3.exceptions import ContractLogicError
 from dotenv import load_dotenv
 from src.utils.contract_queries import ContractQueries
 from src.utils.price_fetcher import PriceFetcher
 from src.utils.formatters import format_token_amount, format_usd_amount
 from colorama import init, Fore, Style
-from typing import List, Dict, Any, Optional, TypedDict
-from concurrent.futures import ThreadPoolExecutor
-from web3.contract import Contract
+from typing import List, Dict, Any, Optional, TypedDict, AsyncGenerator
 from dataclasses import dataclass
 from pathlib import Path
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('.cache/analyzer.log'),
+        logging.StreamHandler()
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Initialize colorama for colored output
 init()
@@ -24,8 +38,8 @@ class TokenInfo(TypedDict):
     symbol: str
     decimals: int
 
-class ControllerResult(TypedDict):
-    """Type definition for controller analysis results"""
+class VaultResult(TypedDict):
+    """Type definition for vault analysis results"""
     address: str
     loans: List[Dict[str, Any]]
     total_borrowed: float
@@ -40,7 +54,7 @@ class ControllerResult(TypedDict):
 @dataclass
 class AnalyzerStats:
     """Statistics for the analysis run"""
-    total_controllers: int = 0
+    total_vaults: int = 0
     total_loans: int = 0
     total_borrowed_usd: float = 0
     total_collateral_usd: float = 0
@@ -54,6 +68,13 @@ class AnalyzerStats:
             return self.end_time - self.start_time
         return 0.0
 
+    @property
+    def collateralization_ratio(self) -> float:
+        """Calculate collateralization ratio"""
+        if self.total_borrowed_usd == 0:
+            return 0.0
+        return (self.total_collateral_usd / self.total_borrowed_usd) * 100
+
 class LoanAnalyzer:
     """Main analyzer class for processing Ethereum loan data"""
     
@@ -62,102 +83,171 @@ class LoanAnalyzer:
         self.config = self._load_config()
         
         # Initialize components
-        self.w3: Optional[Web3] = None
+        self.w3: Optional[AsyncWeb3] = None
         self.queries: Optional[ContractQueries] = None
         self.price_fetcher: Optional[PriceFetcher] = None
-        self.factory: Optional[Contract] = None
+        self.factory: Optional[AsyncContract] = None
         self.stats = AnalyzerStats()
+        
+        # Track empty responses
+        self.empty_responses = 0
+        self.max_empty_responses = 10  # Stop after 10 empty responses
 
     def _load_config(self) -> Dict[str, Any]:
         """Load configuration from YAML file"""
-        config_path = Path(__file__).parent / 'config' / 'analyzer_config.yaml'
+        config_path = Path('config/analyzer_config.yaml')
         try:
             with open(config_path, 'r') as f:
                 return yaml.safe_load(f)
         except Exception as e:
+            logger.error(f"Failed to load config: {e}")
             raise RuntimeError(f"Failed to load config: {e}")
 
-    def initialize(self) -> None:
-        """Initialize connections and utilities"""
-        print("Initializing loan analyzer...")
-        
-        # Load environment variables
-        load_dotenv()
-        
-        # Connect to Ethereum network
-        self.w3 = self._setup_web3()
-        if not self.w3:
-            raise RuntimeError("Failed to connect to Ethereum network")
-            
-        # Initialize utilities
-        cache_dir = Path(__file__).parent / '.cache'
-        cache_dir.mkdir(exist_ok=True)
-        
-        self.queries = ContractQueries(self.w3, str(cache_dir))
-        self.price_fetcher = PriceFetcher(str(cache_dir))
-        
-        print("Initialization complete")
+    async def __aenter__(self):
+        """Async context manager entry"""
+        return self
 
-    def _setup_web3(self) -> Optional[Web3]:
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Async context manager exit"""
+        await self.cleanup()
+
+    async def cleanup(self):
+        """Clean up resources"""
+        pass
+
+    async def initialize(self) -> None:
+        """Initialize connections and utilities"""
+        logger.info("Initializing loan analyzer...")
+        
+        try:
+            # Load environment variables
+            load_dotenv()
+            
+            # Connect to Ethereum network
+            self.w3 = await self._setup_web3()
+            if not self.w3:
+                raise RuntimeError("Failed to connect to Ethereum network")
+                
+            # Initialize utilities
+            cache_dir = Path('.cache')  # Changed to use project root
+            cache_dir.mkdir(exist_ok=True)
+            
+            self.queries = ContractQueries(self.w3, str(cache_dir))
+            self.price_fetcher = PriceFetcher(str(cache_dir))
+            
+            logger.info("Initialization complete")
+            
+        except Exception as e:
+            await self.cleanup()
+            raise
+
+    async def _setup_web3(self) -> Optional[AsyncWeb3]:
         """Setup Web3 connection with fallback endpoints"""
         for endpoint in self.config['rpc_endpoints']:
             try:
-                w3 = Web3(Web3.HTTPProvider(endpoint))
-                if w3.is_connected():
-                    print(f"Connected to {endpoint}")
+                w3 = AsyncWeb3(AsyncWeb3.AsyncHTTPProvider(endpoint))
+                if await w3.is_connected():
+                    logger.info(f"Connected to {endpoint}")
                     return w3
             except Exception as e:
-                print(f"Failed to connect to {endpoint}: {str(e)}")
+                logger.warning(f"Failed to connect to {endpoint}: {str(e)}")
                 continue
         return None
 
-    def analyze_controller(self, factory: Contract, controller_address: str) -> Optional[ControllerResult]:
-        """
-        Analyze a single controller's loans and tokens
+    async def get_token_prices(self, tokens: List[str]) -> Dict[str, float]:
+        """Get prices for multiple tokens concurrently"""
+        if not self.price_fetcher:
+            return {}
+        return await self.price_fetcher.get_multiple_prices_async(tokens)
+
+    async def _get_vault_loans(self, vault: 'AsyncContract') -> AsyncGenerator[Dict[str, Any], None]:
+        """Get all loans for a vault using async generator"""
+        if not self.queries:
+            logger.error("Queries not initialized")
+            return
+            
+        index = 0
+        consecutive_errors = 0
+        max_errors = self.config['error_limits']['max_consecutive_errors']
         
-        Args:
-            factory: Factory contract instance
-            controller_address: Address of the controller to analyze
+        while consecutive_errors < max_errors:
+            try:
+                user_address = await self.queries._retry_with_backoff_async(
+                    vault.functions.loans(index).call
+                )
+                if not user_address or user_address == '0x' + '0' * 40:
+                    consecutive_errors += 1
+                else:
+                    consecutive_errors = 0
+                    loan_info = await self.queries.get_loan_info_async(vault, user_address)
+                    if loan_info:
+                        yield loan_info
+                
+                index += 1
+                
+            except Exception as e:
+                if 'rate limit' in str(e).lower():
+                    logger.warning(f"Rate limit hit at index {index}")
+                    break
+                elif 'execution reverted' in str(e).lower():
+                    consecutive_errors += 1
+                    if consecutive_errors >= max_errors:
+                        logger.info(f"Stopping after {max_errors} consecutive errors")
+                        break
+                else:
+                    logger.error(f"Error getting loan at index {index}: {str(e)}")
+                    break
+
+    async def analyze_vault(
+        self, factory: Optional['AsyncContract'], vault_address: str
+    ) -> Optional[VaultResult]:
+        """Analyze a single vault's loans and tokens"""
+        if not factory:
+            logger.error("Factory contract not provided")
+            return None
             
-        Returns:
-            Optional[ControllerResult]: Analysis results or None if analysis fails
-        """
         try:
-            print(f"\nAnalyzing controller {controller_address}")
+            logger.info(f"Analyzing vault {vault_address}")
             
-            # Get admin contract
-            admin = self.queries.get_admin_contract(factory, controller_address)
-            if not admin:
-                print(f"Could not get admin contract for controller {controller_address}")
+            if not self.queries:
+                logger.error("Queries not initialized")
+                return None
+
+            # Get vault contract
+            vault = await self.queries.get_vault_async(factory, vault_address)
+            if not vault:
+                logger.warning(f"Could not get vault contract for {vault_address}")
                 return None
             
             # Get token information
-            token_info = self.queries.get_controller_tokens(admin, controller_address)
+            token_info = await self.queries.get_vault_tokens_async(vault, vault_address)
             if not token_info:
-                print(f"Could not get token info for controller {controller_address}")
+                logger.warning(f"Could not get token info for vault {vault_address}")
                 return None
             
             borrowed_token = token_info['borrowed_token']['address']
             collateral_token = token_info['collateral_token']['address']
             
-            # Get token prices
-            borrowed_price = self.price_fetcher.get_token_price(borrowed_token)
-            collateral_price = self.price_fetcher.get_token_price(collateral_token)
+            # Get token prices concurrently
+            prices = await self.get_token_prices([borrowed_token, collateral_token])
+            borrowed_price = prices.get(borrowed_token, 1.0)  # Default to 1.0 for stablecoins
+            collateral_price = prices.get(collateral_token, 0.0)  # Default to 0.0 for unknown tokens
             
-            # Get all loans
-            loans = self._get_controller_loans(admin)
-            if loans is None:
-                return None
+            # Process loans using async generator
+            total_borrowed = 0
+            total_collateral = 0
+            loans = []
             
-            # Calculate totals
-            total_borrowed = sum(loan['debt'] for loan in loans)
-            total_collateral = sum(loan['collateral'] for loan in loans)
+            async for loan in self._get_vault_loans(vault):
+                total_borrowed += loan['debt']
+                total_collateral += loan['collateral']
+                loans.append(loan)
             
-            total_borrowed_usd = total_borrowed * (borrowed_price or 0)
-            total_collateral_usd = total_collateral * (collateral_price or 0)
+            total_borrowed_usd = total_borrowed * borrowed_price
+            total_collateral_usd = total_collateral * collateral_price
             
             return {
-                'address': controller_address,
+                'address': vault_address,
                 'loans': loans,
                 'total_borrowed': total_borrowed,
                 'total_collateral': total_collateral,
@@ -170,282 +260,209 @@ class LoanAnalyzer:
             }
             
         except Exception as e:
-            print(f"Error analyzing controller {controller_address}: {str(e)}")
+            logger.error(f"Error analyzing vault {vault_address}: {str(e)}")
             return None
 
-    def _get_controller_loans(self, admin: Contract) -> Optional[List[Dict[str, Any]]]:
-        """
-        Get all loans for a controller
+    async def discover_vaults(self, factory_address: str) -> List[str]:
+        """Discover all active vaults from factory"""
+        logger.info(f"Discovering vaults from factory {factory_address}...")
         
-        Args:
-            admin: Admin contract instance
+        if not self.queries:
+            logger.error("Queries not initialized")
+            return []
             
-        Returns:
-            Optional[List[Dict[str, Any]]]: List of loan information or None if retrieval fails
-        """
-        loans = []
-        user_addresses = []
-        index = 0
-        consecutive_errors = 0
-        max_errors = self.config['error_limits']['max_consecutive_errors']
-        
-        # Collect all user addresses
-        while consecutive_errors < max_errors:
-            try:
-                user_address = self.queries._retry_with_backoff(
-                    admin.functions.loans(index).call
-                )
-                if not user_address or user_address == '0x' + '0' * 40:
-                    consecutive_errors += 1
-                else:
-                    consecutive_errors = 0
-                    user_addresses.append(user_address)
+        try:
+            # Load and parse factory ABI from config
+            factory_abi = self.config['contracts'].get('factory_abi')
+            if not factory_abi:
+                logger.error("Factory ABI not found in config")
+                return []
                 
-                index += 1
-                
-            except Exception as e:
-                if self._is_rate_limit_error(str(e)):
-                    print(f"Rate limit hit, stopping address collection at index {index}")
-                    break
-                elif 'execution reverted' in str(e).lower():
-                    consecutive_errors += 1
-                    if consecutive_errors >= max_errors:
-                        print(f"Stopping after {max_errors} consecutive errors")
-                        break
-                else:
-                    print(f"Error getting loan at index {index}: {str(e)}")
-                    break
-        
-        # Process loans in batches
-        batch_size = self.config['batch_sizes']['loan_info']
-        for i in range(0, len(user_addresses), batch_size):
-            batch = user_addresses[i:i + batch_size]
-            batch_loans = self.queries.get_multiple_loan_info(admin, batch)
-            loans.extend(batch_loans)
-        
-        return loans
-
-    def discover_controllers(self, factory_address: str) -> List[str]:
-        """
-        Discover all active controllers from factory
-        
-        Args:
-            factory_address: Address of the factory contract
-            
-        Returns:
-            List[str]: List of discovered controller addresses
-        """
-        print(f"\nDiscovering controllers from factory {factory_address}...")
-        
-        # Get factory contract
-        self.factory = self.queries.get_factory(factory_address)
-        if not self.factory:
-            raise RuntimeError("Failed to get factory contract")
-        
-        # Load vault cache
-        cache_file = Path(__file__).parent / '.cache' / 'vault_info_cache.json'
-        vault_cache = self._load_vault_cache(cache_file)
-        
-        controllers = []
-        index = 0
-        consecutive_errors = 0
-        max_errors = self.config['error_limits']['max_consecutive_errors']
-        batch_size = self.config['batch_sizes']['controller_discovery']
-        
-        while consecutive_errors < max_errors:
             try:
-                controllers.extend(
-                    self._process_controller_batch(index, batch_size, vault_cache)
-                )
-                index += batch_size
+                # Check if contract exists
+                if not self.w3:
+                    logger.error("Web3 not initialized")
+                    return []
                 
-            except Exception as e:
-                if self._is_rate_limit_error(str(e)):
-                    if self.queries._handle_rate_limit():
-                        continue
-                    else:
-                        print(f"Rate limit hit, stopping controller discovery at index {index}")
-                        break
-                else:
-                    print(f"Error discovering controllers: {str(e)}")
-                    break
-        
-        print(f"\nFound {len(controllers)} active controllers")
-        return controllers
-
-    def _load_vault_cache(self, cache_file: Path) -> Dict[str, Any]:
-        """Load vault cache from file"""
-        if cache_file.exists():
-            try:
-                return json.loads(cache_file.read_text()).get('data', {})
-            except Exception as e:
-                print(f"Error loading vault cache: {str(e)}")
-        return {}
-
-    def _is_rate_limit_error(self, error_str: str) -> bool:
-        """Check if an error is related to rate limiting"""
-        rate_limit_indicators = ['429', 'rate', 'limit', 'unauthorized', '401', '403']
-        return any(indicator in error_str.lower() for indicator in rate_limit_indicators)
-
-    def _process_controller_batch(
-        self, start_index: int, batch_size: int, vault_cache: Dict[str, Any]
-    ) -> List[str]:
-        """Process a batch of potential controllers"""
-        batch_controllers = []
-        
-        # Prepare batch calls
-        batch_calls = [
-            self.factory.functions.controllers(start_index + i).call
-            for i in range(batch_size)
-        ]
-        
-        # Execute batch
-        with ThreadPoolExecutor(max_workers=batch_size) as executor:
-            futures = [executor.submit(call) for call in batch_calls]
-            
-            for i, future in enumerate(futures):
+                checksum_address = self.w3.to_checksum_address(factory_address)
+                code = await self.w3.eth.get_code(checksum_address)
+                if not code or code == '0x':
+                    logger.error(f"No contract found at address {factory_address}")
+                    return []
+                    
+                factory_abi = json.loads(factory_abi)
+                logger.info(f"Using factory ABI with {len(factory_abi)} functions")
+                for func in factory_abi:
+                    if func.get('type') == 'function':
+                        logger.info(f"Found function: {func.get('name')}")
+                
+                factory = await self.queries.get_factory_async(factory_address, factory_abi)
+                
+                if not factory:
+                    logger.error("Failed to initialize factory contract")
+                    return []
+                    
+                # Get total number of vaults
                 try:
-                    controller_address = future.result()
-                    if self._is_valid_controller(controller_address, start_index + i, vault_cache):
-                        batch_controllers.append(controller_address)
+                    market_count = await factory.functions.market_count().call()
+                    logger.info(f"Found {market_count} markets")
+                    
+                    # Get all vault addresses
+                    vaults = []
+                    for i in range(market_count):
+                        vault = await factory.functions.controllers(i).call()
+                        if vault != '0x' + '0' * 40:
+                            vaults.append(vault)
+                            
+                    logger.info(f"Found {len(vaults)} active vaults")
+                    self.factory = factory
+                    return vaults
+                        
+                except ContractLogicError as e:
+                    logger.error(f"Contract logic error: {e}")
+                    return []
                 except Exception as e:
-                    if self._is_rate_limit_error(str(e)):
-                        raise  # Re-raise to handle at higher level
-                    print(f"Error getting controller at index {start_index + i}: {str(e)}")
-        
-        return batch_controllers
+                    logger.error(f"Failed to get vaults: {e}")
+                    return []
+                    
+            except json.JSONDecodeError as e:
+                logger.error(f"Failed to parse factory ABI: {e}")
+                return []
+            except Exception as e:
+                logger.error(f"Error initializing factory contract: {e}")
+                return []
+                
+        except Exception as e:
+            logger.error(f"Failed to get factory contract: {str(e)}")
+            return []
 
-    def _is_valid_controller(
-        self, address: str, index: int, vault_cache: Dict[str, Any]
-    ) -> bool:
-        """Check if a controller address is valid"""
-        if not address or address == '0x' + '0' * 40:
-            return False
-            
-        # Check vault cache first
-        token_info = vault_cache.get(address)
-        if token_info:
-            print(f"\nFound controller {index}: {address}")
-            print(f"Borrowed Token: {token_info['borrowed_token']['name']} "
-                  f"({token_info['borrowed_token']['address']})")
-            print(f"Collateral Token: {token_info['collateral_token']['name']} "
-                  f"({token_info['collateral_token']['address']})")
-            return True
-            
-        # Validate contract code exists
-        code = self.queries._retry_with_backoff(self.w3.eth.get_code, address)
-        return bool(code and code != '0x')
-
-    def print_controller_summary(self, result: Optional[ControllerResult]) -> None:
-        """Print summary for a single controller"""
+    def print_vault_summary(self, result: Optional[VaultResult]) -> None:
+        """Print summary for a single vault"""
         if not result:
             return
             
-        print(f"\nController {result['address']}:")
+        print(f"\n{Fore.CYAN}Vault {result['address']}{Style.RESET_ALL}")
+        print("=" * 80)
         
-        # Get cached token info
-        token_info = self.queries._token_info_cache.get(result['address'])
-        if token_info:
-            print(f"Borrowed Token: {token_info['borrowed_token']['name']} ({result['borrowed_token']})")
-            print(f"Collateral Token: {token_info['collateral_token']['name']} ({result['collateral_token']})")
+        # Get cached token info if available
+        if self.queries:
+            token_info = getattr(self.queries, '_token_info_cache', {}).get(result['address'])
+            if token_info:
+                print(f"Borrowed Token:    {token_info['borrowed_token']['name']}")
+                print(f"                   {Fore.BLUE}{result['borrowed_token']}{Style.RESET_ALL}")
+                print(f"Collateral Token:  {token_info['collateral_token']['name']}")
+                print(f"                   {Fore.BLUE}{result['collateral_token']}{Style.RESET_ALL}")
         
+        print("\nPrices:")
         if result.get('borrowed_price'):
-            print(f"Borrowed Token Price: ${result['borrowed_price']:.2f}")
+            print(f"Borrowed Price:    ${result['borrowed_price']:.2f}")
         if result.get('collateral_price'):
-            print(f"Collateral Token Price: ${result['collateral_price']:.2f}")
+            print(f"Collateral Price:  ${result['collateral_price']:.2f}")
             
-        print(f"\nActive Loans: {len(result.get('loans', []))}")
-        print(f"Total Borrowed: {Fore.RED}{format_token_amount(result.get('total_borrowed', 0), '')}{Style.RESET_ALL}")
-        print(f"Total Collateral: {Fore.GREEN}{format_token_amount(result.get('total_collateral', 0), '')}{Style.RESET_ALL}")
-        print(f"Total Borrowed USD: {Fore.RED}{format_usd_amount(result.get('total_borrowed_usd', 0))}{Style.RESET_ALL}")
-        print(f"Total Collateral USD: {Fore.GREEN}{format_usd_amount(result.get('total_collateral_usd', 0))}{Style.RESET_ALL}")
+        print("\nLoan Statistics:")
+        print(f"Active Loans:      {Fore.YELLOW}{len(result.get('loans', []))}{Style.RESET_ALL}")
+        print(f"Total Borrowed:    {Fore.RED}{format_token_amount(result.get('total_borrowed', 0), '')}{Style.RESET_ALL}")
+        print(f"Total Collateral:  {Fore.GREEN}{format_token_amount(result.get('total_collateral', 0), '')}{Style.RESET_ALL}")
+        print(f"Borrowed USD:      {Fore.RED}{format_usd_amount(result.get('total_borrowed_usd', 0))}{Style.RESET_ALL}")
+        print(f"Collateral USD:    {Fore.GREEN}{format_usd_amount(result.get('total_collateral_usd', 0))}{Style.RESET_ALL}")
 
     def print_grand_totals(self) -> None:
         """Print grand totals and statistics"""
-        print("\n" + "="*50)
-        print("ANALYSIS COMPLETE")
-        print("="*50)
-        print(f"\nProcessed {self.stats.total_controllers} controllers")
-        print(f"Found {self.stats.total_loans} active loans")
-        print(f"\nGrand Totals:")
-        print(f"Total Borrowed USD: {Fore.RED}{format_usd_amount(self.stats.total_borrowed_usd)}{Style.RESET_ALL}")
-        print(f"Total Collateral USD: {Fore.GREEN}{format_usd_amount(self.stats.total_collateral_usd)}{Style.RESET_ALL}")
-        print(f"\nAnalysis took {self.stats.duration:.2f} seconds")
+        print("\n" + "="*80)
+        print(f"{Fore.CYAN}ANALYSIS COMPLETE{Style.RESET_ALL}")
+        print("="*80)
+        
+        print("\nSummary:")
+        print(f"Vaults:            {Fore.YELLOW}{self.stats.total_vaults}{Style.RESET_ALL}")
+        print(f"Active Loans:      {Fore.YELLOW}{self.stats.total_loans}{Style.RESET_ALL}")
+        
+        print("\nGrand Totals:")
+        print(f"Total Borrowed:    {Fore.RED}{format_usd_amount(self.stats.total_borrowed_usd)}{Style.RESET_ALL}")
+        print(f"Total Collateral:  {Fore.GREEN}{format_usd_amount(self.stats.total_collateral_usd)}{Style.RESET_ALL}")
+        print(f"Collateral Ratio:  {Fore.BLUE}{self.stats.collateralization_ratio:.2f}%{Style.RESET_ALL}")
+        
+        print(f"\nDuration:         {Fore.BLUE}{self.stats.duration:.2f} seconds{Style.RESET_ALL}")
 
-    def run(self) -> None:
+    async def run(self) -> None:
         """Main execution flow"""
         try:
-            # Initialize
-            self.initialize()
-            
-            # Start timing
+            await self.initialize()
             self.stats.start_time = time.time()
             
-            # Get factory address from config
             factory_address = self.config['contracts']['factory']
+            vaults = await self.discover_vaults(factory_address)
+            self.stats.total_vaults = len(vaults)
             
-            # Discover controllers
-            controllers = self.discover_controllers(factory_address)
-            self.stats.total_controllers = len(controllers)
-            
-            # Process controllers sequentially to avoid rate limits
-            for controller in controllers:
+            # Process vaults
+            if not self.factory:
+                logger.error("Factory contract not initialized")
+                return
+                
+            for i, vault in enumerate(vaults, 1):
                 try:
-                    result = self.analyze_controller(self.factory, controller)
+                    logger.info(f"Analyzing vault {i}/{len(vaults)}: {vault}")
+                    result = await self.analyze_vault(self.factory, vault)
                     if result:
-                        self.print_controller_summary(result)
+                        self.print_vault_summary(result)
                         
                         # Update statistics
                         self.stats.total_loans += len(result.get('loans', []))
                         self.stats.total_borrowed_usd += result.get('total_borrowed_usd', 0)
                         self.stats.total_collateral_usd += result.get('total_collateral_usd', 0)
-                        
                 except Exception as e:
-                    print(f"Error processing controller {controller}: {str(e)}")
+                    logger.error(f"Error processing vault {vault}: {str(e)}")
                     continue
             
-            # Record end time
             self.stats.end_time = time.time()
-            
-            # Print final summary
             self.print_grand_totals()
             
-            # Save context if configured
             if self.config['output']['save_context']:
-                self._save_analysis_context()
+                await self._save_analysis_context()
             
         except Exception as e:
-            print(f"Error during analysis: {str(e)}")
+            logger.error(f"Error during analysis: {str(e)}")
             raise
         except KeyboardInterrupt:
-            print("\nAnalysis interrupted by user")
+            logger.info("Analysis interrupted by user")
             if self.stats.start_time:
                 self.stats.end_time = time.time()
                 self.print_grand_totals()
 
-    def _save_analysis_context(self) -> None:
+    async def _save_analysis_context(self) -> None:
         """Save analysis context to file"""
         context = {
             'timestamp': time.time(),
             'stats': {
-                'total_controllers': self.stats.total_controllers,
+                'total_vaults': self.stats.total_vaults,
                 'total_loans': self.stats.total_loans,
                 'total_borrowed_usd': self.stats.total_borrowed_usd,
                 'total_collateral_usd': self.stats.total_collateral_usd,
+                'collateralization_ratio': self.stats.collateralization_ratio,
                 'duration': self.stats.duration
             }
         }
         
-        context_file = Path(__file__).parent / '.cache' / 'context.json'
+        context_file = Path('.cache') / 'context.json'  # Changed to use project root
         try:
             context_file.write_text(json.dumps(context, indent=2))
+            logger.info("Analysis context saved successfully")
         except Exception as e:
-            print(f"Error saving context: {str(e)}")
+            logger.error(f"Error saving context: {str(e)}")
 
-def main():
+async def main():
     """Entry point"""
-    analyzer = LoanAnalyzer()
-    analyzer.run()
+    try:
+        async with LoanAnalyzer() as analyzer:
+            await analyzer.run()
+    except Exception as e:
+        logger.error(f"Fatal error: {str(e)}")
+        raise
 
 if __name__ == '__main__':
-    main()
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Analysis interrupted by user")
+    except Exception as e:
+        logger.error(f"Fatal error: {str(e)}")
+        raise
