@@ -4,7 +4,19 @@
 
 API for querying Ethereum lending vault information. Provides endpoints for retrieving vault information, user positions, and loan statistics.
 
-Base URL: `http://localhost:8000`
+Base URL: `https://ethereum-analyzer-330135650610.us-east1.run.app`
+
+## Root Endpoint
+
+The root endpoint (`/`) automatically redirects to the API documentation.
+
+```
+GET /
+```
+
+#### Response
+
+Redirects to `/api/docs`
 
 ## Authentication
 
@@ -276,7 +288,17 @@ pip3 install -r requirements.txt
 python3 api.py
 ```
 
+### Local Development
+
 The server will start on `http://localhost:8000` with the following endpoints:
 - Interactive API docs: http://localhost:8000/api/docs
 - ReDoc documentation: http://localhost:8000/api/redoc
 - OpenAPI schema: http://localhost:8000/api/openapi.json
+
+### Production
+
+The API is deployed on Google Cloud Run and available at:
+- Base URL: https://ethereum-analyzer-330135650610.us-east1.run.app
+- Interactive API docs: https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs
+- ReDoc documentation: https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc
+- OpenAPI schema: https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json
