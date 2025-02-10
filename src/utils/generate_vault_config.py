@@ -1,16 +1,17 @@
 import os
 import json
 import time
-from web3 import Web3
+import asyncio
+from web3 import AsyncWeb3
 from src.utils.contract_queries import ContractQueries
 
-def main():
+async def main():
     """Generate vault configuration cache"""
     print("Generating vault configuration cache...")
     
     # Initialize Web3
-    w3 = Web3(Web3.HTTPProvider('https://eth.llamarpc.com'))
-    if not w3.is_connected():
+    w3 = AsyncWeb3(AsyncWeb3.AsyncHTTPProvider('https://eth.llamarpc.com'))
+    if not await w3.is_connected():
         raise Exception("Failed to connect to Ethereum network")
     
     # Initialize utilities
@@ -21,44 +22,44 @@ def main():
     factory_address = '0xeA6876DDE9e3467564acBeE1Ed5bac88783205E0'
     
     # Get factory contract
-    factory = queries.get_factory(factory_address)
+    factory = await queries.get_factory_async(factory_address)
     if not factory:
         raise Exception("Failed to get factory contract")
     
-    # Discover and cache all controllers
+    # Discover and cache all vaults
     index = 0
     consecutive_none = 0
     vault_info = {}
     
     while consecutive_none < 3:  # Stop after 3 consecutive empty responses
         try:
-            controller_address = queries._retry_with_backoff(
+            vault_address = await queries._retry_with_backoff_async(
                 factory.functions.controllers(index).call
             )
             
-            if not controller_address or controller_address == '0x' + '0' * 40:
+            if not vault_address or vault_address == '0x' + '0' * 40:
                 consecutive_none += 1
             else:
                 consecutive_none = 0
                 
-                # Get controller contract
-                controller = queries.get_admin_contract(factory, controller_address)
-                if controller:
+                # Get vault contract
+                vault = await queries.get_vault_async(factory, vault_address)
+                if vault:
                     # Get token info
-                    token_info = queries.get_controller_tokens(controller, controller_address)
+                    token_info = await queries.get_vault_tokens_async(vault, vault_address)
                     if token_info:
-                        print(f"\nCached controller {index}: {controller_address}")
+                        print(f"\nCached vault {index}: {vault_address}")
                         print(f"Borrowed Token: {token_info['borrowed_token']['name']} ({token_info['borrowed_token']['address']})")
                         print(f"Collateral Token: {token_info['collateral_token']['name']} ({token_info['collateral_token']['address']})")
                         
                         # Store in vault info
-                        vault_info[controller_address] = token_info
+                        vault_info[vault_address] = token_info
             
             index += 1
-            time.sleep(2)  # Rate limit delay
+            await asyncio.sleep(2)  # Rate limit delay
             
         except Exception as e:
-            print(f"Error discovering controller at index {index}: {str(e)}")
+            print(f"Error discovering vault at index {index}: {str(e)}")
             break
     
     # Save vault info cache
@@ -71,7 +72,7 @@ def main():
     with open(cache_file, 'w') as f:
         json.dump(cache_data, f, indent=2)
     
-    print(f"\nCached {len(vault_info)} controllers")
+    print(f"\nCached {len(vault_info)} vaults")
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())

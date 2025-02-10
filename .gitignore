@@ -22,25 +22,25 @@ wheels/
 
 # Virtual Environment
 venv/
-env/
 ENV/
-.env
-.venv
-.env.*
-
-# Cache directories
-cache/
-**/cache/
-*.cache
-web3_cache/
+env/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-.DS_Store
 
 # Project specific
-token_prices_cache.json
-*_cache.json
+.env
+.cache/
+*.db
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db

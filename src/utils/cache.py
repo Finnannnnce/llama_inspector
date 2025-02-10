@@ -1,8 +1,8 @@
 import json
 import os
-import tempfile
+import time
 from decimal import Decimal
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, Tuple
 from pathlib import Path
 
 class DecimalEncoder(json.JSONEncoder):
@@ -13,7 +13,7 @@ class DecimalEncoder(json.JSONEncoder):
         return super().default(obj)
 
 class Cache:
-    """Simple file-based cache with atomic writes"""
+    """Simple file-based cache with atomic writes and expiration"""
     
     def __init__(self, cache_dir: str, filename: str):
         """Initialize cache
@@ -24,7 +24,7 @@ class Cache:
         """
         self.cache_dir = Path(cache_dir)
         self.cache_file = self.cache_dir / filename
-        self.data: Dict[str, Any] = {}
+        self.data: Dict[str, Tuple[Any, float]] = {}  # (value, expiration_time)
         
         # Create cache directory if it doesn't exist
         os.makedirs(self.cache_dir, exist_ok=True)
@@ -33,7 +33,13 @@ class Cache:
         if self.cache_file.exists():
             try:
                 with open(self.cache_file, 'r') as f:
-                    self.data = json.load(f)
+                    raw_data = json.load(f)
+                    # Filter out expired entries during load
+                    current_time = time.time()
+                    self.data = {
+                        k: (v[0], v[1]) for k, v in raw_data.items()
+                        if v[1] == 0 or v[1] > current_time  # Keep if no expiration or not expired
+                    }
             except Exception:
                 self.data = {}
     
@@ -44,19 +50,34 @@ class Cache:
             key: Cache key
             
         Returns:
-            Cached value or None if not found
+            Cached value or None if not found or expired
         """
-        return self.data.get(key)
+        if key not in self.data:
+            return None
+            
+        value, expiration = self.data[key]
+        if expiration > 0 and time.time() > expiration:
+            # Remove expired entry
+            del self.data[key]
+            self._save()
+            return None
+            
+        return value
     
-    def set(self, key: str, value: Any) -> None:
+    def set(self, key: str, value: Any, ttl: Optional[int] = None) -> None:
         """Set value in cache
         
         Args:
             key: Cache key
             value: Value to cache
+            ttl: Time to live in seconds (None for no expiration)
         """
-        self.data[key] = value
-        
+        expiration = time.time() + ttl if ttl is not None else 0
+        self.data[key] = (value, expiration)
+        self._save()
+    
+    def _save(self) -> None:
+        """Save cache to disk"""
         # Write to temporary file first
         tmp_file = self.cache_file.with_suffix('.tmp')
         try:

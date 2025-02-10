@@ -1,0 +1,31 @@
+{
+  "abi": [
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [{"type": "uint8", "name": ""}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "description",
+      "outputs": [{"type": "string", "name": ""}],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "latestRoundData",
+      "outputs": [
+        {"type": "uint80", "name": "roundId"},
+        {"type": "int256", "name": "answer"},
+        {"type": "uint256", "name": "startedAt"},
+        {"type": "uint256", "name": "updatedAt"},
+        {"type": "uint80", "name": "answeredInRound"}
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

@@ -1,0 +1,397 @@
+{
+  "timestamp": 1739082153.159937,
+  "data": {
+    "0x1E0165DbD2019441aB7927C018701f3138114D71": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+        "name": "Wrapped liquid staked Ether 2.0",
+        "symbol": "wstETH",
+        "decimals": 18
+      }
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "decimals": 18
+      }
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x18084fbA666a33d37592fA2633fD49a74DD93a88",
+        "name": "tBTC v2",
+        "symbol": "tBTC",
+        "decimals": 18
+      }
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+        "name": "Curve DAO Token",
+        "symbol": "CRV",
+        "decimals": 18
+      }
+    },
+    "0xC510d73Ad34BeDECa8978B6914461aA7b50CF3Fc": {
+      "borrowed_token": {
+        "address": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+        "name": "Curve DAO Token",
+        "symbol": "CRV",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      }
+    },
+    "0xa5D9137d2A1Ee912469d911A8E74B6c77503bac8": {
+      "borrowed_token": {
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      }
+    },
+    "0xe438658874b0acf4D81c24172E137F0eE00621b8": {
+      "borrowed_token": {
+        "address": "0x18084fbA666a33d37592fA2633fD49a74DD93a88",
+        "name": "tBTC v2",
+        "symbol": "tBTC",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      }
+    },
+    "0x98Fc283d6636f6DCFf5a817A00Ac69A3ADd96907": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
+        "name": "Staked USDe",
+        "symbol": "sUSDe",
+        "decimals": 18
+      }
+    },
+    "0x09dBDEB3b301A4753589Ac6dF8A178C7716ce16B": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x55C08ca52497e2f1534B59E2917BF524D4765257",
+        "name": "UwU Lend",
+        "symbol": "UwU",
+        "decimals": 18
+      }
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+        "name": "Wrapped BTC",
+        "symbol": "WBTC",
+        "decimals": 8
+      }
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xD9A442856C234a39a81a089C06451EBAa4306a72",
+        "name": "pufETH",
+        "symbol": "pufETH",
+        "decimals": 18
+      }
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x9D39A5DE30e57443BfF2A8307A4256c8797A3497",
+        "name": "Staked USDe",
+        "symbol": "sUSDe",
+        "decimals": 18
+      }
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "name": "Wrapped Ether",
+        "symbol": "WETH",
+        "decimals": 18
+      }
+    },
+    "0x5756A035F276a8095A922931F224F4ed06149608": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+        "name": "Wrapped liquid staked Ether 2.0",
+        "symbol": "wstETH",
+        "decimals": 18
+      }
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+        "name": "USDe",
+        "symbol": "USDe",
+        "decimals": 18
+      }
+    },
+    "0x8C2537F1a5b1b167A960A14B89f7860dd5F7cD68": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xA663B02CF0a4b149d2aD41910CB81e23e1c41c32",
+        "name": "Staked FRAX",
+        "symbol": "sFRAX",
+        "decimals": 18
+      }
+    },
+    "0x3c1350aa6FaFF17c87Bde2015BBb45100D37dAD3": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xbf5495Efe5DB9ce00f80364C8B423567e58d2110",
+        "name": "Renzo Restaked ETH",
+        "symbol": "ezETH",
+        "decimals": 18
+      }
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xb45ad160634c528Cc3D2926d9807104FA3157305",
+        "name": "Staked Dola",
+        "symbol": "sDOLA",
+        "decimals": 18
+      }
+    },
+    "0xAC9AdD93364Aea685be238dB6c40BF53753f2cF1": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xFe0c30065B384F05761f15d0CC899D4F9F9Cc0eB",
+        "name": "ether.fi governance token",
+        "symbol": "ETHFI",
+        "decimals": 18
+      }
+    },
+    "0x1F9D988cDeBfA1FD5563C122a987186e516173c2": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x1d08E7adC263CfC70b1BaBe6dC5Bb339c16Eec52",
+        "name": "USD0/USD0++",
+        "symbol": "USD0USD0++",
+        "decimals": 18
+      }
+    },
+    "0xDC8b1Caf2e10dE76fb67E82C2485E7d4fA098C53": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x1d08E7adC263CfC70b1BaBe6dC5Bb339c16Eec52",
+        "name": "USD0/USD0++",
+        "symbol": "USD0USD0++",
+        "decimals": 18
+      }
+    },
+    "0x276B8C8873079eEACCF4Dd241De14be92D733b45": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x8DB2350D78aBc13f5673A411D4700BCF87864dDE",
+        "name": "swBTC",
+        "symbol": "swBTC",
+        "decimals": 8
+      }
+    },
+    "0xdC5D5EE1223D4C8b7eAc8e876793f2171e7e8dEb": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x09db87A538BD693E9d08544577d5cCfAA6373A48",
+        "name": "ynETH",
+        "symbol": "ynETH",
+        "decimals": 18
+      }
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x09db87A538BD693E9d08544577d5cCfAA6373A48",
+        "name": "ynETH",
+        "symbol": "ynETH",
+        "decimals": 18
+      }
+    },
+    "0x757C61d89bD0406BfcBB68178BBfaE79ECa46c0f": {
+      "borrowed_token": {
+        "address": "0x09db87A538BD693E9d08544577d5cCfAA6373A48",
+        "name": "ynETH",
+        "symbol": "ynETH",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      }
+    },
+    "0xC28C2FD809FC1795f90de1C9dA2131434A77721d": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x8236a87084f8B84306f72007F36F2618A5634494",
+        "name": "Lombard Staked Bitcoin",
+        "symbol": "LBTC",
+        "decimals": 8
+      }
+    },
+    "0xf8C27436B277734AAA726A8fD5e6D7daDe0296c5": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x57B96D4aF698605563A4653D882635da59Bf11AF",
+        "name": "RCH Token",
+        "symbol": "RCH",
+        "decimals": 18
+      }
+    },
+    "0xB4544e705665e0856961a51F7E86Ccf633404b86": {
+      "borrowed_token": {
+        "address": "0xf939E0A03FB07F59A73314E73794Be0E57ac1b4E",
+        "name": "Curve.Fi USD Stablecoin",
+        "symbol": "crvUSD",
+        "decimals": 18
+      },
+      "collateral_token": {
+        "address": "0x2103E845C5E135493Bb6c2A4f0B8651956eA8682",
+        "name": "Matrixdock Gold",
+        "symbol": "XAUM",
+        "decimals": 18
+      }
+    }
+  }
+}

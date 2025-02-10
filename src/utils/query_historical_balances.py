@@ -96,10 +96,8 @@ def get_block_by_date(target_date):
                 left = mid + 1
             else:
                 right = mid - 1
-            time.sleep(0.1)  # Add delay to avoid rate limiting
         except Exception as e:
             print(f"Error getting block {mid}: {str(e)}")
-            time.sleep(1)  # Longer delay on error
             continue
     
     return right
@@ -122,9 +120,6 @@ def query_vault_info(vault_name, vault_data, block_number=None):
         )
         
         try:
-            # Add delay between requests
-            time.sleep(0.2)
-            
             block_identifier = block_number if block_number else 'latest'
             print(f"Querying block {block_identifier}...")
             
@@ -197,7 +192,6 @@ def main():
         try:
             usd_value = query_vault_info(vault_name, vault_data, block_number)
             total_usd_value += usd_value
-            time.sleep(0.2)  # Add delay between vault queries
         except Exception as e:
             print(f"Error processing {vault_name}: {str(e)}")
             continue

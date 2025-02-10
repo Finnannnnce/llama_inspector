@@ -1,83 +1,47 @@
 import asyncio
-import threading
-from functools import wraps
-from typing import Any, Callable
+import time
+from typing import Optional
+from dataclasses import dataclass, field
+from collections import deque
 
-class TimeoutException(Exception):
-    """Exception raised when a function call times out"""
-    pass
-
+@dataclass
 class RateLimiter:
-    """Rate limiter to control request frequency"""
-    def __init__(self, requests_per_second: int = 1):
-        self.requests_per_second = requests_per_second
-        self.last_request = 0
-        self.min_interval = 1.0 / requests_per_second
-        self._lock = threading.Lock()  # Thread-safe rate limiting
+    """Rate limiter for API calls with async support"""
+    calls_per_second: int
+    window_size: float = 1.0
+    _calls: deque = field(default_factory=lambda: deque(maxlen=1000))
+    _lock: Optional[asyncio.Lock] = None
 
-    async def wait(self):
-        """Wait if necessary to respect rate limit"""
-        with self._lock:
-            now = asyncio.get_event_loop().time()
-            elapsed = now - self.last_request
-            if elapsed < self.min_interval:
-                await asyncio.sleep(self.min_interval - elapsed)
-            self.last_request = asyncio.get_event_loop().time()
+    def __post_init__(self):
+        self._lock = asyncio.Lock()
 
-def with_timeout(timeout_duration: int) -> Callable:
-    """Decorator to add timeout to async functions
-    
-    Args:
-        timeout_duration: Timeout in seconds
-        
-    Returns:
-        Decorated function that will raise TimeoutException if execution exceeds timeout
-    """
-    def decorator(func: Callable) -> Callable:
-        @wraps(func)
-        async def wrapper(*args: Any, **kwargs: Any) -> Any:
-            try:
-                return await asyncio.wait_for(func(*args, **kwargs), timeout_duration)
-            except asyncio.TimeoutError:
-                raise TimeoutException(
-                    f"Function call timed out after {timeout_duration} seconds"
-                )
-        return wrapper
-    return decorator
+    async def __aenter__(self):
+        """Async context manager entry"""
+        await self.acquire()
+        return self
 
-def retry_forever(func: Callable) -> Callable:
-    """Decorator to retry async function forever with exponential backoff until timeout
-    
-    Args:
-        func: Async function to retry
-        
-    Returns:
-        Decorated function that will retry on failure with exponential backoff
-    """
-    @wraps(func)
-    async def wrapper(*args: Any, **kwargs: Any) -> Any:
-        start_time = asyncio.get_event_loop().time()
-        attempt = 0
-        last_error = None
-        
-        while True:
-            try:
-                return await func(*args, **kwargs)
-            except Exception as e:
-                last_error = e
-                elapsed = asyncio.get_event_loop().time() - start_time
-                
-                # Check if total time exceeds timeout
-                REQUEST_TIMEOUT = 15  # 15 seconds
-                if elapsed >= REQUEST_TIMEOUT:
-                    print(f"Request timed out after {REQUEST_TIMEOUT} seconds: {str(last_error)}")
-                    return None
-                
-                # Exponential backoff with 30 second cap
-                delay = min(30, 1 * (2 ** attempt))
-                if kwargs.get('verbose', False):
-                    print(f"Error: {str(e)}")
-                    print(f"Retrying in {delay} seconds...")
-                await asyncio.sleep(delay)
-                attempt += 1
-    return wrapper
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Async context manager exit"""
+        pass
+
+    async def acquire(self):
+        """Acquire rate limit slot"""
+        async with self._lock:
+            now = time.time()
+            
+            # Remove old calls outside window
+            while self._calls and now - self._calls[0] > self.window_size:
+                self._calls.popleft()
+            
+            # Wait if at limit
+            if len(self._calls) >= self.calls_per_second:
+                sleep_time = self._calls[0] + self.window_size - now
+                if sleep_time > 0:
+                    await asyncio.sleep(sleep_time)
+            
+            # Add current call
+            self._calls.append(now)
+
+    def reset(self):
+        """Reset rate limiter state"""
+        self._calls.clear()

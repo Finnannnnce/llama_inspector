@@ -1,0 +1,1757 @@
+{
+  "timestamp": 1739085906.305295,
+  "data": {
+    "0x1E0165DbD2019441aB7927C018701f3138114D71_0xb8543e19b2D8428182aFF43BfD2E945e5f41a19a": {
+      "user_address": "0xb8543e19b2D8428182aFF43BfD2E945e5f41a19a",
+      "debt": 54794363886547996879,
+      "collateral": 47666905720671069,
+      "is_liquidated": false
+    },
+    "0x1E0165DbD2019441aB7927C018701f3138114D71_0x23F8C7dB7A1B656652e9726ab264c5B181418B9f": {
+      "user_address": "0x23F8C7dB7A1B656652e9726ab264c5B181418B9f",
+      "debt": 1162175503607191777,
+      "collateral": 330399519408846,
+      "is_liquidated": false
+    },
+    "0x1E0165DbD2019441aB7927C018701f3138114D71_0x1A31C94f97C649bC2a8aDbCeb54D1f4a075be4b1": {
+      "user_address": "0x1A31C94f97C649bC2a8aDbCeb54D1f4a075be4b1",
+      "debt": 921832078422156878,
+      "collateral": 88103970925269712,
+      "is_liquidated": false
+    },
+    "0x1E0165DbD2019441aB7927C018701f3138114D71_0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2": {
+      "user_address": "0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2",
+      "debt": 16009010907772522237787,
+      "collateral": 7963760196665382366,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x0fc59C9C998537c940a9Dfc7DacDe533a9c496Fe": {
+      "user_address": "0x0fc59C9C998537c940a9Dfc7DacDe533a9c496Fe",
+      "debt": 106103177681924341594,
+      "collateral": 100000000000000000,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x4570d5b4177Cf209944e8E3fB1f2A77021ffD5C5": {
+      "user_address": "0x4570d5b4177Cf209944e8E3fB1f2A77021ffD5C5",
+      "debt": 109764264679904274217917,
+      "collateral": 87609052374453843322,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xF18eb7De4A8F3e9d8d0e516BeD6a169BC330B7a4": {
+      "user_address": "0xF18eb7De4A8F3e9d8d0e516BeD6a169BC330B7a4",
+      "debt": 32536224525912419741,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x252cb5f6D082fE4EBCc013209d563605aAc728e2": {
+      "user_address": "0x252cb5f6D082fE4EBCc013209d563605aAc728e2",
+      "debt": 30234707845552679016710,
+      "collateral": 17000000000000000000,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x049C4013FCf545366bE36ecDa4F30eCFf07fB05F": {
+      "user_address": "0x049C4013FCf545366bE36ecDa4F30eCFf07fB05F",
+      "debt": 30597121250201966364422,
+      "collateral": 19871420147090965988,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x10E3085127C9BD92AB325F8D1f65CDcEC2436149": {
+      "user_address": "0x10E3085127C9BD92AB325F8D1f65CDcEC2436149",
+      "debt": 76682434731844725514845,
+      "collateral": 113999999999999999999,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xe3D2283e983D9Ec973d1e773358981a7e9c62409": {
+      "user_address": "0xe3D2283e983D9Ec973d1e773358981a7e9c62409",
+      "debt": 5440505750976765139603,
+      "collateral": 3326657799619689998,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x1705d9c661AC0B1E8B72e3D01376F3329261A5Bd": {
+      "user_address": "0x1705d9c661AC0B1E8B72e3D01376F3329261A5Bd",
+      "debt": 54621198925806042793,
+      "collateral": 30000000000000000,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xb8543e19b2D8428182aFF43BfD2E945e5f41a19a": {
+      "user_address": "0xb8543e19b2D8428182aFF43BfD2E945e5f41a19a",
+      "debt": 131903357181646681897,
+      "collateral": 65058872149965022,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x9e28B5eF83c102d813ABeC06A8f2CBBE4F6B388D": {
+      "user_address": "0x9e28B5eF83c102d813ABeC06A8f2CBBE4F6B388D",
+      "debt": 681532622520274106822,
+      "collateral": 650000000000000000,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xcb12355e9E463450D33a95AD712691030C57D939": {
+      "user_address": "0xcb12355e9E463450D33a95AD712691030C57D939",
+      "debt": 609345788247613580398,
+      "collateral": 370000000000000000,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xA04CbcBF43aBD445AEaC02D6Ea070c2275C2EAF5": {
+      "user_address": "0xA04CbcBF43aBD445AEaC02D6Ea070c2275C2EAF5",
+      "debt": 385561419469264574391,
+      "collateral": 208140000000000005,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xF1Bc3468e8aE73e93d80d681CD6581d486081754": {
+      "user_address": "0xF1Bc3468e8aE73e93d80d681CD6581d486081754",
+      "debt": 4760368935773126930099,
+      "collateral": 2991372434640266299,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0x64923162709A0bF5e2c02B034B7b11fFA17Aa762": {
+      "user_address": "0x64923162709A0bF5e2c02B034B7b11fFA17Aa762",
+      "debt": 22073831391948475764306,
+      "collateral": 2891625387016408841,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xDFB93509146daEacf83199bcF6dCACA9b20eFF2a": {
+      "user_address": "0xDFB93509146daEacf83199bcF6dCACA9b20eFF2a",
+      "debt": 45735617133372758830491,
+      "collateral": 25323303291269664999,
+      "is_liquidated": false
+    },
+    "0xaade9230AA9161880E13a38C83400d3D1995267b_0xF9e31984F6c90621c362aE50EC60BFc467633f08": {
+      "user_address": "0xF9e31984F6c90621c362aE50EC60BFc467633f08",
+      "debt": 2501605273949019225855,
+      "collateral": 2299999999999999999,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x1cABC2a3E7fD58B16502bF7c60c5a5e41b9Db638": {
+      "user_address": "0x1cABC2a3E7fD58B16502bF7c60c5a5e41b9Db638",
+      "debt": 75002730650527436285064,
+      "collateral": 1096800200000000003,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xa1f0AeE15A81aA288d7F3D2C225B4E6B98Efb748": {
+      "user_address": "0xa1f0AeE15A81aA288d7F3D2C225B4E6B98Efb748",
+      "debt": 65302044746416423291942,
+      "collateral": 1464846715202779226,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x049C4013FCf545366bE36ecDa4F30eCFf07fB05F": {
+      "user_address": "0x049C4013FCf545366bE36ecDa4F30eCFf07fB05F",
+      "debt": 56854790211272991834294,
+      "collateral": 1290765199840786908,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x0215c140840B896e1e371525D1f70cefbd09aAfa": {
+      "user_address": "0x0215c140840B896e1e371525D1f70cefbd09aAfa",
+      "debt": 3643817686391449,
+      "collateral": 61121892277,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xEDa73C9fA6A90CEA2BCC5529E9E12C012e13655B": {
+      "user_address": "0xEDa73C9fA6A90CEA2BCC5529E9E12C012e13655B",
+      "debt": 28590383557055990464140,
+      "collateral": 400601191992449587,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x402904E954aebEE2E78b7B09595393cf05571333": {
+      "user_address": "0x402904E954aebEE2E78b7B09595393cf05571333",
+      "debt": 145063379451383786289645,
+      "collateral": 2581611874340976082,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xb0e83C2D71A991017e0116d58c5765Abc57384af": {
+      "user_address": "0xb0e83C2D71A991017e0116d58c5765Abc57384af",
+      "debt": 26668408384016781183513,
+      "collateral": 899085495062464820,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xAF949B4F1c1e0dE895e2E24F1Dc82917c0e9E472": {
+      "user_address": "0xAF949B4F1c1e0dE895e2E24F1Dc82917c0e9E472",
+      "debt": 19662249510227626704172,
+      "collateral": 486691450000000000,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x577BE3eD9A71E1c355f519BBDF5f09Ba2018b1Cc": {
+      "user_address": "0x577BE3eD9A71E1c355f519BBDF5f09Ba2018b1Cc",
+      "debt": 288869506936354626,
+      "collateral": 5667254137440,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xa7B1f857886884BBd4947538eb498Cf3e4Fa03b3": {
+      "user_address": "0xa7B1f857886884BBd4947538eb498Cf3e4Fa03b3",
+      "debt": 43048826287978466852169,
+      "collateral": 602057770522980843,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x6Ac252972C6e3ac0e414CB11Eb772a8E146766F8": {
+      "user_address": "0x6Ac252972C6e3ac0e414CB11Eb772a8E146766F8",
+      "debt": 35794805326120094235252,
+      "collateral": 501594932970274241,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0x00D70aBD44E0055EC4BbE91C5Adc541b9D32298c": {
+      "user_address": "0x00D70aBD44E0055EC4BbE91C5Adc541b9D32298c",
+      "debt": 314838688744289609821,
+      "collateral": 14259656469696498,
+      "is_liquidated": false
+    },
+    "0x413FD2511BAD510947a91f5c6c79EBD8138C29Fc_0xA008fD358Bc786692C4aEc7Da1a09079b8A951C3": {
+      "user_address": "0xA008fD358Bc786692C4aEc7Da1a09079b8A951C3",
+      "debt": 1397006558842109503357,
+      "collateral": 29841282849030471,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x67745602629A97F395d783528169E33E01245DA8": {
+      "user_address": "0x67745602629A97F395d783528169E33E01245DA8",
+      "debt": 13481244243064560517227,
+      "collateral": 51754408597143696012100,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xe69A49F8F9C1d66fefA66Dfb61155c06606986D1": {
+      "user_address": "0xe69A49F8F9C1d66fefA66Dfb61155c06606986D1",
+      "debt": 91001325321835355060731,
+      "collateral": 338778660117592603687613,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x9858218c248864698e9F3454c5F828761094D190": {
+      "user_address": "0x9858218c248864698e9F3454c5F828761094D190",
+      "debt": 152986741980244063,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x29de71aD7Bb4427E632656698D3926e634e43e88": {
+      "user_address": "0x29de71aD7Bb4427E632656698D3926e634e43e88",
+      "debt": 935387170430923086485,
+      "collateral": 5457356977110000000000,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x75d32cA496B239ee9E7F3D6e6FBb3813Ab14aAaC": {
+      "user_address": "0x75d32cA496B239ee9E7F3D6e6FBb3813Ab14aAaC",
+      "debt": 12559033066601491636117,
+      "collateral": 58231416862917779327848,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xe5b2a2459914B78F52bEF1d294605EfC91E311a3": {
+      "user_address": "0xe5b2a2459914B78F52bEF1d294605EfC91E311a3",
+      "debt": 4680438009991191007281,
+      "collateral": 18000006634452207949852,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x1569639f33f7B617DfD9A31A0D2a7f1f577865c1": {
+      "user_address": "0x1569639f33f7B617DfD9A31A0D2a7f1f577865c1",
+      "debt": 3026265991477089948705,
+      "collateral": 12199945125594412077227,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x158BF6bE282000DEC7820a5Ec90c59767FBc527B": {
+      "user_address": "0x158BF6bE282000DEC7820a5Ec90c59767FBc527B",
+      "debt": 2147543386549,
+      "collateral": 51615097685219097036,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x311bE8656F5c669d018b9790Ff601125F75A0FBB": {
+      "user_address": "0x311bE8656F5c669d018b9790Ff601125F75A0FBB",
+      "debt": 22137214782292371927907,
+      "collateral": 93024532276023896767606,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x3f6524BBaB05FD836710fbbF9adC6268e42Abd80": {
+      "user_address": "0x3f6524BBaB05FD836710fbbF9adC6268e42Abd80",
+      "debt": 285562283433648430071871,
+      "collateral": 1439163226927454724045551,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x610f164450F534882ED77a2d606C5Bd67b2d962a": {
+      "user_address": "0x610f164450F534882ED77a2d606C5Bd67b2d962a",
+      "debt": 29788446467101351386581,
+      "collateral": 89476898250870803392416,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xD76AA47f1Ad6ce7f78ddCD4643A85C87B7e7C047": {
+      "user_address": "0xD76AA47f1Ad6ce7f78ddCD4643A85C87B7e7C047",
+      "debt": 60526848099348557021281,
+      "collateral": 210226801554521331174129,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xA0Fd134B6b75D3F102cBc68e95E6ceF61911307b": {
+      "user_address": "0xA0Fd134B6b75D3F102cBc68e95E6ceF61911307b",
+      "debt": 284856841351258709865,
+      "collateral": 1648750629319798902505,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xD30a0D8713E3eD9Ae651388B7c70b05C3a058d40": {
+      "user_address": "0xD30a0D8713E3eD9Ae651388B7c70b05C3a058d40",
+      "debt": 152236640631949684300,
+      "collateral": 463737373514645449404,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x8544d87b9E8e931e1b13b5FF225fB306cA400bEd": {
+      "user_address": "0x8544d87b9E8e931e1b13b5FF225fB306cA400bEd",
+      "debt": 1252673152504018351077,
+      "collateral": 7545970647649832704755,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x4Bb7fba588B4254536DE4316e8FB346bbe275EcB": {
+      "user_address": "0x4Bb7fba588B4254536DE4316e8FB346bbe275EcB",
+      "debt": 37380508370463857209128,
+      "collateral": 33642497859197667076515,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xbf7677961c1DE4F2ecA7100425D70BE00dB78183": {
+      "user_address": "0xbf7677961c1DE4F2ecA7100425D70BE00dB78183",
+      "debt": 3695981021148159916,
+      "collateral": 9311660963011608424,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x764B3aAf71891c351B83fE3D4C8Fbcb7609AA56b": {
+      "user_address": "0x764B3aAf71891c351B83fE3D4C8Fbcb7609AA56b",
+      "debt": 4354938691441702,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xE4E64aC04295953593954E5d4EEBcB509839ecb3": {
+      "user_address": "0xE4E64aC04295953593954E5d4EEBcB509839ecb3",
+      "debt": 1276434505594362031956,
+      "collateral": 65022872531313800590,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xFac75d2e2FC279e4d311a9E61B0D7c5C245A6Ba0": {
+      "user_address": "0xFac75d2e2FC279e4d311a9E61B0D7c5C245A6Ba0",
+      "debt": 1166390305715965,
+      "collateral": 2096054636220898,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x9Fc1a0601872762B5C8B2c602C2457A55Bb0d80f": {
+      "user_address": "0x9Fc1a0601872762B5C8B2c602C2457A55Bb0d80f",
+      "debt": 1804045093877881452672,
+      "collateral": 7349999999999999999988,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xa883A7Ed9a3bb84432c0bDE8B814C4523fD35fFE": {
+      "user_address": "0xa883A7Ed9a3bb84432c0bDE8B814C4523fD35fFE",
+      "debt": 2608167665814705554523,
+      "collateral": 8154214892783494161445,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x7C1EF124eA6b78FB6E0b82DF2f32Fdd2208f8636": {
+      "user_address": "0x7C1EF124eA6b78FB6E0b82DF2f32Fdd2208f8636",
+      "debt": 1073975297580301253,
+      "collateral": 10000000000000000000,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x4D28c4DFC0E10c35D3B18221584E7693Ce93e824": {
+      "user_address": "0x4D28c4DFC0E10c35D3B18221584E7693Ce93e824",
+      "debt": 304480297552513582950,
+      "collateral": 1103106528000125908003,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x6e22c49c85de053107fEA6E09ffFbC4b5029C5f1": {
+      "user_address": "0x6e22c49c85de053107fEA6E09ffFbC4b5029C5f1",
+      "debt": 16847387131662258134326,
+      "collateral": 58356867044789665016031,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xEd477e6921D6b9F90984B072D77a9Cf1856783F9": {
+      "user_address": "0xEd477e6921D6b9F90984B072D77a9Cf1856783F9",
+      "debt": 315182028305150456881,
+      "collateral": 3000000000000000000000,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x85522E08937910B77eF7B46dbba0f8425AaD58Ff": {
+      "user_address": "0x85522E08937910B77eF7B46dbba0f8425AaD58Ff",
+      "debt": 140314325725525735019523,
+      "collateral": 572076119270909688024021,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x992dac69827A200BA112A0303Fe8F79F03c37D9d": {
+      "user_address": "0x992dac69827A200BA112A0303Fe8F79F03c37D9d",
+      "debt": 107912403854710605295829,
+      "collateral": 636557707507649067141012,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xb79b4C8EFf11F74EbbE98FE028241C31604BDe91": {
+      "user_address": "0xb79b4C8EFf11F74EbbE98FE028241C31604BDe91",
+      "debt": 2608153956803438315027,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xEbD31ba78255244ff183BdeE468311074533149e": {
+      "user_address": "0xEbD31ba78255244ff183BdeE468311074533149e",
+      "debt": 3981152957974624146854,
+      "collateral": 5397872354107761868500,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x443D576982294AF9257E21A8FCe43c95d917402c": {
+      "user_address": "0x443D576982294AF9257E21A8FCe43c95d917402c",
+      "debt": 270758980914392595,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x127656ba749DA2Cc8A41a1a87C73c2c5ea801728": {
+      "user_address": "0x127656ba749DA2Cc8A41a1a87C73c2c5ea801728",
+      "debt": 784393860599352406,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x79e77Ff9041A8a4ccDdEf45Dfa98f0d5127871E2": {
+      "user_address": "0x79e77Ff9041A8a4ccDdEf45Dfa98f0d5127871E2",
+      "debt": 227941248803585873589645,
+      "collateral": 999765619900000000000019,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x82a72EcdF9267a6B031c6139b57A9347B9EF42b4": {
+      "user_address": "0x82a72EcdF9267a6B031c6139b57A9347B9EF42b4",
+      "debt": 13808521564230550971605,
+      "collateral": 50090200019884268875102,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x8Bf9f93aFE230A315Fd42A5A6150CdD7c1DcAF3A": {
+      "user_address": "0x8Bf9f93aFE230A315Fd42A5A6150CdD7c1DcAF3A",
+      "debt": 8622473549879062072044,
+      "collateral": 31373285398365079035534,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xB97ADe36185a07343FfA89B9595280F021977CB7": {
+      "user_address": "0xB97ADe36185a07343FfA89B9595280F021977CB7",
+      "debt": 2003707047719610677294,
+      "collateral": 5554156470362759408958,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xa8dfe7c4615111361179D33E03C944de85B91818": {
+      "user_address": "0xa8dfe7c4615111361179D33E03C944de85B91818",
+      "debt": 1195811133880093938177,
+      "collateral": 3381419885246581612882,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x81F2fa40494601eF81BdDabA00E6646eBA16c855": {
+      "user_address": "0x81F2fa40494601eF81BdDabA00E6646eBA16c855",
+      "debt": 4774803450430990182245,
+      "collateral": 28044782731305462274284,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x3b96f28e3B45a19FA3e89232D0680E54872D3d58": {
+      "user_address": "0x3b96f28e3B45a19FA3e89232D0680E54872D3d58",
+      "debt": 16151087546095423777502,
+      "collateral": 63000000000000000000000,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xa7dD77a2EA51f1A1fFEdbac99e0a2882906A02Cd": {
+      "user_address": "0xa7dD77a2EA51f1A1fFEdbac99e0a2882906A02Cd",
+      "debt": 61118545601706230082945,
+      "collateral": 226617125455338399335883,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x66BE2B7ec3C5524C2C741E9421714b39079969e4": {
+      "user_address": "0x66BE2B7ec3C5524C2C741E9421714b39079969e4",
+      "debt": 150329983127026493464196,
+      "collateral": 800000649103306879896358,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2": {
+      "user_address": "0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2",
+      "debt": 5010863408567990898975,
+      "collateral": 20696202630339638591488,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xA78E67E364918B3C719200b85B80D0509d8220C5": {
+      "user_address": "0xA78E67E364918B3C719200b85B80D0509d8220C5",
+      "debt": 1501045762156151338632,
+      "collateral": 7091823494113448371936,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x32855b470Dd533DB11bdaC26c6b883B35CF2AE5B": {
+      "user_address": "0x32855b470Dd533DB11bdaC26c6b883B35CF2AE5B",
+      "debt": 1501044565133487653834,
+      "collateral": 7095081107636809972445,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x0B4af852273cf5B541BCFc485928E1CCd60A6272": {
+      "user_address": "0x0B4af852273cf5B541BCFc485928E1CCd60A6272",
+      "debt": 185120453044874215012,
+      "collateral": 949999999999999999988,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0xAea0884559deA9fA3f80bDD9f045c5658B91Adb0": {
+      "user_address": "0xAea0884559deA9fA3f80bDD9f045c5658B91Adb0",
+      "debt": 9002629158821256326920,
+      "collateral": 44446421371980000000000,
+      "is_liquidated": false
+    },
+    "0xEdA215b7666936DEd834f76f3fBC6F323295110A_0x2eE140FA48D3f53f8e0bB20cd1fCC11bA7178eC5": {
+      "user_address": "0x2eE140FA48D3f53f8e0bB20cd1fCC11bA7178eC5",
+      "debt": 1000224756158922587372,
+      "collateral": 7003162526762043497941,
+      "is_liquidated": false
+    },
+    "0x09dBDEB3b301A4753589Ac6dF8A178C7716ce16B_0x961993ff86a8fF9e10664a1f91dDB8C9EF17EA4F": {
+      "user_address": "0x961993ff86a8fF9e10664a1f91dDB8C9EF17EA4F",
+      "debt": 33691109546065411804130,
+      "collateral": 474079709502916565,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x5432add59D6B9339ECEb18c5dCC4B8D3Ec093299": {
+      "user_address": "0x5432add59D6B9339ECEb18c5dCC4B8D3Ec093299",
+      "debt": 13742358775976530855476,
+      "collateral": 18756902,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x170B6EE0387762Acb551310e817FEbe5F98157BD": {
+      "user_address": "0x170B6EE0387762Acb551310e817FEbe5F98157BD",
+      "debt": 5892065041837149709120,
+      "collateral": 54544540,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xd90B100fb849589fEE08FD53a030Aa815EdBa632": {
+      "user_address": "0xd90B100fb849589fEE08FD53a030Aa815EdBa632",
+      "debt": 1308689694803155184330,
+      "collateral": 1791083,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xe1ABBcb7776199FdDa8c2C47d9Cc3EB80917daF1": {
+      "user_address": "0xe1ABBcb7776199FdDa8c2C47d9Cc3EB80917daF1",
+      "debt": 226064377509628352694745,
+      "collateral": 335228176,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x48C0a2644a898E9955cD4103e4Cb0a3A52365e39": {
+      "user_address": "0x48C0a2644a898E9955cD4103e4Cb0a3A52365e39",
+      "debt": 291262599878042228370210,
+      "collateral": 568245385,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xa1f0AeE15A81aA288d7F3D2C225B4E6B98Efb748": {
+      "user_address": "0xa1f0AeE15A81aA288d7F3D2C225B4E6B98Efb748",
+      "debt": 98585474877839136158480,
+      "collateral": 239929328,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x51fD2a79d1bB69f06324f6B0d885347055254445": {
+      "user_address": "0x51fD2a79d1bB69f06324f6B0d885347055254445",
+      "debt": 748160171869362128599,
+      "collateral": 1554476,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xeBE27290d47137Ca758CA487538e8C2Bb426697B": {
+      "user_address": "0xeBE27290d47137Ca758CA487538e8C2Bb426697B",
+      "debt": 5375574209198571613535,
+      "collateral": 10734334,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x1cABC2a3E7fD58B16502bF7c60c5a5e41b9Db638": {
+      "user_address": "0x1cABC2a3E7fD58B16502bF7c60c5a5e41b9Db638",
+      "debt": 169457119309355695691851,
+      "collateral": 250000000,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xDaae7AF729292f50376092A953C8CFeD7c442B28": {
+      "user_address": "0xDaae7AF729292f50376092A953C8CFeD7c442B28",
+      "debt": 17212280168803,
+      "collateral": 1,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x4d011E725Ab35A721A9cE83837E128F28eae2802": {
+      "user_address": "0x4d011E725Ab35A721A9cE83837E128F28eae2802",
+      "debt": 18118088412168835959599,
+      "collateral": 49856865,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xB8976A02e5e4943E2b9A7b8a2d57d8C60A530A9D": {
+      "user_address": "0xB8976A02e5e4943E2b9A7b8a2d57d8C60A530A9D",
+      "debt": 25982991226994905559506,
+      "collateral": 74854463,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x86cCF8F139FEfFa849cf2796eB8aDf517Da17d87": {
+      "user_address": "0x86cCF8F139FEfFa849cf2796eB8aDf517Da17d87",
+      "debt": 4441162970597017885072,
+      "collateral": 10000000,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xfa485924e3121Ff073E82Ce691Fa376FFA27a7F0": {
+      "user_address": "0xfa485924e3121Ff073E82Ce691Fa376FFA27a7F0",
+      "debt": 124051671890847956190356,
+      "collateral": 319562647,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x360B412f772Ef9B0e1EaCeeAE2E0Ec647376C426": {
+      "user_address": "0x360B412f772Ef9B0e1EaCeeAE2E0Ec647376C426",
+      "debt": 1109650941953772014190,
+      "collateral": 2300000,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x6036BD6c98b8d13C32A2d6d364284aD31478f7aa": {
+      "user_address": "0x6036BD6c98b8d13C32A2d6d364284aD31478f7aa",
+      "debt": 980082543969159365903739,
+      "collateral": 1111430194,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0xC716c9152E8228E040C7C340a1AD3817551b13ad": {
+      "user_address": "0xC716c9152E8228E040C7C340a1AD3817551b13ad",
+      "debt": 1557391439713568778310,
+      "collateral": 4310469,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x1D6702bD3DA0108a4428415FFc74B0efd2F86E4f": {
+      "user_address": "0x1D6702bD3DA0108a4428415FFc74B0efd2F86E4f",
+      "debt": 6374797203942874085,
+      "collateral": 11219,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x8120Df970e0E8D883E8a050318C0f7D9af2aa0e2": {
+      "user_address": "0x8120Df970e0E8D883E8a050318C0f7D9af2aa0e2",
+      "debt": 82645400666899717,
+      "collateral": 146,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x7F2E5a5ee681fbC4C8eF5a1823Cf609e689Ca42C": {
+      "user_address": "0x7F2E5a5ee681fbC4C8eF5a1823Cf609e689Ca42C",
+      "debt": 8530685425066566727928,
+      "collateral": 9719767,
+      "is_liquidated": false
+    },
+    "0xcaD85b7fe52B1939DCEebEe9bCf0b2a5Aa0cE617_0x08cDe32a5875CE858A211550BA266fc99987235E": {
+      "user_address": "0x08cDe32a5875CE858A211550BA266fc99987235E",
+      "debt": 5022084208085535709373,
+      "collateral": 10195356,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x05c0d112c29A794a438607897F3ACB2776294bD9": {
+      "user_address": "0x05c0d112c29A794a438607897F3ACB2776294bD9",
+      "debt": 1024,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xD72C80F7cFB8500b15871f4c540c9Dd3491B7522": {
+      "user_address": "0xD72C80F7cFB8500b15871f4c540c9Dd3491B7522",
+      "debt": 1025,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x77489B8326f4007a50a9FECC8Ea5B821086a9f3F": {
+      "user_address": "0x77489B8326f4007a50a9FECC8Ea5B821086a9f3F",
+      "debt": 1024,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x06CD7C278f6318a3bD86399e962F4661d68cb7C5": {
+      "user_address": "0x06CD7C278f6318a3bD86399e962F4661d68cb7C5",
+      "debt": 3,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xF9d26dC8FBA2e12CBaEf9731f813C4672f0d772f": {
+      "user_address": "0xF9d26dC8FBA2e12CBaEf9731f813C4672f0d772f",
+      "debt": 12,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xc5b38695F85d74acfb39617a9BdF085a529C0D44": {
+      "user_address": "0xc5b38695F85d74acfb39617a9BdF085a529C0D44",
+      "debt": 9906552,
+      "collateral": 23979,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x93BF3e8B2696f514653aBdE7Feee480e9d2Aaae7": {
+      "user_address": "0x93BF3e8B2696f514653aBdE7Feee480e9d2Aaae7",
+      "debt": 1085466322415455963,
+      "collateral": 102757652090227675,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xFcd148492A5e41e01d9aC1575Ddf02E6a230fEFD": {
+      "user_address": "0xFcd148492A5e41e01d9aC1575Ddf02E6a230fEFD",
+      "debt": 1676239614594571849915,
+      "collateral": 1365839866297375005,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x446aCF20aDB377F7872A7d0Db96dd83D290B61ad": {
+      "user_address": "0x446aCF20aDB377F7872A7d0Db96dd83D290B61ad",
+      "debt": 16735873,
+      "collateral": 26653,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x4A614f1fde2a7710C907cCC7b139659D6C7d569A": {
+      "user_address": "0x4A614f1fde2a7710C907cCC7b139659D6C7d569A",
+      "debt": 451787,
+      "collateral": 20278,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x8484BF9F7F85b451A465C97951FF18311bc84752": {
+      "user_address": "0x8484BF9F7F85b451A465C97951FF18311bc84752",
+      "debt": 13660170717294894339084,
+      "collateral": 10831043696831799684,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x69D7B56e48F4A6E60fe51D4CB16e4d44ac2d3fc0": {
+      "user_address": "0x69D7B56e48F4A6E60fe51D4CB16e4d44ac2d3fc0",
+      "debt": 10782590386650453248835,
+      "collateral": 9268977362499169540,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x9b0Dec8f04501565357917A275ea829352A1FD01": {
+      "user_address": "0x9b0Dec8f04501565357917A275ea829352A1FD01",
+      "debt": 6417954758559080328077,
+      "collateral": 5916065676906685814,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x6fB6765Fe6E8072270d3A58d75A552beb0AC7D15": {
+      "user_address": "0x6fB6765Fe6E8072270d3A58d75A552beb0AC7D15",
+      "debt": 5381821533879849409481,
+      "collateral": 4894317021134296592,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x4D28c4DFC0E10c35D3B18221584E7693Ce93e824": {
+      "user_address": "0x4D28c4DFC0E10c35D3B18221584E7693Ce93e824",
+      "debt": 216293367531069752637,
+      "collateral": 199980832746987880,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xD30a0D8713E3eD9Ae651388B7c70b05C3a058d40": {
+      "user_address": "0xD30a0D8713E3eD9Ae651388B7c70b05C3a058d40",
+      "debt": 216292669246924992523,
+      "collateral": 209979874384337274,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x686d2E92C3F2F27f8632B72df95Dba8020019d32": {
+      "user_address": "0x686d2E92C3F2F27f8632B72df95Dba8020019d32",
+      "debt": 216292113386122700383,
+      "collateral": 229977957659036063,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xC033dD8E740835Dda236f56e0906bEba42f7Ed94": {
+      "user_address": "0xC033dD8E740835Dda236f56e0906bEba42f7Ed94",
+      "debt": 270364770569571152220,
+      "collateral": 259975082571084244,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xeCaf5554b3e7acC936cf5B9F7E9173a7b85cBa73": {
+      "user_address": "0xeCaf5554b3e7acC936cf5B9F7E9173a7b85cBa73",
+      "debt": 21625766533317101669,
+      "collateral": 20850897185701335,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xFF11A16B965Fd9e649CeC4473502fA2DBE9a9B32": {
+      "user_address": "0xFF11A16B965Fd9e649CeC4473502fA2DBE9a9B32",
+      "debt": 1049303754999051988991,
+      "collateral": 595059160537458839,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xD02A28Ea34163BD1023b10081553089840fA2Ba6": {
+      "user_address": "0xD02A28Ea34163BD1023b10081553089840fA2Ba6",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x975b9451fBE0B5277Ac010aDc0D42A8f54A6cC9c": {
+      "user_address": "0x975b9451fBE0B5277Ac010aDc0D42A8f54A6cC9c",
+      "debt": 13762071015532407698816,
+      "collateral": 11805177654359220373,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x4A24fd841E74C28309BCa5730B40679e18C5FcA0": {
+      "user_address": "0x4A24fd841E74C28309BCa5730B40679e18C5FcA0",
+      "debt": 3130978232866995950023,
+      "collateral": 3004148970429452729,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xB52C6d96bC3D7748A3a285a6eC941929d939bf37": {
+      "user_address": "0xB52C6d96bC3D7748A3a285a6eC941929d939bf37",
+      "debt": 13149356585692424256427,
+      "collateral": 11828629038353626587,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xbB24F905D7eC3Dd93DcaC7e5D198A12d4E926a88": {
+      "user_address": "0xbB24F905D7eC3Dd93DcaC7e5D198A12d4E926a88",
+      "debt": 1621319391760829676608,
+      "collateral": 1486765430468279974,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x00D5c9710e6aA284623F6B077CD8f651A8A7A7c2": {
+      "user_address": "0x00D5c9710e6aA284623F6B077CD8f651A8A7A7c2",
+      "debt": 1063882459293922998,
+      "collateral": 1000000000000000,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xd07855cba53a72B07E4A84D67A45955A8fE20e8b": {
+      "user_address": "0xd07855cba53a72B07E4A84D67A45955A8fE20e8b",
+      "debt": 3958407,
+      "collateral": 21651,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x95431fA97f5360aed44f80eE12d809841a34E498": {
+      "user_address": "0x95431fA97f5360aed44f80eE12d809841a34E498",
+      "debt": 3705071,
+      "collateral": 21551,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x06b90cDB463ED75A39080aC4c5942FcAc3d6e809": {
+      "user_address": "0x06b90cDB463ED75A39080aC4c5942FcAc3d6e809",
+      "debt": 1791612,
+      "collateral": 20802,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x72827c4311E0335b6149Fbef8788cD82bb251fe5": {
+      "user_address": "0x72827c4311E0335b6149Fbef8788cD82bb251fe5",
+      "debt": 8585794681980439,
+      "collateral": 873473983395,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x78857Bf204e9aB16730943aA86232d6509CBbDdA": {
+      "user_address": "0x78857Bf204e9aB16730943aA86232d6509CBbDdA",
+      "debt": 142130759983068713900691,
+      "collateral": 87192566365024858108,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x060e472391397f95ae2a4cf5f2cc215e5652A603": {
+      "user_address": "0x060e472391397f95ae2a4cf5f2cc215e5652A603",
+      "debt": 12,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xB1f759Cd76FD89341Ff062e0De188974890a3de9": {
+      "user_address": "0xB1f759Cd76FD89341Ff062e0De188974890a3de9",
+      "debt": 1030317571829633140,
+      "collateral": 548120432251310,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xdBA299204fE507148b0e09C4bA180894A052c2E3": {
+      "user_address": "0xdBA299204fE507148b0e09C4bA180894A052c2E3",
+      "debt": 34251396,
+      "collateral": 33511,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xEB99686333Eb388946a8ac8964EaDcF174C846Ab": {
+      "user_address": "0xEB99686333Eb388946a8ac8964EaDcF174C846Ab",
+      "debt": 2646426448203464077,
+      "collateral": 1487647901343646,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x752503f7Ed8fCf01AE6578ef77C05f350cE66439": {
+      "user_address": "0x752503f7Ed8fCf01AE6578ef77C05f350cE66439",
+      "debt": 400479,
+      "collateral": 20258,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x51FB007343726CC4148a8adc9B755179F41D10bA": {
+      "user_address": "0x51FB007343726CC4148a8adc9B755179F41D10bA",
+      "debt": 11504058643751363916,
+      "collateral": 50000000000000000,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x10E3085127C9BD92AB325F8D1f65CDcEC2436149": {
+      "user_address": "0x10E3085127C9BD92AB325F8D1f65CDcEC2436149",
+      "debt": 50147683841837489287529,
+      "collateral": 96732040855660157441,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xF56f22B88b6EBE9993F9878dC24C53d55a4Ee7bB": {
+      "user_address": "0xF56f22B88b6EBE9993F9878dC24C53d55a4Ee7bB",
+      "debt": 46267,
+      "collateral": 20120,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xFcaDD91c28Dd12Bb258f090C511b8813f4c89992": {
+      "user_address": "0xFcaDD91c28Dd12Bb258f090C511b8813f4c89992",
+      "debt": 87999635,
+      "collateral": 40600,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x3090eeF25c05c6CF6fF2988646EE27Aa2f5C0178": {
+      "user_address": "0x3090eeF25c05c6CF6fF2988646EE27Aa2f5C0178",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x6a603eF89A5fD5212783a5Ca395609D15Cb7198a": {
+      "user_address": "0x6a603eF89A5fD5212783a5Ca395609D15Cb7198a",
+      "debt": 87369217074536231,
+      "collateral": 1555703002315,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x332c5320C74666086681548446fdF7253B8e5891": {
+      "user_address": "0x332c5320C74666086681548446fdF7253B8e5891",
+      "debt": 653417906,
+      "collateral": 39824,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x26e68cb23b01467CEFf402D4EB0b5c334d2609A2": {
+      "user_address": "0x26e68cb23b01467CEFf402D4EB0b5c334d2609A2",
+      "debt": 1079085310499385842,
+      "collateral": 98915418602318414,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xE74E67AAF055a99b231F57f4D8d09866B6f70454": {
+      "user_address": "0xE74E67AAF055a99b231F57f4D8d09866B6f70454",
+      "debt": 274449326,
+      "collateral": 31162,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x07e86CD82bc010671d380Fee3fdA3E101F888888": {
+      "user_address": "0x07e86CD82bc010671d380Fee3fdA3E101F888888",
+      "debt": 2158120995693822220,
+      "collateral": 98915418602318414,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x10D8D730D0277114cf9716d9C87B941620201012": {
+      "user_address": "0x10D8D730D0277114cf9716d9C87B941620201012",
+      "debt": 1798350527932311997,
+      "collateral": 98915418602318414,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x36a329DB450c76D6499a0809f749a33520b92f7d": {
+      "user_address": "0x36a329DB450c76D6499a0809f749a33520b92f7d",
+      "debt": 3,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x159EE852894023Ae323d5B8076b9Bc9246681EEb": {
+      "user_address": "0x159EE852894023Ae323d5B8076b9Bc9246681EEb",
+      "debt": 3237060879014963604,
+      "collateral": 110785268834596623,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x79B831046c7196b77B007E9AF926f3C55f4FA63c": {
+      "user_address": "0x79B831046c7196b77B007E9AF926f3C55f4FA63c",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x5e71553F2bdF4eA29a3B1F8F7e95e06ACbb4C31D": {
+      "user_address": "0x5e71553F2bdF4eA29a3B1F8F7e95e06ACbb4C31D",
+      "debt": 1078643080159282,
+      "collateral": 389901854075,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xB681A92f9b1C69F2624FBF8BbBbaDc86844a9000": {
+      "user_address": "0xB681A92f9b1C69F2624FBF8BbBbaDc86844a9000",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x23B83c2821D1E9Fe5C40cE3c014D2420F2f1eEB7": {
+      "user_address": "0x23B83c2821D1E9Fe5C40cE3c014D2420F2f1eEB7",
+      "debt": 173068248554620035225705,
+      "collateral": 102306641584675771296,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x624f8F8E2B83E863892158d7294454dF39fEF963": {
+      "user_address": "0x624f8F8E2B83E863892158d7294454dF39fEF963",
+      "debt": 51640499,
+      "collateral": 40318,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x937a90bA935A0F817772F9C69E25C8E43Ca16c6E": {
+      "user_address": "0x937a90bA935A0F817772F9C69E25C8E43Ca16c6E",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x55AD39Ff21cd1D359E01b1f90F421bde0546f1EE": {
+      "user_address": "0x55AD39Ff21cd1D359E01b1f90F421bde0546f1EE",
+      "debt": 66326185928201,
+      "collateral": 23975231359,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x8624EAbC2002d3E839782A3665BCBbfDCB294FE5": {
+      "user_address": "0x8624EAbC2002d3E839782A3665BCBbfDCB294FE5",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xE3E71CA6fE4606aC5A2Ae17b64074aB07184D652": {
+      "user_address": "0xE3E71CA6fE4606aC5A2Ae17b64074aB07184D652",
+      "debt": 104,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x7Be648327Be72077974D1E32A061596f4c95972B": {
+      "user_address": "0x7Be648327Be72077974D1E32A061596f4c95972B",
+      "debt": 12,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x2F8733B924b05D5a498B0e914cb2473aaEa6D667": {
+      "user_address": "0x2F8733B924b05D5a498B0e914cb2473aaEa6D667",
+      "debt": 8444592,
+      "collateral": 23407,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xDa4F617d56c537a02E0ebE72Df39F703a461F3Da": {
+      "user_address": "0xDa4F617d56c537a02E0ebE72Df39F703a461F3Da",
+      "debt": 426828990,
+      "collateral": 27019,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xfbC15c53DD211D4E41Baf04Bdd8A424FcFD876a2": {
+      "user_address": "0xfbC15c53DD211D4E41Baf04Bdd8A424FcFD876a2",
+      "debt": 1021,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x5DBA0DB8e8b926a6Ba7af36A5814cde1a652ad88": {
+      "user_address": "0x5DBA0DB8e8b926a6Ba7af36A5814cde1a652ad88",
+      "debt": 7730645444505421729614,
+      "collateral": 6462870650303650319,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xCAdB551A5eC0510e3D1Ed0c3F1c62c3bDa749C66": {
+      "user_address": "0xCAdB551A5eC0510e3D1Ed0c3F1c62c3bDa749C66",
+      "debt": 92867696,
+      "collateral": 42022,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x9f28152AE399a6f1B9760c04972DE4f9303C0C9f": {
+      "user_address": "0x9f28152AE399a6f1B9760c04972DE4f9303C0C9f",
+      "debt": 1023673,
+      "collateral": 20614,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xa68658704aE5f37284E93ac91A7FECB1c858dBEd": {
+      "user_address": "0xa68658704aE5f37284E93ac91A7FECB1c858dBEd",
+      "debt": 1066303915824135542,
+      "collateral": 585664088722212,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x33a7Ec1055edd4cc35ef289156C7a7a078043474": {
+      "user_address": "0x33a7Ec1055edd4cc35ef289156C7a7a078043474",
+      "debt": 902734831830934359707,
+      "collateral": 514540950941971247,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xDD946E62f7a535eEc40982d824869B9E699E463e": {
+      "user_address": "0xDD946E62f7a535eEc40982d824869B9E699E463e",
+      "debt": 548022289,
+      "collateral": 33867,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x1dFb5c1f929d951D4C9fA959eAB01A803B7a7E57": {
+      "user_address": "0x1dFb5c1f929d951D4C9fA959eAB01A803B7a7E57",
+      "debt": 1065857021979269666,
+      "collateral": 131636562480433046,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x425DF118975af86feA2a8451f4FF61c3E703F55d": {
+      "user_address": "0x425DF118975af86feA2a8451f4FF61c3E703F55d",
+      "debt": 181020414468245789361,
+      "collateral": 108553218341488081,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x8189f3743Dd71BBd1dF597FbCe5eFDd33070D438": {
+      "user_address": "0x8189f3743Dd71BBd1dF597FbCe5eFDd33070D438",
+      "debt": 218155000,
+      "collateral": 36327,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xEAf1532CD9844319C1c08d360915097Ebb28b210": {
+      "user_address": "0xEAf1532CD9844319C1c08d360915097Ebb28b210",
+      "debt": 1703018367845081165347,
+      "collateral": 998110613091251139,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x642fc004883398E1f8a756D741f15d6007822427": {
+      "user_address": "0x642fc004883398E1f8a756D741f15d6007822427",
+      "debt": 10223,
+      "collateral": 20105,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x61d345369925129c5C97374051C410A62a19B3c8": {
+      "user_address": "0x61d345369925129c5C97374051C410A62a19B3c8",
+      "debt": 1063011762701798259,
+      "collateral": 384251464572207,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x77Da07A77e44A55Bd4E6AFF6278158868d2807A9": {
+      "user_address": "0x77Da07A77e44A55Bd4E6AFF6278158868d2807A9",
+      "debt": 10558245085512,
+      "collateral": 188001803,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xA9454Bb47aF4780d77Ed8Fe659a228ca0c8E9f9e": {
+      "user_address": "0xA9454Bb47aF4780d77Ed8Fe659a228ca0c8E9f9e",
+      "debt": 105582248406,
+      "collateral": 1880919,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x8dDc04304aA3C6F4bFf02C0ef3079d08F72F1C37": {
+      "user_address": "0x8dDc04304aA3C6F4bFf02C0ef3079d08F72F1C37",
+      "debt": 21114661352973,
+      "collateral": 375970128,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xcbE74ca9D82aa3610ACC8dc8EFdf11cdFC530518": {
+      "user_address": "0xcbE74ca9D82aa3610ACC8dc8EFdf11cdFC530518",
+      "debt": 3695014064242,
+      "collateral": 65794606,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x0fEcBC9291D0f35E44000589F0cF1BB7aCD94713": {
+      "user_address": "0x0fEcBC9291D0f35E44000589F0cF1BB7aCD94713",
+      "debt": 219589289123,
+      "collateral": 3910936,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x84f7dc8230f667e1f7a462724A11F4976D5cBDA6": {
+      "user_address": "0x84f7dc8230f667e1f7a462724A11F4976D5cBDA6",
+      "debt": 66510183161,
+      "collateral": 1185199,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x33058D23D47b907Cc61f8BCB55AB61a9396CdE7D": {
+      "user_address": "0x33058D23D47b907Cc61f8BCB55AB61a9396CdE7D",
+      "debt": 9649248826,
+      "collateral": 172729,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xc58F57015cc9eB77551a0C32D01b954c411b6b9e": {
+      "user_address": "0xc58F57015cc9eB77551a0C32D01b954c411b6b9e",
+      "debt": 601758097,
+      "collateral": 36904,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x11Cd9058492bC28e7bfF33F5791651e33af52a66": {
+      "user_address": "0x11Cd9058492bC28e7bfF33F5791651e33af52a66",
+      "debt": 261817467,
+      "collateral": 29953,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xfa8E1822326E8F18179d11c1807a7316f85A5c32": {
+      "user_address": "0xfa8E1822326E8F18179d11c1807a7316f85A5c32",
+      "debt": 5594585403,
+      "collateral": 100531,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xe15d36e1cBe1777cc00cE52dfb7e8c1cbaB45008": {
+      "user_address": "0xe15d36e1cBe1777cc00cE52dfb7e8c1cbaB45008",
+      "debt": 7389072295,
+      "collateral": 132484,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x74FD02d957D59Bd25Ad6E7aF5E67B48b0B9394A9": {
+      "user_address": "0x74FD02d957D59Bd25Ad6E7aF5E67B48b0B9394A9",
+      "debt": 4222325,
+      "collateral": 21754,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x372d9F4Ba9c7631C89E931435AbdeAdEd498B71b": {
+      "user_address": "0x372d9F4Ba9c7631C89E931435AbdeAdEd498B71b",
+      "debt": 629127,
+      "collateral": 20347,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x794f457cdE64A8F96bfa4cd72A359A111bD7A828": {
+      "user_address": "0x794f457cdE64A8F96bfa4cd72A359A111bD7A828",
+      "debt": 295562388,
+      "collateral": 33183,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x334b521b096FDc3Ebf7b8a4B562917e79C4C2EE0": {
+      "user_address": "0x334b521b096FDc3Ebf7b8a4B562917e79C4C2EE0",
+      "debt": 3166737790,
+      "collateral": 57300,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x8531C783ddB3B6000c70e44807507d7b7459d568": {
+      "user_address": "0x8531C783ddB3B6000c70e44807507d7b7459d568",
+      "debt": 89724180,
+      "collateral": 41106,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x13fA25e1213FDbFed7C0Bf3849Ad4cF7EFf4B2aF": {
+      "user_address": "0x13fA25e1213FDbFed7C0Bf3849Ad4cF7EFf4B2aF",
+      "debt": 42223121,
+      "collateral": 36632,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x1eb6D9B2754C84694E6dDebbBB41D969d7608c95": {
+      "user_address": "0x1eb6D9B2754C84694E6dDebbBB41D969d7608c95",
+      "debt": 524,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0xA861496cd733e93D4A33f04D45847218138c91E2": {
+      "user_address": "0xA861496cd733e93D4A33f04D45847218138c91E2",
+      "debt": 10979,
+      "collateral": 20105,
+      "is_liquidated": false
+    },
+    "0x4f87158350c296955966059C50263F711cE0817C_0x356C8B8AFB41b42871A82AD8c48159A0de298765": {
+      "user_address": "0x356C8B8AFB41b42871A82AD8c48159A0de298765",
+      "debt": 233,
+      "collateral": 20102,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xd40F88175b439E89d989b7C0f36D6c1aAC1A8b33": {
+      "user_address": "0xd40F88175b439E89d989b7C0f36D6c1aAC1A8b33",
+      "debt": 21298983700193189112150,
+      "collateral": 20302829000044103483406,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x750E9A7b449904f47B793B805dB469FA6e025E33": {
+      "user_address": "0x750E9A7b449904f47B793B805dB469FA6e025E33",
+      "debt": 331919419806078208171711,
+      "collateral": 305900010307141979041683,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xAAc0aa431c237C2C0B5f041c8e59B3f1a43aC78F": {
+      "user_address": "0xAAc0aa431c237C2C0B5f041c8e59B3f1a43aC78F",
+      "debt": 1605589878057619705585779,
+      "collateral": 1581596657776508848301070,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x40EdDEe537AEaD16c2c7E3DacfDCC8e7DB49C596": {
+      "user_address": "0x40EdDEe537AEaD16c2c7E3DacfDCC8e7DB49C596",
+      "debt": 634225906943673600115439,
+      "collateral": 579407906063672501334296,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x86Cb4f155693F57caf6cbeF595f129dDf70cC4D7": {
+      "user_address": "0x86Cb4f155693F57caf6cbeF595f129dDf70cC4D7",
+      "debt": 659537880212644251345,
+      "collateral": 648251078649116145467,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x9f5e6aF744a137C9feFeeDfb6b706B0640a57673": {
+      "user_address": "0x9f5e6aF744a137C9feFeeDfb6b706B0640a57673",
+      "debt": 4160867279565078214320,
+      "collateral": 3892340053497386823496,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xA077b54582e5d05DE3873b080ca9Ed4b59acF015": {
+      "user_address": "0xA077b54582e5d05DE3873b080ca9Ed4b59acF015",
+      "debt": 112187378062434715111809,
+      "collateral": 103353221360266738804057,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xD87DE515c5272F16Bbd007356E697faa35e78aF5": {
+      "user_address": "0xD87DE515c5272F16Bbd007356E697faa35e78aF5",
+      "debt": 509530412511118733647956,
+      "collateral": 509072994700017484385789,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x2730d3E61AB9E0AfcD9d64131dfB215329Aed310": {
+      "user_address": "0x2730d3E61AB9E0AfcD9d64131dfB215329Aed310",
+      "debt": 94413093096703598748420,
+      "collateral": 86503182849710822837036,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0x9B6ABB92f939488C73fAfc94B220Ae196ea50199": {
+      "user_address": "0x9B6ABB92f939488C73fAfc94B220Ae196ea50199",
+      "debt": 101970876165983475274074,
+      "collateral": 96048760321694597338430,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xd46c81245A0582891c2249daf2d68925977cF2a7": {
+      "user_address": "0xd46c81245A0582891c2249daf2d68925977cF2a7",
+      "debt": 380515988908059861565512,
+      "collateral": 351924662737282006233869,
+      "is_liquidated": false
+    },
+    "0xB536FEa3a01c95Dd09932440eC802A75410139D6_0xdA42842918D81fC916A850924f266AB3e8D52d77": {
+      "user_address": "0xdA42842918D81fC916A850924f266AB3e8D52d77",
+      "debt": 9884580244240390184771,
+      "collateral": 10109400000000000000000,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x74B3A400CC4CD87be98766842774c9f212BEd009": {
+      "user_address": "0x74B3A400CC4CD87be98766842774c9f212BEd009",
+      "debt": 33504711024057286309192,
+      "collateral": 9370732028135389307,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x2F6a2F4b3B0ffE7F5E5bd439E2152848bdC3cD65": {
+      "user_address": "0x2F6a2F4b3B0ffE7F5E5bd439E2152848bdC3cD65",
+      "debt": 168063062129112319253425,
+      "collateral": 97670622729977758595,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x6161AfB49bdEaAE7A67af0E19E5070962449bC6c": {
+      "user_address": "0x6161AfB49bdEaAE7A67af0E19E5070962449bC6c",
+      "debt": 5219021841086398095586,
+      "collateral": 1789202089748416584,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x4D6b77F89CBC85dEcE032788a9e27c6B9A7F48f0": {
+      "user_address": "0x4D6b77F89CBC85dEcE032788a9e27c6B9A7F48f0",
+      "debt": 43094513699618342493952,
+      "collateral": 23643622974573908606,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x29f0F8006d8Fa52D5D90277731e472b1d585Faa8": {
+      "user_address": "0x29f0F8006d8Fa52D5D90277731e472b1d585Faa8",
+      "debt": 316855606724657382208884,
+      "collateral": 231700000000000000000,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xb685384242115bD3041067f490b98462B27D5d12": {
+      "user_address": "0xb685384242115bD3041067f490b98462B27D5d12",
+      "debt": 14011271544420413538838,
+      "collateral": 6839541896976728280,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x0eDDC8dFE7b8efB871d0871d42A9D60C1d1746D6": {
+      "user_address": "0x0eDDC8dFE7b8efB871d0871d42A9D60C1d1746D6",
+      "debt": 55704241487755061591693,
+      "collateral": 10713801214766336863,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x0Fe093fA04C305C00482bf9F9fe927056b790988": {
+      "user_address": "0x0Fe093fA04C305C00482bf9F9fe927056b790988",
+      "debt": 48949278424472584459013,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x2BAf435F8054d3a7c5fA45B929264ad9AA934C5c": {
+      "user_address": "0x2BAf435F8054d3a7c5fA45B929264ad9AA934C5c",
+      "debt": 62396260953891183881589,
+      "collateral": 28617565573266874704,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x2761A575cf6EA58D9d59426F1733dF573d92Cf36": {
+      "user_address": "0x2761A575cf6EA58D9d59426F1733dF573d92Cf36",
+      "debt": 6707160715714501804,
+      "collateral": 2941471015475459,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xB7b31461501A781Cd8B4ef52c7234b08B89DBF70": {
+      "user_address": "0xB7b31461501A781Cd8B4ef52c7234b08B89DBF70",
+      "debt": 41358154050982625683738,
+      "collateral": 23335978832603479226,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x4731B132E1235e696BA9F2Dcc20DEabE6A3AF588": {
+      "user_address": "0x4731B132E1235e696BA9F2Dcc20DEabE6A3AF588",
+      "debt": 834306057013211112095,
+      "collateral": 481582835353814278,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xBf1ee10A8329f3BeF1156e561606a88B73BFBa29": {
+      "user_address": "0xBf1ee10A8329f3BeF1156e561606a88B73BFBa29",
+      "debt": 20038519747882098226691,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x10e50901A9F65629715db45B24e5b047a6F11240": {
+      "user_address": "0x10e50901A9F65629715db45B24e5b047a6F11240",
+      "debt": 438328561271785661702,
+      "collateral": 0,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x5d90926C9FF3427C9684f2860702bE60095590c6": {
+      "user_address": "0x5d90926C9FF3427C9684f2860702bE60095590c6",
+      "debt": 25973956164793971813465,
+      "collateral": 15226246504973091827,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xE73cf96C10a0669cA2Bb46b3550e9baE4ab52f2c": {
+      "user_address": "0xE73cf96C10a0669cA2Bb46b3550e9baE4ab52f2c",
+      "debt": 33220285229255771719218,
+      "collateral": 18186245381045204590,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x43Dd5D4A299BdDcDc89f4625B4FC9ECCdD74eF18": {
+      "user_address": "0x43Dd5D4A299BdDcDc89f4625B4FC9ECCdD74eF18",
+      "debt": 42099063388131988455,
+      "collateral": 19706501369537940,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x1AE75b46e46465077411526D95991bDC257cF352": {
+      "user_address": "0x1AE75b46e46465077411526D95991bDC257cF352",
+      "debt": 9286006963561716076438,
+      "collateral": 6080436189381268150,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x4555daA8895400FB5507Dd90103Ea0dE7b328201": {
+      "user_address": "0x4555daA8895400FB5507Dd90103Ea0dE7b328201",
+      "debt": 15828658599392555272712,
+      "collateral": 7809435668446028123,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x843C0486030646Cb1E95FFf8a3d3208ed1d33917": {
+      "user_address": "0x843C0486030646Cb1E95FFf8a3d3208ed1d33917",
+      "debt": 117805038215528500314309,
+      "collateral": 75000000415730852149,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xc344f940332d3AA76e4f20D7352AAf086480111f": {
+      "user_address": "0xc344f940332d3AA76e4f20D7352AAf086480111f",
+      "debt": 20241826267472794622641,
+      "collateral": 16373939944066840182,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xdD7E58AEbFF33c84Cf088fA518C3c2df6154AdF2": {
+      "user_address": "0xdD7E58AEbFF33c84Cf088fA518C3c2df6154AdF2",
+      "debt": 104915428532553109052,
+      "collateral": 55613908872879469,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x98227fF23bC01B7e62e2Aa9d94F920Cd844620AD": {
+      "user_address": "0x98227fF23bC01B7e62e2Aa9d94F920Cd844620AD",
+      "debt": 31581438848236854511922,
+      "collateral": 6066945037461833403,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xc9a7bC556eC037088E89557033Dc87dd9E51C9C7": {
+      "user_address": "0xc9a7bC556eC037088E89557033Dc87dd9E51C9C7",
+      "debt": 4985844272500537216082,
+      "collateral": 2589293181652824867,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xe8486C082654C9A5a2ec2879B489a5B54AA61897": {
+      "user_address": "0xe8486C082654C9A5a2ec2879B489a5B54AA61897",
+      "debt": 4120303331846116968262,
+      "collateral": 746872242943688122,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x682085435B939199efC0BCEc821D4e5BB05f8f6e": {
+      "user_address": "0x682085435B939199efC0BCEc821D4e5BB05f8f6e",
+      "debt": 62317004977601562491819,
+      "collateral": 32378640295204987919,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xf2221a7DC1c80A05605083643769D46F42a52c24": {
+      "user_address": "0xf2221a7DC1c80A05605083643769D46F42a52c24",
+      "debt": 23428115617818698002173,
+      "collateral": 13832523036818663711,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xDB7875A11A60A6fEC2B820D34ee1528075a70DC8": {
+      "user_address": "0xDB7875A11A60A6fEC2B820D34ee1528075a70DC8",
+      "debt": 1208519352799466760715164,
+      "collateral": 813909856062474399981,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x9Be353A221c4F3762092f44896054Bd071B1481d": {
+      "user_address": "0x9Be353A221c4F3762092f44896054Bd071B1481d",
+      "debt": 4420629169203079121903,
+      "collateral": 6587367844091127588,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0xE422f29bfB983Ca2aC88a77Dfe15FB3D4C0cEE9a": {
+      "user_address": "0xE422f29bfB983Ca2aC88a77Dfe15FB3D4C0cEE9a",
+      "debt": 22378514478098402926968,
+      "collateral": 13006560060668022202,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x496A893B09c6D0c10521AEbD1ccb6bC878eC98D2": {
+      "user_address": "0x496A893B09c6D0c10521AEbD1ccb6bC878eC98D2",
+      "debt": 4353092954526310120687,
+      "collateral": 1200616791776533773,
+      "is_liquidated": false
+    },
+    "0x23F5a668A9590130940eF55964ead9787976f2CC_0x128D456203C4EAfa0D996904389fAd7204595391": {
+      "user_address": "0x128D456203C4EAfa0D996904389fAd7204595391",
+      "debt": 100061516396547591651912,
+      "collateral": 55000000000000000000,
+      "is_liquidated": false
+    },
+    "0x5756A035F276a8095A922931F224F4ed06149608_0xCe4862A567526f5F42590E17BC3638D6Df27D89E": {
+      "user_address": "0xCe4862A567526f5F42590E17BC3638D6Df27D89E",
+      "debt": 172489343078497967489770,
+      "collateral": 85772127120404599941,
+      "is_liquidated": false
+    },
+    "0x5756A035F276a8095A922931F224F4ed06149608_0xC716c9152E8228E040C7C340a1AD3817551b13ad": {
+      "user_address": "0xC716c9152E8228E040C7C340a1AD3817551b13ad",
+      "debt": 1567566629458053735483,
+      "collateral": 1012692483115925853,
+      "is_liquidated": false
+    },
+    "0x5756A035F276a8095A922931F224F4ed06149608_0xB8595D024AFa36E0205AF627E3b47bd5CA0cf67a": {
+      "user_address": "0xB8595D024AFa36E0205AF627E3b47bd5CA0cf67a",
+      "debt": 73752117577917831549916,
+      "collateral": 35648908485120124195,
+      "is_liquidated": false
+    },
+    "0x5756A035F276a8095A922931F224F4ed06149608_0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2": {
+      "user_address": "0xd843d7f790e645d8e33aa8281D24a6C1f914d0D2",
+      "debt": 17021641113478239937680,
+      "collateral": 8775312276224290611,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x8F0A3E01d916486735a8F6A2Ffc0685a3Fa57BF5": {
+      "user_address": "0x8F0A3E01d916486735a8F6A2Ffc0685a3Fa57BF5",
+      "debt": 907620292219331157614,
+      "collateral": 913283636123554236021,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x3Da48C5E033EDC7Dbb3bcC1e68293753c1Ce9cF6": {
+      "user_address": "0x3Da48C5E033EDC7Dbb3bcC1e68293753c1Ce9cF6",
+      "debt": 1016641222196879233740,
+      "collateral": 1102814516405756624896,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xc8bD7a31Ccd314C71eF5C9Ada14767a90dEcf669": {
+      "user_address": "0xc8bD7a31Ccd314C71eF5C9Ada14767a90dEcf669",
+      "debt": 20844663967237981631787,
+      "collateral": 21943844036553962074439,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xBF2d3D1A3eDfB81Be6660e480EE0E9DD780f926a": {
+      "user_address": "0xBF2d3D1A3eDfB81Be6660e480EE0E9DD780f926a",
+      "debt": 2559072804857051785639,
+      "collateral": 1248717800894417521443,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x05791640dBE10CdAf3827A93e4b43a905329aab3": {
+      "user_address": "0x05791640dBE10CdAf3827A93e4b43a905329aab3",
+      "debt": 44769493517033168572224,
+      "collateral": 44985286460694486034125,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xc7e36BC2f80543b6C244B147606f9501da6C6561": {
+      "user_address": "0xc7e36BC2f80543b6C244B147606f9501da6C6561",
+      "debt": 101034544104526030911115,
+      "collateral": 104825702316886425065501,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xbEe1f7e369B3271088Ed58bF225DF13Cd96D32d5": {
+      "user_address": "0xbEe1f7e369B3271088Ed58bF225DF13Cd96D32d5",
+      "debt": 10415056489692889,
+      "collateral": 31659925595917751815,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x50DfcA12954304d7849433c7234Ae97b62850a8A": {
+      "user_address": "0x50DfcA12954304d7849433c7234Ae97b62850a8A",
+      "debt": 20791395569359825867604,
+      "collateral": 14443727601681413367122,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x86Cb4f155693F57caf6cbeF595f129dDf70cC4D7": {
+      "user_address": "0x86Cb4f155693F57caf6cbeF595f129dDf70cC4D7",
+      "debt": 13921515349006213938337,
+      "collateral": 12555611317087066488627,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xCD7F23e12F0626e652D9207019FBAF17adB145e4": {
+      "user_address": "0xCD7F23e12F0626e652D9207019FBAF17adB145e4",
+      "debt": 14124401024701474612813,
+      "collateral": 15564803807798686701684,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x903c43553f5137C3A8A1bA0bc78ee7Fcb01FeE8F": {
+      "user_address": "0x903c43553f5137C3A8A1bA0bc78ee7Fcb01FeE8F",
+      "debt": 127058449276407814692,
+      "collateral": 149620071985168050447,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xc24eAE1f29Fe5A65C0d66778349d602DDAB94723": {
+      "user_address": "0xc24eAE1f29Fe5A65C0d66778349d602DDAB94723",
+      "debt": 203207243775867968957,
+      "collateral": 261678834231310496382,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x9B6ABB92f939488C73fAfc94B220Ae196ea50199": {
+      "user_address": "0x9B6ABB92f939488C73fAfc94B220Ae196ea50199",
+      "debt": 67877904563865888499036,
+      "collateral": 73077214451164266499731,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x370f8582678412A69353CFcBf0a7236D79B0BbdB": {
+      "user_address": "0x370f8582678412A69353CFcBf0a7236D79B0BbdB",
+      "debt": 3156210838039891793384,
+      "collateral": 1542155698832715550531,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x98826E49EbE9201fdA844940929EDcB2497b5763": {
+      "user_address": "0x98826E49EbE9201fdA844940929EDcB2497b5763",
+      "debt": 17307957235344757916385,
+      "collateral": 17405665576403182380528,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x570FC0F42eaC039DE4b74C23FED65EFF0080C858": {
+      "user_address": "0x570FC0F42eaC039DE4b74C23FED65EFF0080C858",
+      "debt": 95665357685528684623203,
+      "collateral": 99913707160758811028117,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xeCab3552289EEbe7B9Ba5286BCa4ED0f1DA0CdC3": {
+      "user_address": "0xeCab3552289EEbe7B9Ba5286BCa4ED0f1DA0CdC3",
+      "debt": 6049407415557402366290,
+      "collateral": 6088963664668836615968,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x66Ca376FcF2CFEC6577F9Ee37AcB16E757DDE563": {
+      "user_address": "0x66Ca376FcF2CFEC6577F9Ee37AcB16E757DDE563",
+      "debt": 10075878165052040525984,
+      "collateral": 10488630864889792982832,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x9953181ce2901c1FB946c29C3E1F66D70395963F": {
+      "user_address": "0x9953181ce2901c1FB946c29C3E1F66D70395963F",
+      "debt": 806386007634473214775413,
+      "collateral": 836775657226557095932514,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xC97252f98B7159251D410fE237674dC5bF7465A1": {
+      "user_address": "0xC97252f98B7159251D410fE237674dC5bF7465A1",
+      "debt": 200559024407735255702424,
+      "collateral": 209142960945814772023665,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xa6D110419B43C7a004Db2832997AA800F0Aa606D": {
+      "user_address": "0xa6D110419B43C7a004Db2832997AA800F0Aa606D",
+      "debt": 45958851959245239134,
+      "collateral": 27138306704924989536,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0xD0Cdc7978566a2Ed4D351df4da7F0Ba72161298B": {
+      "user_address": "0xD0Cdc7978566a2Ed4D351df4da7F0Ba72161298B",
+      "debt": 22229998954824873891707,
+      "collateral": 22967098912780501931424,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x037771A4c189d3B9C0b9DB7b7CB2C4EA6629bB61": {
+      "user_address": "0x037771A4c189d3B9C0b9DB7b7CB2C4EA6629bB61",
+      "debt": 1018066729657154340671,
+      "collateral": 1045673943173333334229,
+      "is_liquidated": false
+    },
+    "0x74f88Baa966407b50c10B393bBD789639EFfE78B_0x2DFF9C79CA2442d31cdCf4FaB8C004175209FA45": {
+      "user_address": "0x2DFF9C79CA2442d31cdCf4FaB8C004175209FA45",
+      "debt": 5090326790306272562421,
+      "collateral": 5235172288897162775082,
+      "is_liquidated": false
+    },
+    "0x8C2537F1a5b1b167A960A14B89f7860dd5F7cD68_0xAdE9e51C9E23d64E538A7A38656B78aB6Bcc349e": {
+      "user_address": "0xAdE9e51C9E23d64E538A7A38656B78aB6Bcc349e",
+      "debt": 20138131151675179606333,
+      "collateral": 19163625058084881922244,
+      "is_liquidated": false
+    },
+    "0x8C2537F1a5b1b167A960A14B89f7860dd5F7cD68_0x17359937bC169a348AAEA90871765ACa4071C8d3": {
+      "user_address": "0x17359937bC169a348AAEA90871765ACa4071C8d3",
+      "debt": 121754144299878777045793,
+      "collateral": 118263132667723175692939,
+      "is_liquidated": false
+    },
+    "0x8C2537F1a5b1b167A960A14B89f7860dd5F7cD68_0x1ef8019A1793EF3283742D7aa975b9a66133A2d0": {
+      "user_address": "0x1ef8019A1793EF3283742D7aa975b9a66133A2d0",
+      "debt": 3156484951391832490332,
+      "collateral": 3231711629841713996562,
+      "is_liquidated": false
+    },
+    "0x8C2537F1a5b1b167A960A14B89f7860dd5F7cD68_0x9c0D1F4a029c46265831D120DeE9CDc72F0aB3C3": {
+      "user_address": "0x9c0D1F4a029c46265831D120DeE9CDc72F0aB3C3",
+      "debt": 37538886817532922741757,
+      "collateral": 35980144251818464863866,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0xD77FD38ECB4E231a4d7259eFC7285eA6799bA597": {
+      "user_address": "0xD77FD38ECB4E231a4d7259eFC7285eA6799bA597",
+      "debt": 25192819022825392448341,
+      "collateral": 24118402559218055905280,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0x75C108dF63381E5b2FAe62d610D79A8915911AA8": {
+      "user_address": "0x75C108dF63381E5b2FAe62d610D79A8915911AA8",
+      "debt": 1001198456944522500539661,
+      "collateral": 957390102023784523286120,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0x9D9C2d013F85f61baDBD209c58Eafb83B6e130A9": {
+      "user_address": "0x9D9C2d013F85f61baDBD209c58Eafb83B6e130A9",
+      "debt": 1201629953663160370920662,
+      "collateral": 1150937101687983780101864,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0x9c0D1F4a029c46265831D120DeE9CDc72F0aB3C3": {
+      "user_address": "0x9c0D1F4a029c46265831D120DeE9CDc72F0aB3C3",
+      "debt": 45767465637234885971329,
+      "collateral": 45159698811071736595661,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0xa35908Dc3E8aE99F2853dd8863f3E19314e0a296": {
+      "user_address": "0xa35908Dc3E8aE99F2853dd8863f3E19314e0a296",
+      "debt": 18198231496221907071501,
+      "collateral": 17229153520884323255502,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0xC8801FFAaA9DfCce7299e7B4Eb616741EA01F5DE": {
+      "user_address": "0xC8801FFAaA9DfCce7299e7B4Eb616741EA01F5DE",
+      "debt": 177481410467625735328575,
+      "collateral": 169693997252331924936392,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0x80C67fe70d7D6cC488782439fad381d8646640c4": {
+      "user_address": "0x80C67fe70d7D6cC488782439fad381d8646640c4",
+      "debt": 3242853702466355998234442,
+      "collateral": 3107462414329106314942397,
+      "is_liquidated": false
+    },
+    "0xCf3DF6C1B4A6b38496661B31170de9508b867C8E_0xb152FC7E9ddf01A942685E390A74009cd2B9Ca52": {
+      "user_address": "0xb152FC7E9ddf01A942685E390A74009cd2B9Ca52",
+      "debt": 425248658149016314719938,
+      "collateral": 413928521634170605065811,
+      "is_liquidated": false
+    },
+    "0xAC9AdD93364Aea685be238dB6c40BF53753f2cF1_0xfa2DC8a07B5e823cD5C50d8b601Ef5E79E1F5A11": {
+      "user_address": "0xfa2DC8a07B5e823cD5C50d8b601Ef5E79E1F5A11",
+      "debt": 1008171336720592085,
+      "collateral": 1119772645644241997,
+      "is_liquidated": false
+    },
+    "0xAC9AdD93364Aea685be238dB6c40BF53753f2cF1_0x84a1495EDF1d5915Da0Fc7c7B770D5D591Dd32C5": {
+      "user_address": "0x84a1495EDF1d5915Da0Fc7c7B770D5D591Dd32C5",
+      "debt": 705447082840188939161,
+      "collateral": 900972153834905479981,
+      "is_liquidated": false
+    },
+    "0xAC9AdD93364Aea685be238dB6c40BF53753f2cF1_0x14E94B74B8488328A640825294D8275c0aE1DcB3": {
+      "user_address": "0x14E94B74B8488328A640825294D8275c0aE1DcB3",
+      "debt": 3614035594989745071832,
+      "collateral": 4953815532684402158371,
+      "is_liquidated": false
+    },
+    "0xDC8b1Caf2e10dE76fb67E82C2485E7d4fA098C53_0x34DC124e0eA6E0CdAc7605EC3c5153dca17B6BA1": {
+      "user_address": "0x34DC124e0eA6E0CdAc7605EC3c5153dca17B6BA1",
+      "debt": 1003717871900285556,
+      "collateral": 60000000000000000000,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0x73e60ff198FDF5bCECb92b963DD05AfAD818f2ca": {
+      "user_address": "0x73e60ff198FDF5bCECb92b963DD05AfAD818f2ca",
+      "debt": 1200101154847744065282,
+      "collateral": 685571516223399223,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0x0b09e92a7C94dCD51F3AF7846b0d194136464e91": {
+      "user_address": "0x0b09e92a7C94dCD51F3AF7846b0d194136464e91",
+      "debt": 101374878283122057379,
+      "collateral": 131678097746279078,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0xa3B75Dbb7654ba680a412D79Ad937C4262CAb1b6": {
+      "user_address": "0xa3B75Dbb7654ba680a412D79Ad937C4262CAb1b6",
+      "debt": 8790473579005062906185,
+      "collateral": 5201940835777938799,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0xf6f8A5C7bfe0FAAb623a63b7e3Bd28d704aCB29B": {
+      "user_address": "0xf6f8A5C7bfe0FAAb623a63b7e3Bd28d704aCB29B",
+      "debt": 28252874852716048471693,
+      "collateral": 21519574304034729343,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0x0329aCa1a15139e2288E58c8a8a057b7723af4f2": {
+      "user_address": "0x0329aCa1a15139e2288E58c8a8a057b7723af4f2",
+      "debt": 230041194951017229065535,
+      "collateral": 161933530305721665600,
+      "is_liquidated": false
+    },
+    "0x143985860EFaeAcB92Db23E4b0c4d66Be51b08D2_0xfC4B2a62A06cb2E1C6A743E9aE327Bb16977E4c1": {
+      "user_address": "0xfC4B2a62A06cb2E1C6A743E9aE327Bb16977E4c1",
+      "debt": 4000439234752347449520,
+      "collateral": 2750000000000000000,
+      "is_liquidated": false
+    },
+    "0xB4544e705665e0856961a51F7E86Ccf633404b86_0x7a16fF8270133F063aAb6C9977183D9e72835428": {
+      "user_address": "0x7a16fF8270133F063aAb6C9977183D9e72835428",
+      "debt": 15146784330422297757,
+      "collateral": 10000000000000000,
+      "is_liquidated": false
+    },
+    "0xB4544e705665e0856961a51F7E86Ccf633404b86_0x459b68d370006E2f6a301F10EEE21f3Ae4048036": {
+      "user_address": "0x459b68d370006E2f6a301F10EEE21f3Ae4048036",
+      "debt": 7068493871324848316054,
+      "collateral": 11000000000000000000,
+      "is_liquidated": false
+    }
+  }
+}

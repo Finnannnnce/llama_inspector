@@ -12,6 +12,20 @@
 - Most controllers use crvUSD as the borrowed token
 - Some controllers are "reverse" pairs (e.g., borrow WETH against crvUSD)
 
+## Caching System
+- SQLite-based caching for web3 calls
+- Cache duration: 4 hours
+- Cached data:
+  * Contract function calls
+  * Token information
+  * Price data
+- Cache structure:
+  * Key: contract_address:function_name:args
+  * Value: JSON-serialized result
+  * Timestamp: Last update time
+- Automatic cache cleanup for expired entries
+- Thread-safe database operations
+
 ## Controllers and Collateral Types
 
 1. wstETH Controller
@@ -169,12 +183,15 @@
   1. Iterating through `loans(uint256)` to get user addresses
   2. Checking `loan_exists(address)` for each user
   3. Getting debt/collateral amounts for active loans
+- Web3 calls are cached in SQLite with 4-hour expiration
+- Async operations supported throughout the codebase
 
 ## Current State
 - All 28 controllers are deployed and functional
 - Token prices are being successfully queried
 - Loan querying implemented through controller->AMM->admin path
 - Rate limiting implemented for both Infura and Etherscan APIs
+- SQLite caching system implemented for web3 calls
 
 ## Next Steps
 1. Implement historical loan analysis
@@ -182,3 +199,5 @@
 3. Include liquidation event monitoring
 4. Add more detailed token analytics
 5. Implement WebSocket support for real-time updates
+6. Add cache analytics and monitoring
+7. Implement cache preloading for common queries

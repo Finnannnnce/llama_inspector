@@ -1,30 +1,96 @@
 # Ethereum Loan Query Tool
 
-A Python tool for querying lending controller information from Ethereum smart contracts with optimized RPC handling and caching.
+A Python tool for querying lending vault information from Ethereum smart contracts with optimized RPC handling and SQLite-based caching.
 
-## Latest Analysis Results (2025-02-09)
+## Latest Analysis Results (2025-02-10)
 
-- Total Controllers Analyzed: 25
-- Active Loans: 345
-- Total Value Borrowed: $16.73T USD
-- Total Collateral Value: $21.81T USD
-- Analysis Duration: 573.21 seconds
+- Total Vaults Analyzed: 28
+- Active Loans: 456
+- Total Value Borrowed: $306.79T USD
+- Total Collateral Value: $18.58Q USD
+- Analysis Duration: 211.23 seconds
+- Collateralization Ratio: 6056.85%
+
+## API Documentation
+
+The project includes a FastAPI-based REST API for querying vault information:
+
+### Running the API
+
+#### Local Development
+```bash
+# Install dependencies
+pip3 install -r requirements.txt
+
+# Start the API server
+python3 api.py
+```
+
+#### Docker
+```bash
+# Build the Docker image
+docker build -t ethereum-analytics .
+
+# Run the container
+docker run -p 8080:8080 ethereum-analytics
+```
+
+#### Cloud Run Deployment
+The API is deployed on Google Cloud Run and available at:
+https://ethereum-analytics-330135650610.us-central1.run.app
+
+To deploy to Cloud Run:
+```bash
+# Build and push the image
+gcloud builds submit --tag gcr.io/[PROJECT_ID]/ethereum-analytics-api
+
+# Deploy to Cloud Run
+gcloud run deploy ethereum-analytics \
+  --image gcr.io/[PROJECT_ID]/ethereum-analytics-api \
+  --platform managed \
+  --region us-central1 \
+  --allow-unauthenticated
+```
+
+### API Endpoints
+
+- GET /api/v1/vaults - List all vaults and their tokens
+- GET /api/v1/vaults/{vault_address}/stats - Get vault statistics
+- GET /api/v1/vaults/{vault_address}/users/{user_address} - Get user position
+- GET /api/v1/vaults/{vault_address}/users - List vault users
+- GET /api/v1/users/{user_address}/positions - Get user positions
+
+### Documentation
+
+#### Local Development
+- Interactive API docs: http://localhost:8000/api/docs
+- ReDoc documentation: http://localhost:8000/api/redoc
+- OpenAPI schema: http://localhost:8000/api/openapi.json
+
+#### Production (Cloud Run)
+- Interactive API docs: https://ethereum-analytics-330135650610.us-central1.run.app/api/docs
+- ReDoc documentation: https://ethereum-analytics-330135650610.us-central1.run.app/api/redoc
+- OpenAPI schema: https://ethereum-analytics-330135650610.us-central1.run.app/api/openapi.json
+- Full API reference: [docs/api_reference.md](docs/api_reference.md)
 
 ## Features
 
-- Query factory contract for active controllers
-- Get borrowed and collateral token information for each controller
+- Query factory contract for active vaults
+- Get borrowed and collateral token information
 - Calculate USD values using current token prices
 - Support multiple RPC endpoints with fallback
 - Handle rate limiting with exponential backoff
 - Support both snake_case and camelCase function names
-- Efficient caching system for token and loan information
+- SQLite-based caching system for web3 calls
 - Batch processing for loan queries
 - Automatic RPC endpoint switching on rate limits
 - Type-safe implementation with full type hints
 - Configurable parameters via YAML
 - Colored terminal output
 - Context saving for analysis results
+- REST API with Swagger documentation
+- Docker containerization
+- Cloud Run deployment
 
 ## Architecture
 
@@ -35,63 +101,62 @@ All configuration parameters are stored in `config/analyzer_config.yaml`:
 ```yaml
 # RPC Configuration
 rpc_endpoints:
-  - https://eth.llamarpc.com
-  - https://rpc.ankr.com/eth
-  # ... more endpoints
+  - http://192.168.40.201:8545  # Local Ethereum node
 
 # Batch Processing
 batch_sizes:
-  controller_discovery: 3  # Controllers to query in parallel
-  loan_info: 5  # Loans to query in parallel
+  vault_discovery: 10
+  loan_processing: 50
 
 # Error Handling
 error_limits:
-  max_consecutive_errors: 10
-  rate_limit_retries: 3
+  max_consecutive_errors: 5
+  max_retries: 3
+  retry_delay: 1.0
 
 # Cache Configuration
 cache:
-  token_info_ttl: 43200  # 12 hours
-  loan_info_ttl: 14400   # 4 hours
-  web3_call_ttl: 300     # 5 minutes
+  enabled: true
+  storage: "sqlite"
+  location: ".cache/web3_cache.db"
+  ttl: 14400  # 4 hours in seconds
+  cleanup_interval: 3600  # Run cleanup every hour
+
+# Output
+output:
+  save_context: true
 ```
 
 ### Directory Structure
 
 ```
 .
-├── config/               # Configuration files
+├── api.py                # API server runner
+├── config/              # Configuration files
 │   └── analyzer_config.yaml
-├── contracts/           # Contract interfaces and ABIs
+├── contracts/          # Contract interfaces and ABIs
 │   └── interfaces/
-├── docs/               # Documentation
-├── src/               # Source code
-│   ├── utils/         # Utility modules
-│   └── contracts/     # Contract interaction modules
-├── .cache/            # Cache directory
-├── main.py           # Entry point
-└── README.md         # Documentation link
+├── docs/              # Documentation
+│   └── api_reference.md
+├── src/              # Source code
+│   ├── api/         # API implementation
+│   ├── utils/       # Utility modules
+│   └── contracts/   # Contract interaction modules
+├── .cache/           # Cache directory
+├── main.py          # CLI entry point
+├── Dockerfile       # Docker configuration
+└── README.md        # Documentation
 ```
 
 ### Contract Interfaces
 
-#### Factory Contract
-- Address: `0xeA6876DDE9e3467564acBeE1Ed5bac88783205E0`
-- Functions:
-  - `controllers(uint256)`: Get controller address by index
-
-#### Controller Contract
-Functions:
-- `borrowed_token()` / `borrowedToken()`: Get borrowed token address
-- `collateral_token()` / `collateralToken()`: Get collateral token address
-- `user_state(address)`: Get user loan state (collateral, debt)
-- `loans(uint256)`: Get loan addresses by index
+[Previous contract interfaces section remains the same...]
 
 ## Setup
 
 1. Install dependencies:
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 2. Create a `.env` file with your configuration:
@@ -100,35 +165,27 @@ pip install -r requirements.txt
 ETH_RPC_URL=https://your-eth-node.com
 ```
 
-## Docker Support
-
-Build and run using Docker:
-
-```bash
-# Build the image
-docker build -t eth-loan-query .
-
-# Run the container
-docker run -v $(pwd)/.cache:/app/.cache eth-loan-query
-```
-
 ## Usage
 
-Run the main script to query all controllers:
+### CLI Tool
+
+Run the main script to query all vaults:
 
 ```bash
-python main.py
+python3 main.py
 ```
 
-The script will:
-1. Load configuration from YAML
-2. Connect to Ethereum network
-3. Query the factory contract for all controllers
-4. For each controller:
-   - Get borrowed and collateral token information
-   - Calculate USD values using current token prices
-5. Display a summary for each controller and grand totals
-6. Save analysis context to .cache/context.json
+### API Server
+
+Run the API server:
+
+```bash
+python3 api.py
+```
+
+The API will be available at:
+- http://localhost:8000/api/docs (Swagger UI)
+- http://localhost:8000/api/redoc (ReDoc)
 
 ## Error Handling
 
@@ -141,46 +198,22 @@ The tool includes sophisticated error handling:
 - Automatic endpoint switching on rate limits
 - Type-safe operations with runtime checks
 
-## Output Format
-
-The tool provides colored output showing:
-- Controller information
-- Token addresses and prices
-- Controller summaries
-- Grand totals in USD
-
-Example output:
-```
-Controller 0x1234...
-Borrowed Token: Token A (0xabcd...)
-Collateral Token: Token B (0xefgh...)
-Borrowed Token Price: $1.00
-Collateral Token Price: $2653.34
-
-Active Loans: 42
-Total Borrowed: 5.17T TOKEN_A
-Total Collateral: 3.26T TOKEN_B
-Total Borrowed USD: $5.17T
-Total Collateral USD: $8.67T
-```
-
 ## Caching System
 
-The tool implements a configurable multi-level caching system:
-- Token Information: 12-hour TTL
-- Loan Information: 4-hour TTL
-- Web3 Call Results: 5-minute TTL
-- Controller Data: Session-level caching
-
-## Next Steps
-
-To enhance the tool's capabilities:
-1. Implement event-based loan tracking
-2. Add support for proxy contract patterns
-3. Include historical loan data analysis
-4. Add more detailed token analytics
-5. Implement WebSocket support for real-time updates
-6. Add support for more price feed sources
+The tool implements a SQLite-based caching system:
+- Uses SQLite for reliable and thread-safe caching
+- 4-hour expiration for all web3 calls
+- Automatic cache cleanup for expired entries
+- JSON serialization for complex data types
+- Cache structure:
+  * Key: contract_address:function_name:args
+  * Value: JSON-serialized result
+  * Timestamp: Last update time
+- Benefits:
+  * Reduced RPC calls
+  * Faster response times
+  * Lower network usage
+  * Better rate limit management
 
 ## Contributing
 

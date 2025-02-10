@@ -1,10 +1,13 @@
 import asyncio
 import threading
 import time
-from typing import Dict, List, Optional, Set, Tuple, Any
+from typing import Any, Dict, List, Optional, Set, Tuple
+
 from web3 import Web3
 from web3.types import RPCEndpoint
+
 from ..utils.rate_limiter import retry_forever
+
 
 class Web3ProviderPool:
     """Pool of Web3 providers with weighted round-robin selection"""
@@ -53,11 +56,9 @@ class Web3ProviderPool:
                         else:
                             if self.verbose:
                                 print(f"Connection test failed for {rpc['name']}, attempt {attempt + 1}/{retries}")
-                            time.sleep(1)
                     except Exception as e:
                         if self.verbose:
                             print(f"Connection test error for {rpc['name']}: {str(e)}")
-                        time.sleep(1)
                 
                 if connected:
                     self.providers.append(provider)

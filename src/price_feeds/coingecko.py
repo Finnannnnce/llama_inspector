@@ -1,5 +1,6 @@
 import asyncio
 import aiohttp
+import ssl
 from decimal import Decimal
 from typing import Optional, Dict, Tuple
 import yaml
@@ -32,6 +33,11 @@ class CoinGeckoPriceFeed(PriceFeed):
         self.base_url = 'https://api.coingecko.com/api/v3'
         self.WETH_ADDRESS = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
         self.eth_cache_key = 'eth_price_coingecko'
+        
+        # Configure SSL context
+        self.ssl_context = ssl.create_default_context()
+        self.ssl_context.check_hostname = False
+        self.ssl_context.verify_mode = ssl.CERT_NONE
     
     async def get_eth_price(self, verbose: bool = False) -> Optional[Decimal]:
         """Get ETH price in USD
@@ -56,7 +62,8 @@ class CoinGeckoPriceFeed(PriceFeed):
                 'vs_currencies': 'usd'
             }
             
-            async with aiohttp.ClientSession() as session:
+            connector = aiohttp.TCPConnector(ssl=self.ssl_context)
+            async with aiohttp.ClientSession(connector=connector) as session:
                 async with session.get(url, params=params) as response:
                     if response.status == 200:
                         data = await response.json()
@@ -92,7 +99,8 @@ class CoinGeckoPriceFeed(PriceFeed):
                 'vs_currencies': 'eth'
             }
             
-            async with aiohttp.ClientSession() as session:
+            connector = aiohttp.TCPConnector(ssl=self.ssl_context)
+            async with aiohttp.ClientSession(connector=connector) as session:
                 async with session.get(url, params=params) as response:
                     if response.status == 200:
                         data = await response.json()
