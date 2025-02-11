@@ -43,11 +43,3 @@ spec:
               path: /health
               port: 8080
             initialDelaySeconds: 5
----
-apiVersion: domains.cloudrun.com/v1alpha1
-kind: DomainMapping
-metadata:
-  name: ethereum.swacktech.com
-  namespace: default
-spec:
-  routeName: ethereum-analyzer
