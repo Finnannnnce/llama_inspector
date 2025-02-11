@@ -58,25 +58,32 @@ The script handles:
 ## Development
 
 ### Local Setup
+The project includes a start script that handles the development environment setup:
 ```bash
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate
+# Run the application (creates venv and installs dependencies if needed)
+./start.sh
+```
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Run locally
-python app.py  # Starts both Streamlit and FastAPI servers
+The script handles:
+```bash
+- Virtual environment creation and activation
+- Installation of dependencies including watchdog for better performance
+- Setting up PYTHONPATH
+- Starting both Streamlit (8501) and FastAPI (8000) servers
 ```
 
 ### Directory Structure
 ```
-├── app.py                         # Main Streamlit application
-├── Dockerfile.streamlit           # Container configuration
-├── cloud-run-config-streamlit.yaml # Cloud Run service config
-├── deploy_frontend.sh            # Deployment script
-└── requirements.txt              # Python dependencies
+├── app.py                          # Main Streamlit application
+├── run.py                          # Server process management
+├── start.sh                        # Development environment setup
+├── deployment/
+│   ├── Dockerfile.streamlit        # Container configuration
+│   └── docker-compose.yml          # Local container setup
+├── config/
+│   ├── cloud-run-config-streamlit.yaml  # Cloud Run service config
+│   └── domain-mapping.yaml         # Domain configuration
+└── requirements.txt                # Pinned Python dependencies
 ```
 
 ## Integration with API
@@ -136,7 +143,8 @@ The frontend integrates with the Loan Analytics API by:
 1. Streamlit not starting
    - Check virtual environment
    - Verify dependencies
-   - Check port availability
+   - Check port availability (8000 for API, 8501 for frontend)
+   - Run ./start.sh to reset environment
 
 2. Deployment failures
    - Verify gcloud configuration
