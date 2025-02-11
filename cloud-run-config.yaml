@@ -14,7 +14,7 @@ spec:
       containers:
         - image: us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
           env:
             - name: ALCHEMY_API_KEY
               valueFrom:
@@ -36,10 +36,10 @@ spec:
           livenessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 8000
             initialDelaySeconds: 10
           readinessProbe:
             httpGet:
               path: /health
-              port: 8080
+              port: 8000
             initialDelaySeconds: 5

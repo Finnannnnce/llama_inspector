@@ -8,14 +8,15 @@ The SwackTech frontend (swacktech.net) provides a clean, user-friendly interface
 
 ### Components
 1. Streamlit Application
-   - Location: app.py
-   - Purpose: Root page interface
+   - Location: app.py (combined frontend/API)
+   - Purpose: Root page interface and API server
    - Features: API overview, documentation links, integration examples
+   - Runs both Streamlit (port 8501) and FastAPI (port 8000) servers
 
 2. Container Infrastructure
    - Dockerfile.streamlit: Container definition
    - Base image: python:3.9-slim
-   - Exposed port: 8501
+   - Exposed port: 8000
 
 3. Cloud Run Configuration
    - Service name: swacktech-frontend
@@ -23,6 +24,7 @@ The SwackTech frontend (swacktech.net) provides a clean, user-friendly interface
    - Memory: 1Gi
    - CPU: 1 core
    - Auto-scaling: enabled (max 10 instances)
+   - Rolling updates: enabled for zero-downtime deployments
 
 ### Domain Setup
 - Primary domain: swacktech.net
@@ -39,18 +41,19 @@ The SwackTech frontend (swacktech.net) provides a clean, user-friendly interface
 
 ### Deployment Process
 ```bash
-# Deploy frontend
-./deploy_frontend.sh
+# Deploy frontend with zero-downtime updates
+gcloud run services replace cloud-run-config-streamlit.yaml --platform managed \
+  --region us-central1 --async
 ```
 
 The script handles:
 1. Building Docker image
 2. Pushing to Container Registry
-3. Deploying to Cloud Run
+3. Deploying to Cloud Run with rolling updates
 4. Setting up domain mapping
 
 ### Environment Variables
-- BASE_URL: https://ethereum.swacktech.com
+- BASE_URL: https://swacktech.com
 
 ## Development
 
@@ -64,7 +67,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Run locally
-streamlit run app.py
+python app.py  # Starts both Streamlit and FastAPI servers
 ```
 
 ### Directory Structure
@@ -78,7 +81,7 @@ streamlit run app.py
 
 ## Integration with API
 
-The frontend integrates with the Ethereum Loan Analytics API by:
+The frontend integrates with the Loan Analytics API by:
 1. Providing direct links to API documentation
 2. Showing integration examples
 3. Displaying API status
@@ -100,8 +103,12 @@ The frontend integrates with the Ethereum Loan Analytics API by:
 
 1. Health Checks
    - Path: /_stcore/health
-   - Port: 8501
-   - Initial delay: 10s
+   - Port: 800
+   - Startup Probe:
+      * Period: 1s
+      * Timeout: 1s
+      * Failure threshold: 30
+    - Readiness Probe: No initial delay
 
 2. Cloud Run Metrics
    - Request latency
@@ -120,7 +127,7 @@ The frontend integrates with the Ethereum Loan Analytics API by:
 ### Update Process
 1. Test changes locally
 2. Build and test Docker image
-3. Deploy using deploy_frontend.sh
+3. Deploy using rolling updates
 4. Verify deployment success
 
 ## Troubleshooting

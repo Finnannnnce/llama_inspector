@@ -1,7 +1,7 @@
 apiVersion: domains.cloudrun.com/v1alpha1
 kind: DomainMapping
 metadata:
-  name: ethereum.swacktech.com
+  name: swacktech.com
   namespace: default
 spec:
   routeName: ethereum-analyzer

@@ -25,7 +25,11 @@
 2. swacktech-frontend
    - Container: gcr.io/homelab-424523/swacktech-frontend:latest
    - Resources: 1Gi memory, 1 CPU
-   - Health checks on /_stcore/health endpoint
+   - Health checks:
+     * Path: /_stcore/health
+     * Startup: 1s period, 1s timeout, 30 retries
+     * Readiness: Immediate checks
+     * Port: 8000
 
 ### Domain Configuration
 1. ethereum.swacktech.com
@@ -41,15 +45,14 @@
 ## Configuration Files
 
 ### API Service
-- cloud-run-config.yaml: Service configuration
+- app.py: Combined Streamlit frontend and FastAPI backend
+- cloud-run-config.yaml: API service configuration
 - domain-mapping.yaml: Domain mapping for ethereum.swacktech.com
 - requirements.txt: Python dependencies
 
 ### Frontend
 - cloud-run-config-streamlit.yaml: Frontend service configuration
-- Dockerfile.streamlit: Container configuration
-- deploy_frontend.sh: Deployment automation
-- app.py: Streamlit application code
+- Dockerfile.streamlit: Container configuration for combined service
 
 ## Documentation
 1. API Documentation
@@ -92,13 +95,12 @@
 ### Local Setup
 ```bash
 # API Service
+# Combined frontend and API setup
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python api.py
-
-# Frontend
-streamlit run app.py
+python app.py  # Starts both Streamlit and FastAPI servers
+# Access frontend at :8501 and API at :8000
 ```
 
 ### Deployment Process
@@ -109,7 +111,8 @@ streamlit run app.py
 
 2. Frontend
    ```bash
-   ./deploy_frontend.sh
+   gcloud run services replace cloud-run-config-streamlit.yaml \
+     --platform managed --region us-central1 --async
    ```
 
 ## Current Analysis Results (2025-02-10)

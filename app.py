@@ -1,4 +1,11 @@
+import multiprocessing
 import streamlit as st
+import uvicorn
+from pathlib import Path
+import sys
+
+# Add project root to Python path for API imports
+project_root = str(Path(__file__).parent)
 
 # Page config
 st.set_page_config(
@@ -55,11 +62,11 @@ with st.container():
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("[📚 API Documentation](https://ethereum.swacktech.com/api/docs)")
+        st.markdown("[📚 API Documentation](https://swacktech.com/api/docs)")
     with col2:
-        st.markdown("[🔍 API Reference](https://ethereum.swacktech.com/api/redoc)")
+        st.markdown("[🔍 API Reference](https://swacktech.com/api/redoc)")
     with col3:
-        st.markdown("[⚙️ OpenAPI Spec](https://ethereum.swacktech.com/api/openapi.json)")
+        st.markdown("[⚙️ OpenAPI Spec](https://swacktech.com/api/openapi.json)")
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Integration Section
@@ -70,7 +77,7 @@ import requests
 
 VAULT_ADDRESS = "0x..."  # Your vault address
 response = requests.get(
-    f"https://ethereum.swacktech.com/api/v1/vaults/{VAULT_ADDRESS}/stats"
+    f"https://swacktech.com/api/v1/vaults/{VAULT_ADDRESS}/stats"
 )
 stats = response.json()
 """, language="python")
@@ -102,6 +109,22 @@ st.markdown("---")
 st.markdown("""
 <div class='centered-text'>
     <p>© 2025 SwackTech. All rights reserved.</p>
-    <p>For support or inquiries, please visit our <a href="https://ethereum.swacktech.com/api/docs">documentation</a>.</p>
+    <p>For support or inquiries, please visit our <a href="https://swacktech.com/api/docs">documentation</a>.</p>
 </div>
 """, unsafe_allow_html=True)
+
+def run_api():
+    """Run the FastAPI server"""
+    if project_root not in sys.path:
+        sys.path.append(project_root)
+    uvicorn.run(
+        "src.api.app:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=True,
+        log_level="info"
+    )
+
+if __name__ == "__main__":
+    api_process = multiprocessing.Process(target=run_api)
+    api_process.start()

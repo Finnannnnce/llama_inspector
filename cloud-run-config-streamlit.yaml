@@ -6,6 +6,8 @@ metadata:
     run.googleapis.com/ingress: all
     run.googleapis.com/ingress-status: all
     run.googleapis.com/launch-stage: BETA
+    run.googleapis.com/https-only: "true"
+    run.googleapis.com/ingress-allow-http: "false"
     run.googleapis.com/allow-unauthenticated: "true"
 spec:
   template:
@@ -16,7 +18,7 @@ spec:
       containers:
         - image: gcr.io/homelab-424523/swacktech-frontend:latest
           ports:
-            - containerPort: 8501
+            - containerPort: 8000
           resources:
             limits:
               cpu: "1"
@@ -27,14 +29,29 @@ spec:
           env:
             - name: BASE_URL
               value: "https://swacktech.com"
-          # Health checks
-          livenessProbe:
+          startupProbe:
             httpGet:
               path: /_stcore/health
-              port: 8501
-            initialDelaySeconds: 10
+              port: 8000
+            failureThreshold: 30
+            periodSeconds: 1
+            timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /_stcore/health
-              port: 8501
-            initialDelaySeconds: 5
+              port: 8000
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: 8000
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+  traffic:
+    - percent: 100
+      latestRevision: true

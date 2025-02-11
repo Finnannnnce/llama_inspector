@@ -4,7 +4,7 @@
 
 SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our platform consists of:
 
-1. Ethereum Loan Analytics API (ethereum.swacktech.com)
+1. Loan Analytics API (swacktech.com)
    - Real-time lending protocol analytics
    - Vault statistics and monitoring
    - User position tracking
@@ -23,7 +23,7 @@ SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our pla
    - FastAPI-based REST API
    - Multi-source price feeds (Chainlink/CoinGecko)
    - SQLite and Redis caching
-   - Cloud Run deployment
+   - Cloud Run deployment with zero-downtime updates
 
 2. Frontend Interface
    - Streamlit-based web application
@@ -32,7 +32,7 @@ SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our pla
    - Quick-start guides
 
 3. Infrastructure
-   - Google Cloud Run
+   - Google Cloud Run with rolling updates
    - Cloudflare DNS/CDN
    - Automated deployments
    - Health monitoring
@@ -50,14 +50,14 @@ SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our pla
 
 ### Backend API
 ```bash
-# Deploy API service
+# Deploy API service with rolling updates
 gcloud run services replace cloud-run-config.yaml
 ```
 
 ### Frontend
 ```bash
-# Deploy frontend
-./deploy_frontend.sh
+# Deploy frontend with zero-downtime updates
+gcloud run services replace cloud-run-config-streamlit.yaml
 ```
 
 ## Development
@@ -87,11 +87,11 @@ streamlit run app.py
 ## Infrastructure
 
 ### Domains
-- ethereum.swacktech.com - API service
+- swacktech.com - API service
 - swacktech.net - Frontend interface
 
 ### Cloud Resources
-- Cloud Run services
+- Cloud Run services with rolling updates
 - Container Registry
 - Secret Manager
 - Cloud Monitoring
