@@ -6,14 +6,18 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy application code and server scripts
 COPY app.py .
+COPY run.py .
+COPY src/ src/
 
-# Expose port for Streamlit
-EXPOSE 8080
+# Expose ports for Streamlit and FastAPI
+EXPOSE 8501
+EXPOSE 8000
 
 # Set environment variables
 ENV BASE_URL=https://swacktech.com
+ENV PYTHONPATH=/app
 
-# Run Streamlit
-CMD ["streamlit", "run", "app.py", "--server.port=8080", "--server.address=0.0.0.0"]
+# Run both servers using run.py
+CMD ["python", "run.py"]
