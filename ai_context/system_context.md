@@ -172,13 +172,39 @@ docker build -t ethereum-analytics .
 docker run -p 8080:8080 ethereum-analytics
 ```
 
-### Cloud Run
-- Deployed and available at:
-  https://ethereum-analyzer-330135650610.us-east1.run.app
+### Cloud Run and Custom Domain
+- Primary domain: https://ethereum.swacktech.com
+- Cloud Run service: ethereum-analyzer-oacz5ektba-ue.a.run.app
 - Auto-scaling configuration
 - Secret management for API keys
 - IAM role configuration
 - Health check endpoints
+
+### Domain Infrastructure
+- DNS Provider: Cloudflare
+- Edge IPs: 104.21.81.184, 172.67.163.97
+- SSL/TLS: Full (strict) mode
+- Automatic HTTPS enforcement
+- Edge caching and security rules
+
+### Security Features
+- Cloudflare DDoS protection
+- Browser integrity checks
+- Security headers:
+  * Strict-Transport-Security
+  * Content-Security-Policy
+  * X-Frame-Options
+  * X-Content-Type-Options
+  * X-XSS-Protection
+- Rate limiting and bot protection
+
+### Monitoring and Verification
+- DNS propagation monitoring
+- HTTPS connection verification
+- Certificate validation
+- Edge caching performance
+- Security event tracking
+- Health check monitoring
 
 ## Documentation
 - Interactive API docs: /api/docs
