@@ -1,8 +1,9 @@
-import multiprocessing
 import streamlit as st
-import uvicorn
+import subprocess
 from pathlib import Path
 import sys
+import os
+import signal
 
 # Add project root to Python path for API imports
 project_root = str(Path(__file__).parent)
@@ -113,18 +114,30 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-def run_api():
-    """Run the FastAPI server"""
-    if project_root not in sys.path:
-        sys.path.append(project_root)
-    uvicorn.run(
-        "src.api.app:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=True,
-        log_level="info"
-    )
+def cleanup(api_process):
+    """Cleanup function to terminate API process"""
+    if api_process:
+        api_process.terminate()
+        api_process.wait()
 
 if __name__ == "__main__":
-    api_process = multiprocessing.Process(target=run_api)
-    api_process.start()
+    # Start FastAPI server
+    api_process = subprocess.Popen([
+        "uvicorn",
+        "src.api.app:app",
+        "--host", "0.0.0.0",
+        "--port", "8000",
+        "--log-level", "info"
+    ])
+
+    try:
+        # Register cleanup handler
+        signal.signal(signal.SIGINT, lambda s, f: cleanup(api_process))
+        
+        # Keep the script running
+        api_process.wait()
+    except KeyboardInterrupt:
+        cleanup(api_process)
+    except Exception as e:
+        print(f"Error: {e}")
+        cleanup(api_process)

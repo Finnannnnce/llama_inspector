@@ -1,0 +1,69 @@
+Cloudflare SSL Fix for ERR_SSL_VERSION_OR_CIPHER_MISMATCH (Updated)
+
+1. DNS Settings:
+   - Go to DNS tab
+   - For all A and AAAA records:
+     * Change proxy status to DNS only (grey cloud) temporarily
+     * Verify they point to Google Cloud Run IPs:
+       A records:
+       - 216.239.32.21
+       - 216.239.34.21
+       - 216.239.36.21
+       - 216.239.38.21
+       AAAA records:
+       - 2001:4860:4802:32::15
+       - 2001:4860:4802:34::15
+       - 2001:4860:4802:36::15
+       - 2001:4860:4802:38::15
+
+2. SSL/TLS Settings:
+   - Go to SSL/TLS tab
+   - Set SSL/TLS encryption mode to "Off" temporarily
+   - Wait 2 minutes
+   - Then set to "Flexible"
+   - Wait 2 minutes
+   - Finally set to "Full" (not Full Strict)
+
+3. Edge Certificates:
+   - Go to SSL/TLS > Edge Certificates
+   - Disable all options temporarily:
+     * Always Use HTTPS: Off
+     * Automatic HTTPS Rewrites: Off
+     * TLS 1.3: Off
+   - Set Minimum TLS Version to TLS 1.2
+   - Wait 2 minutes
+
+4. Re-enable features in order:
+   a. Enable TLS 1.3
+   b. Enable Always Use HTTPS
+   c. Enable Automatic HTTPS Rewrites
+   d. Change all DNS records back to proxied (orange cloud)
+
+5. Page Rules:
+   - Remove any existing page rules
+   - Add new rule:
+     * URL Pattern: swacktech.com/*
+     * Settings:
+       - SSL: Full
+       - Cache Level: Standard
+       - Edge Cache TTL: 2 hours
+
+6. Clear DNS and Browser Cache:
+   ```bash
+   sudo dscacheutil -flushcache
+   sudo killall -HUP mDNSResponder
+   ```
+   Chrome:
+   - Go to chrome://net-internals/#dns
+   - Click "Clear host cache"
+   - Go to chrome://net-internals/#sockets
+   - Click "Flush socket pools"
+
+7. Wait 5-10 minutes for changes to propagate
+
+8. Verify with:
+   ```bash
+   ./scripts/verify_ssl_fix.sh
+   ```
+
+Note: The key is to temporarily disable proxying and gradually re-enable features to ensure proper SSL certificate propagation.

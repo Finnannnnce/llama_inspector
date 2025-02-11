@@ -1,0 +1,46 @@
+Cloudflare Configuration Update for swacktech.com
+
+1. Remove Existing Rules:
+   - Delete the forwarding page rule that redirects to ethereum.swacktech.com
+   - Remove any existing CNAME records for the root domain (@)
+
+2. DNS Configuration:
+   A Records (all proxied - orange cloud):
+   - Name: @ (root domain)
+   - Values:
+     * 216.239.32.21
+     * 216.239.34.21
+     * 216.239.36.21
+     * 216.239.38.21
+
+   AAAA Records (all proxied - orange cloud):
+   - Name: @ (root domain)
+   - Values:
+     * 2001:4860:4802:32::15
+     * 2001:4860:4802:34::15
+     * 2001:4860:4802:36::15
+     * 2001:4860:4802:38::15
+
+3. SSL/TLS Settings:
+   - SSL/TLS encryption mode: Full (strict)
+   - Always Use HTTPS: Enabled
+   - Minimum TLS Version: 1.2
+   - Automatic HTTPS Rewrites: Enabled
+
+4. Page Rules:
+   Remove any existing forwarding rules and add:
+   URL Pattern: swacktech.com/*
+   Settings:
+   - Cache Level: Standard
+   - Edge Cache TTL: 2 hours
+   - Browser Cache TTL: 4 hours
+
+5. Verification Steps:
+   a. Check DNS resolution:
+      dig swacktech.com
+
+   b. Verify HTTPS:
+      curl -v https://swacktech.com/_stcore/health
+
+   c. Monitor Cloud Run domain mapping:
+      gcloud beta run domain-mappings describe --domain swacktech.com --platform managed --region us-central1

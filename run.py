@@ -3,7 +3,6 @@ import subprocess
 import os
 from dotenv import load_dotenv
 import socket
-import threading
 import time
 
 def is_port_in_use(port):
@@ -16,13 +15,6 @@ def terminate_process(process):
     if process and process.poll() is None:
         process.terminate()
         process.wait(timeout=5)
-
-def monitor_processes(processes):
-    """Monitor processes and exit if any of them dies"""
-    while all(p.poll() is None for p in processes):
-        time.sleep(1)
-    for p in processes:
-        terminate_process(p)
 
 def main():
     # Load environment variables
@@ -53,11 +45,15 @@ def main():
             "--server.baseUrlPath", ""
         ])
 
-        # Start monitoring in a separate thread
-        monitor_thread = threading.Thread(
-            target=monitor_processes, 
-            args=([api_process, streamlit_process],))
-        monitor_thread.start()
+        print("\nServers started successfully!")
+        print("API server running at: http://localhost:8000")
+        print("Frontend running at: http://localhost:8501")
+        print("\nPress Ctrl+C to stop the servers...\n")
+
+        # Wait for either process to finish
+        api_process.wait()
+        if streamlit_process:
+            streamlit_process.wait()
 
     except KeyboardInterrupt:
         print("\nShutting down servers...")

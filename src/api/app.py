@@ -18,7 +18,10 @@ app.add_middleware(TrustedHostMiddleware, allowed_hosts=[
     "swacktech.com",
     "analyzer-oacz5ektba-ue.a.run.app"
 ])
-app.add_middleware(HTTPSRedirectMiddleware)
+
+# Only enable HTTPS redirect in production (Cloud Run)
+if not __debug__:  # __debug__ is False when running with -O flag in production
+    app.add_middleware(HTTPSRedirectMiddleware)
 
 # CORS middleware
 app.add_middleware(

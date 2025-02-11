@@ -9,8 +9,8 @@ REGION="us-central1"
 IMAGE_NAME="swacktech-frontend"
 GCR_HOSTNAME="gcr.io"
 
-echo "Building Docker image..."
-docker build -t $GCR_HOSTNAME/$PROJECT_ID/$IMAGE_NAME:latest -f deployment/Dockerfile.streamlit .
+echo "Building Docker image for amd64..."
+docker build --platform linux/amd64 -t $GCR_HOSTNAME/$PROJECT_ID/$IMAGE_NAME:latest -f deployment/Dockerfile.streamlit .
 
 echo "Pushing to Container Registry..."
 docker push $GCR_HOSTNAME/$PROJECT_ID/$IMAGE_NAME:latest

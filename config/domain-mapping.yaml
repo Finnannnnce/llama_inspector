@@ -4,4 +4,4 @@ metadata:
   name: swacktech.com
   namespace: default
 spec:
-  routeName: analyzer
+  routeName: swacktech-frontend

@@ -4,7 +4,7 @@
 
 SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our platform consists of:
 
-1. Loan Analytics API (swacktech.com)
+1. Analytics API (swacktech.com)
    - Real-time lending protocol analytics
    - Vault statistics and monitoring
    - User position tracking
@@ -45,6 +45,8 @@ SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our pla
 - [Configuration Guide](ai_context/configuration.md) - System configuration
 - [System Context](ai_context/system_context.md) - Comprehensive system context
 - [Custom Domain Setup](docs/custom_domain_setup.md) - Domain configuration
+- [Deployment Context](docs/deployment_context.md) - Deployment and SSL configuration
+- [Cloud Run DNS Setup](docs/cloud_run_dns_setup.md) - Cloud Run DNS configuration
 
 ## Deployment
 
@@ -57,7 +59,17 @@ gcloud run services replace cloud-run-config.yaml
 ### Frontend
 ```bash
 # Deploy frontend with zero-downtime updates
-gcloud run services replace cloud-run-config-streamlit.yaml
+gcloud run services replace cloud-run-config-streamlit.yaml --platform managed --region us-central1
+```
+
+### Domain Configuration
+```bash
+# Verify domain mapping
+gcloud beta run domain-mappings describe --domain swacktech.com --platform managed --region us-central1
+
+# Check DNS and SSL
+./scripts/verify_root_dns.sh
+./scripts/verify_ssl_fix.sh
 ```
 
 ## Development
@@ -65,23 +77,21 @@ gcloud run services replace cloud-run-config-streamlit.yaml
 ### Prerequisites
 - Python 3.9+
 - Google Cloud SDK
-- Docker
+- Docker (with amd64 platform support)
 - Access to required API keys
 
 ### Local Setup
+The project includes a start script that handles the development environment:
 ```bash
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate
+# Run the application (creates venv and installs dependencies if needed)
+./start.sh
+```
 
-# Install dependencies
-pip install -r requirements.txt
-
-# Run API
-python api.py
-
-# Run frontend
-streamlit run app.py
+This will:
+```bash
+- Set up Python virtual environment
+- Install all dependencies (including watchdog for better performance)
+- Start both API (port 8000) and Frontend (port 8501) servers
 ```
 
 ## Infrastructure
@@ -97,16 +107,17 @@ streamlit run app.py
 - Cloud Monitoring
 
 ### Security
-- SSL/TLS encryption
+- SSL/TLS encryption (Cloudflare Full mode)
 - Cloudflare protection
 - Regular security updates
 - Automated health checks
+- TLS 1.2+ support
 
 ## Monitoring
 
 ### Health Checks
-- API endpoint: /health
-- Frontend: /_stcore/health
+- API endpoint: http://localhost:8000/health
+- Frontend: http://localhost:8501/_stcore/health
 - Automated monitoring
 
 ### Metrics
