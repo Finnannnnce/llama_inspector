@@ -22,5 +22,8 @@ else
     activate_venv
 fi
 
+# Ensure Python path includes project root
+export PYTHONPATH=$PYTHONPATH:$(pwd)
+
 echo "Starting application in virtual environment..."
 python run.py
