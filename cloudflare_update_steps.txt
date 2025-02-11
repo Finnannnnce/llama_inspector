@@ -1,0 +1,54 @@
+Cloudflare DNS Update Steps for swacktech.com
+
+1. Access Cloudflare Dashboard DNS Settings:
+   - Go to swacktech.com domain
+   - Navigate to DNS settings
+
+2. Remove Existing Records:
+   - Delete current A records pointing to Cloudflare IPs
+   - Delete current AAAA records pointing to Cloudflare IPs
+   - Delete any existing CNAME records for the root domain
+
+3. Add New A Records:
+   For each of these IPs:
+   - 216.239.32.21
+   - 216.239.34.21
+   - 216.239.36.21
+   - 216.239.38.21
+
+   Configuration:
+   - Type: A
+   - Name: @ (root domain)
+   - Proxy status: DNS only (gray cloud) temporarily
+   - TTL: Auto
+
+4. Add New AAAA Records:
+   For each of these IPs:
+   - 2001:4860:4802:32::15
+   - 2001:4860:4802:34::15
+   - 2001:4860:4802:36::15
+   - 2001:4860:4802:38::15
+
+   Configuration:
+   - Type: AAAA
+   - Name: @ (root domain)
+   - Proxy status: DNS only (gray cloud) temporarily
+   - TTL: Auto
+
+5. Wait for Certificate Provisioning:
+   - Monitor domain mapping status:
+     gcloud beta run domain-mappings describe --domain=swacktech.com --platform managed
+   - Wait for certificate provisioning to complete (usually 15-30 minutes)
+
+6. After Certificate is Provisioned:
+   - Return to Cloudflare DNS settings
+   - Re-enable proxy (orange cloud) for all A and AAAA records
+   - Verify HTTPS is working properly
+
+7. SSL/TLS Settings:
+   - Set SSL/TLS encryption mode to "Full (strict)"
+   - Enable "Always Use HTTPS"
+   - Set Minimum TLS Version to 1.2
+   - Enable Automatic HTTPS Rewrites
+
+Note: Keep the verify_dns_records.sh script running to monitor the DNS propagation and certificate status.

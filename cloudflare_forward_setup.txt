@@ -1,0 +1,25 @@
+Cloudflare Forwarding Configuration for swacktech.com
+
+1. DNS Configuration:
+Name: @ (root domain)
+Type: CNAME
+Target: ethereum-analyzer-oacz5ektba-ue.a.run.app
+Proxy status: Proxied (orange cloud)
+TTL: Auto
+
+2. Page Rule for URL Forwarding:
+URL Pattern: swacktech.com/*
+Settings:
+- Forwarding URL
+- Status Code: 301 (Permanent Redirect)
+- Target URL: https://ethereum.swacktech.com/$1
+
+3. SSL/TLS Settings:
+- Set SSL/TLS encryption mode to "Full (strict)"
+- Enable "Always Use HTTPS"
+- Set Minimum TLS Version to 1.2
+- Enable Automatic HTTPS Rewrites
+
+After configuring:
+1. Test the redirect: curl -I https://swacktech.com
+2. Verify it redirects to https://ethereum.swacktech.com

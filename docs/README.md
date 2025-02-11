@@ -1,330 +1,127 @@
-# Ethereum Analyzer
+# SwackTech API Platform
 
-## Cloud Run Deployment
+## Overview
 
-### Prerequisites
-- Google Cloud SDK installed
-- Docker installed
-- Access to Google Cloud Console
-- Required API keys from:
-  - Alchemy
-  - Infura
-  - Ankr
+SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our platform consists of:
 
-### Setting up Secrets
+1. Ethereum Loan Analytics API (ethereum.swacktech.com)
+   - Real-time lending protocol analytics
+   - Vault statistics and monitoring
+   - User position tracking
+   - Multi-token support
 
-1. Create a Secret Manager secret for RPC credentials:
-```bash
-# Create the secret
-gcloud secrets create rpc-credentials --replication-policy="automatic"
-
-# Add the API keys
-echo -n "your-alchemy-api-key" | gcloud secrets versions add rpc-credentials --data-file=-
-echo -n "your-infura-project-id" | gcloud secrets versions add rpc-credentials --data-file=-
-echo -n "your-ankr-api-key" | gcloud secrets versions add rpc-credentials --data-file=-
-```
-
-2. Grant Secret Manager access to Cloud Run:
-```bash
-# Get your project number
-PROJECT_NUMBER=$(gcloud projects describe $(gcloud config get-value project) --format='value(projectNumber)')
-
-# Grant access to the Cloud Run service account
-gcloud projects add-iam-policy-binding $(gcloud config get-value project) \
-    --member="serviceAccount:service-$PROJECT_NUMBER@gcp-sa-cloudrun.iam.gserviceaccount.com" \
-    --role="roles/secretmanager.secretAccessor"
-```
-
-### Building and Deploying
-
-1. Build the Docker image:
-```bash
-# Set your project ID
-PROJECT_ID=$(gcloud config get-value project)
-
-# Build the image
-docker build -t gcr.io/$PROJECT_ID/ethereum-analyzer .
-
-# Push to Container Registry
-docker push gcr.io/$PROJECT_ID/ethereum-analyzer
-```
-
-2. Deploy to Cloud Run:
-```bash
-# Update PROJECT_ID in cloud-run-config.yaml
-sed -i "s/PROJECT_ID/$PROJECT_ID/g" cloud-run-config.yaml
-
-# Deploy the service
-gcloud run services replace cloud-run-config.yaml
-```
-
-3. Verify deployment:
-```bash
-# Get the service URL
-SERVICE_URL=$(gcloud run services describe ethereum-analyzer --format='value(status.url)')
-
-# Test the health endpoint
-curl $SERVICE_URL/health
-```
-
-### Monitoring
-
-Monitor your service through the Google Cloud Console:
-- Cloud Run dashboard for service metrics
-- Cloud Logging for application logs
-- Error Reporting for tracking issues
-- Cloud Monitoring for setting up alerts
-
-### Updating
-
-To update the service:
-1. Build and push a new image version
-2. Update the Cloud Run service:
-```bash
-gcloud run services update ethereum-analyzer \
-    --image gcr.io/$PROJECT_ID/ethereum-analyzer:latest
-```
-# Ethereum Loan Query Tool
-
-A Python tool for querying lending vault information from Ethereum smart contracts with optimized RPC handling and SQLite-based caching.
-
-## Latest Analysis Results (2025-02-10)
-
-- Total Vaults Analyzed: 28
-- Active Loans: 456
-- Total Value Borrowed: $306.79T USD
-- Total Collateral Value: $18.58Q USD
-- Analysis Duration: 211.23 seconds
-- Collateralization Ratio: 6056.85%
-
-## API Documentation
-
-The project includes a FastAPI-based REST API for querying vault information:
-
-### Running the API
-
-#### Local Development
-```bash
-# Install dependencies
-pip3 install -r requirements.txt
-
-# Start the API server
-python3 api.py
-```
-
-#### Docker
-```bash
-# Build the Docker image
-docker build -t ethereum-analytics .
-
-# Run the container
-docker run -p 8080:8080 ethereum-analytics
-```
-
-#### Cloud Run Deployment
-The API is deployed on Google Cloud Run and available at:
-https://ethereum-analyzer-330135650610.us-east1.run.app
-
-To deploy to Cloud Run:
-```bash
-# Build and push the image
-gcloud builds submit --tag us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
-
-# Deploy to Cloud Run
-gcloud run deploy ethereum-analyzer \
-  --image us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest \
-  --platform managed \
-  --region us-east1 \
-  --port 8080 \
-  --memory 2Gi \
-  --cpu 1 \
-  --min-instances 0 \
-  --max-instances 10 \
-  --allow-unauthenticated
-
-# Grant access to secrets
-gcloud run services add-iam-policy-binding ethereum-analyzer \
-  --region=us-east1 \
-  --member="allUsers" \
-  --role="roles/run.invoker"
-```
-
-### API Endpoints
-
-- GET /api/v1/vaults - List all vaults and their tokens
-- GET /api/v1/vaults/{vault_address}/stats - Get vault statistics
-- GET /api/v1/vaults/{vault_address}/users/{user_address} - Get user position
-- GET /api/v1/vaults/{vault_address}/users - List vault users
-- GET /api/v1/users/{user_address}/positions - Get user positions
-
-### Documentation
-
-#### Local Development
-- Interactive API docs: http://localhost:8000/api/docs
-- ReDoc documentation: http://localhost:8000/api/redoc
-- OpenAPI schema: http://localhost:8000/api/openapi.json
-
-#### Production (Cloud Run)
-- Interactive API docs: https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs
-- ReDoc documentation: https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc
-- OpenAPI schema: https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json
-- Full API reference: [docs/api_reference.md](docs/api_reference.md)
-
-## Features
-
-- Query factory contract for active vaults
-- Get borrowed and collateral token information
-- Calculate USD values using current token prices
-- Support multiple RPC endpoints with fallback
-- Handle rate limiting with exponential backoff
-- Support both snake_case and camelCase function names
-- SQLite-based caching system for web3 calls
-- Batch processing for loan queries
-- Automatic RPC endpoint switching on rate limits
-- Type-safe implementation with full type hints
-- Configurable parameters via YAML
-- Colored terminal output
-- Context saving for analysis results
-- REST API with Swagger documentation
-- Docker containerization
-- Cloud Run deployment
+2. API Hub Frontend (swacktech.net)
+   - Central access point for API documentation
+   - Integration guides and examples
+   - Real-time API status monitoring
 
 ## Architecture
 
-### Configuration
+### Components
 
-All configuration parameters are stored in `config/analyzer_config.yaml`:
+1. Backend Services
+   - FastAPI-based REST API
+   - Multi-source price feeds (Chainlink/CoinGecko)
+   - SQLite and Redis caching
+   - Cloud Run deployment
 
-```yaml
-# RPC Configuration
-rpc_endpoints:
-  - http://192.168.40.201:8545  # Local Ethereum node
+2. Frontend Interface
+   - Streamlit-based web application
+   - Clean, modern UI
+   - Documentation integration
+   - Quick-start guides
 
-# Batch Processing
-batch_sizes:
-  vault_discovery: 10
-  loan_processing: 50
+3. Infrastructure
+   - Google Cloud Run
+   - Cloudflare DNS/CDN
+   - Automated deployments
+   - Health monitoring
 
-# Error Handling
-error_limits:
-  max_consecutive_errors: 5
-  max_retries: 3
-  retry_delay: 1.0
+## Documentation
 
-# Cache Configuration
-cache:
-  enabled: true
-  storage: "sqlite"
-  location: ".cache/web3_cache.db"
-  ttl: 14400  # 4 hours in seconds
-  cleanup_interval: 3600  # Run cleanup every hour
+- [API Reference](docs/api_reference.md) - Complete API documentation
+- [Frontend Guide](docs/frontend.md) - Frontend implementation details
+- [Architecture Overview](ai_context/architecture.md) - System architecture
+- [Configuration Guide](ai_context/configuration.md) - System configuration
+- [System Context](ai_context/system_context.md) - Comprehensive system context
+- [Custom Domain Setup](docs/custom_domain_setup.md) - Domain configuration
 
-# Output
-output:
-  save_context: true
-```
+## Deployment
 
-### Directory Structure
-
-```
-.
-├── api.py                # API server runner
-├── config/              # Configuration files
-│   └── analyzer_config.yaml
-├── contracts/          # Contract interfaces and ABIs
-│   └── interfaces/
-├── docs/              # Documentation
-│   └── api_reference.md
-├── src/              # Source code
-│   ├── api/         # API implementation
-│   ├── utils/       # Utility modules
-│   └── contracts/   # Contract interaction modules
-├── .cache/           # Cache directory
-├── main.py          # CLI entry point
-├── Dockerfile       # Docker configuration
-└── README.md        # Documentation
-```
-
-### Contract Interfaces
-
-[Previous contract interfaces section remains the same...]
-
-## Setup
-
-1. Install dependencies:
+### Backend API
 ```bash
-pip3 install -r requirements.txt
+# Deploy API service
+gcloud run services replace cloud-run-config.yaml
 ```
 
-2. Create a `.env` file with your configuration:
-```
-# Optional: Add custom RPC endpoints
-ETH_RPC_URL=https://your-eth-node.com
-```
-
-## Usage
-
-### CLI Tool
-
-Run the main script to query all vaults:
-
+### Frontend
 ```bash
-python3 main.py
+# Deploy frontend
+./deploy_frontend.sh
 ```
 
-### API Server
+## Development
 
-Run the API server:
+### Prerequisites
+- Python 3.9+
+- Google Cloud SDK
+- Docker
+- Access to required API keys
 
+### Local Setup
 ```bash
-python3 api.py
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run API
+python api.py
+
+# Run frontend
+streamlit run app.py
 ```
 
-The API will be available at:
-- http://localhost:8000/api/docs (Swagger UI)
-- http://localhost:8000/api/redoc (ReDoc)
-- http://localhost:8000/api/openapi.json (OpenAPI Schema)
+## Infrastructure
 
-Production API is available at:
-- https://ethereum-analyzer-330135650610.us-east1.run.app/api/docs (Swagger UI)
-- https://ethereum-analyzer-330135650610.us-east1.run.app/api/redoc (ReDoc)
-- https://ethereum-analyzer-330135650610.us-east1.run.app/api/openapi.json (OpenAPI Schema)
+### Domains
+- ethereum.swacktech.com - API service
+- swacktech.net - Frontend interface
 
-## Error Handling
+### Cloud Resources
+- Cloud Run services
+- Container Registry
+- Secret Manager
+- Cloud Monitoring
 
-The tool includes sophisticated error handling:
-- Exponential backoff for rate limiting
-- Multiple RPC endpoint fallbacks
-- Support for different function naming conventions
-- Graceful handling of contract errors
-- Consecutive error detection
-- Automatic endpoint switching on rate limits
-- Type-safe operations with runtime checks
+### Security
+- SSL/TLS encryption
+- Cloudflare protection
+- Regular security updates
+- Automated health checks
 
-## Caching System
+## Monitoring
 
-The tool implements a SQLite-based caching system:
-- Uses SQLite for reliable and thread-safe caching
-- 4-hour expiration for all web3 calls
-- Automatic cache cleanup for expired entries
-- JSON serialization for complex data types
-- Cache structure:
-  * Key: contract_address:function_name:args
-  * Value: JSON-serialized result
-  * Timestamp: Last update time
-- Benefits:
-  * Reduced RPC calls
-  * Faster response times
-  * Lower network usage
-  * Better rate limit management
+### Health Checks
+- API endpoint: /health
+- Frontend: /_stcore/health
+- Automated monitoring
 
-## Contributing
+### Metrics
+- Request latency
+- Error rates
+- Instance count
+- Resource utilization
 
-Feel free to contribute by:
-1. Adding support for more contract patterns
-2. Implementing additional data sources
-3. Improving error handling and recovery
-4. Adding new analytics features
-5. Optimizing RPC usage patterns
-6. Enhancing caching strategies
-7. Adding tests and improving type safety
+## Support
+
+For technical support or inquiries:
+1. Review the [API Documentation](docs/api_reference.md)
+2. Check [Frontend Guide](docs/frontend.md)
+3. Visit the API Hub at [swacktech.net](https://swacktech.net)
+
+## License
+
+Copyright © 2025 SwackTech. All rights reserved.

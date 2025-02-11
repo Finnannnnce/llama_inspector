@@ -1,0 +1,49 @@
+Cloudflare DNS Configuration for swacktech.com (root domain)
+
+1. Add A Records:
+Name: @ (root domain)
+Values: 
+- 216.239.32.21
+- 216.239.34.21
+- 216.239.36.21
+- 216.239.38.21
+Proxy status: Proxied
+TTL: Auto
+
+2. Add AAAA Records:
+Name: @ (root domain)
+Values:
+- 2001:4860:4802:32::15
+- 2001:4860:4802:34::15
+- 2001:4860:4802:36::15
+- 2001:4860:4802:38::15
+Proxy status: Proxied
+TTL: Auto
+
+3. SSL/TLS Settings:
+- Set SSL/TLS encryption mode to "Full (strict)"
+- Enable "Always Use HTTPS"
+- Set Minimum TLS Version to 1.2
+- Enable Automatic HTTPS Rewrites
+
+4. Page Rules:
+Create the following rules:
+
+Cache Rule:
+URL Pattern: swacktech.com/*
+Settings:
+- Cache Level: Standard
+- Edge Cache TTL: 2 hours
+- Browser Cache TTL: 4 hours
+
+Security Rule:
+URL Pattern: swacktech.com/*
+Settings:
+- Security Level: High
+- Browser Integrity Check: On
+- Enable Bot Fight Mode
+
+After configuring these settings in Cloudflare:
+1. Wait for DNS propagation (usually 5-10 minutes)
+2. Test the domain: curl -v https://swacktech.com/health
+3. Verify SSL: openssl s_client -connect swacktech.com:443

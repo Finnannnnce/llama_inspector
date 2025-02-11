@@ -1,0 +1,7 @@
+apiVersion: domains.cloudrun.com/v1alpha1
+kind: DomainMapping
+metadata:
+  name: swacktech.net
+  namespace: default
+spec:
+  routeName: swacktech-frontend

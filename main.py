@@ -1,21 +1,48 @@
-import os
-import json
-import time
-import yaml
+import argparse
 import asyncio
-import aiohttp
+import json
 import logging
+import os
+import time
+from dataclasses import dataclass
+from pathlib import Path
+from typing import (
+    Any,
+    AsyncGenerator,
+    Dict,
+    Iterator,
+    List,
+    Optional,
+    Sequence,
+    TypedDict,
+    TypeVar,
+    Union,
+)
+
+import aiohttp
+import yaml
+from colorama import Fore, Style, init
+from dotenv import load_dotenv
 from web3 import AsyncWeb3
 from web3.contract import AsyncContract
 from web3.exceptions import ContractLogicError
-from dotenv import load_dotenv
+
 from src.utils.contract_queries import ContractQueries
+from src.utils.formatters import format_token_amount, format_usd_amount, get_token_decimals
 from src.utils.price_fetcher import PriceFetcher
-from src.utils.formatters import format_token_amount, format_usd_amount
-from colorama import init, Fore, Style
-from typing import List, Dict, Any, Optional, TypedDict, AsyncGenerator
-from dataclasses import dataclass
-from pathlib import Path
+
+T = TypeVar('T')
+
+try:
+    from tqdm import tqdm as tqdm_sync
+    from tqdm.asyncio import tqdm
+except ImportError:
+    # Fallback if tqdm not installed
+    def tqdm(iterable: Optional[Sequence[T]], **kwargs) -> Iterator[T]:
+        if iterable is not None:
+            return iter(iterable)
+        return iter([])
+    tqdm_sync = tqdm
 
 # Configure logging
 logging.basicConfig(
@@ -37,6 +64,7 @@ class TokenInfo(TypedDict):
     name: str
     symbol: str
     decimals: int
+    contract: Optional[AsyncContract]
 
 class VaultResult(TypedDict):
     """Type definition for vault analysis results"""
@@ -50,6 +78,8 @@ class VaultResult(TypedDict):
     collateral_token: str
     borrowed_price: float
     collateral_price: float
+    borrowed_decimals: int
+    collateral_decimals: int
 
 @dataclass
 class AnalyzerStats:
@@ -78,7 +108,7 @@ class AnalyzerStats:
 class LoanAnalyzer:
     """Main analyzer class for processing Ethereum loan data"""
     
-    def __init__(self):
+    def __init__(self, show_progress: bool = True):
         # Load configuration
         self.config = self._load_config()
         
@@ -88,6 +118,7 @@ class LoanAnalyzer:
         self.price_fetcher: Optional[PriceFetcher] = None
         self.factory: Optional[AsyncContract] = None
         self.stats = AnalyzerStats()
+        self.show_progress = show_progress
         
         # Track empty responses
         self.empty_responses = 0
@@ -145,6 +176,7 @@ class LoanAnalyzer:
         """Check if running on Google Cloud Platform"""
         try:
             import requests
+
             # Try to access GCP metadata server
             response = requests.get(
                 'http://metadata.google.internal',
@@ -166,8 +198,8 @@ class LoanAnalyzer:
         for endpoint in endpoints:
             try:
                 # Replace ${VAR} with environment variable values
-                import re
                 import os
+                import re
                 processed = re.sub(
                     r'\${([^}]+)}',
                     lambda m: os.environ.get(m.group(1), ''),
@@ -278,6 +310,10 @@ class LoanAnalyzer:
             borrowed_token = token_info['borrowed_token']['address']
             collateral_token = token_info['collateral_token']['address']
             
+            # Get token decimals
+            borrowed_decimals = get_token_decimals(token_info['borrowed_token'].get('contract'))
+            collateral_decimals = get_token_decimals(token_info['collateral_token'].get('contract'))
+            
             # Get token prices concurrently
             prices = await self.get_token_prices([borrowed_token, collateral_token])
             borrowed_price = prices.get(borrowed_token, 1.0)  # Default to 1.0 for stablecoins
@@ -306,7 +342,9 @@ class LoanAnalyzer:
                 'borrowed_token': borrowed_token,
                 'collateral_token': collateral_token,
                 'borrowed_price': borrowed_price,
-                'collateral_price': collateral_price
+                'collateral_price': collateral_price,
+                'borrowed_decimals': borrowed_decimals,
+                'collateral_decimals': collateral_decimals
             }
             
         except Exception as e:
@@ -342,9 +380,6 @@ class LoanAnalyzer:
                     
                 factory_abi = json.loads(factory_abi)
                 logger.info(f"Using factory ABI with {len(factory_abi)} functions")
-                for func in factory_abi:
-                    if func.get('type') == 'function':
-                        logger.info(f"Found function: {func.get('name')}")
                 
                 factory = await self.queries.get_factory_async(factory_address, factory_abi)
                 
@@ -357,12 +392,20 @@ class LoanAnalyzer:
                     market_count = await factory.functions.market_count().call()
                     logger.info(f"Found {market_count} markets")
                     
-                    # Get all vault addresses
+                    # Get all vault addresses with progress bar
                     vaults = []
+                    if self.show_progress:
+                        print(f"\nDiscovering vaults (0/{market_count})\r\n", end="")
+                    
                     for i in range(market_count):
                         vault = await factory.functions.controllers(i).call()
                         if vault != '0x' + '0' * 40:
                             vaults.append(vault)
+                        if self.show_progress:
+                            print(f"\rDiscovering vaults ({i+1}/{market_count})\r\n", end="")
+                            
+                    if self.show_progress:
+                        print("\n")
                             
                     logger.info(f"Found {len(vaults)} active vaults")
                     self.factory = factory
@@ -411,8 +454,8 @@ class LoanAnalyzer:
             
         print("\nLoan Statistics:")
         print(f"Active Loans:      {Fore.YELLOW}{len(result.get('loans', []))}{Style.RESET_ALL}")
-        print(f"Total Borrowed:    {Fore.RED}{format_token_amount(result.get('total_borrowed', 0), '')}{Style.RESET_ALL}")
-        print(f"Total Collateral:  {Fore.GREEN}{format_token_amount(result.get('total_collateral', 0), '')}{Style.RESET_ALL}")
+        print(f"Total Borrowed:    {Fore.RED}{format_token_amount(result.get('total_borrowed', 0), result['borrowed_decimals'])}{Style.RESET_ALL}")
+        print(f"Total Collateral:  {Fore.GREEN}{format_token_amount(result.get('total_collateral', 0), result['collateral_decimals'])}{Style.RESET_ALL}")
         print(f"Borrowed USD:      {Fore.RED}{format_usd_amount(result.get('total_borrowed_usd', 0))}{Style.RESET_ALL}")
         print(f"Collateral USD:    {Fore.GREEN}{format_usd_amount(result.get('total_collateral_usd', 0))}{Style.RESET_ALL}")
 
@@ -448,6 +491,9 @@ class LoanAnalyzer:
                 logger.error("Factory contract not initialized")
                 return
                 
+            if self.show_progress:
+                print(f"\nAnalyzing vaults (0/{len(vaults)})\r\n", end="")
+                
             for i, vault in enumerate(vaults, 1):
                 try:
                     logger.info(f"Analyzing vault {i}/{len(vaults)}: {vault}")
@@ -459,6 +505,8 @@ class LoanAnalyzer:
                         self.stats.total_loans += len(result.get('loans', []))
                         self.stats.total_borrowed_usd += result.get('total_borrowed_usd', 0)
                         self.stats.total_collateral_usd += result.get('total_collateral_usd', 0)
+                    if self.show_progress:
+                        print(f"\rAnalyzing vaults ({i}/{len(vaults)})\r\n", end="")
                 except Exception as e:
                     logger.error(f"Error processing vault {vault}: {str(e)}")
                     continue
@@ -499,10 +547,21 @@ class LoanAnalyzer:
         except Exception as e:
             logger.error(f"Error saving context: {str(e)}")
 
+def parse_args():
+    """Parse command line arguments"""
+    parser = argparse.ArgumentParser(description="Ethereum Loan Analytics")
+    parser.add_argument(
+        "--no-progress",
+        action="store_true",
+        help="Disable progress bars"
+    )
+    return parser.parse_args()
+
 async def main():
     """Entry point"""
+    args = parse_args()
     try:
-        async with LoanAnalyzer() as analyzer:
+        async with LoanAnalyzer(show_progress=not args.no_progress) as analyzer:
             await analyzer.run()
     except Exception as e:
         logger.error(f"Fatal error: {str(e)}")

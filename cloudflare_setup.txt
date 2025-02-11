@@ -1,0 +1,35 @@
+Cloudflare DNS Configuration for ethereum.swacktech.com
+
+1. Add CNAME Record:
+Name: ethereum
+Target: ethereum-analyzer-oacz5ektba-ue.a.run.app
+Proxy status: Proxied
+TTL: Auto
+
+2. SSL/TLS Settings:
+- Set SSL/TLS encryption mode to "Full (strict)"
+- Enable "Always Use HTTPS"
+- Set Minimum TLS Version to 1.2
+- Enable Automatic HTTPS Rewrites
+
+3. Page Rules:
+Create the following rules:
+
+Cache Rule:
+URL Pattern: ethereum.swacktech.com/*
+Settings:
+- Cache Level: Standard
+- Edge Cache TTL: 2 hours
+- Browser Cache TTL: 4 hours
+
+Security Rule:
+URL Pattern: ethereum.swacktech.com/*
+Settings:
+- Security Level: High
+- Browser Integrity Check: On
+- Enable Bot Fight Mode
+
+After configuring these settings in Cloudflare:
+1. Wait for DNS propagation (usually 5-10 minutes)
+2. Test the domain: curl -v https://ethereum.swacktech.com/health
+3. Verify SSL: openssl s_client -connect ethereum.swacktech.com:443

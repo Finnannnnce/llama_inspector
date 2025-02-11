@@ -1,0 +1,36 @@
+Cloudflare DNS Configuration for swacktech.com
+
+1. Remove any existing CNAME or forwarding rules for swacktech.com
+
+2. Add A Records:
+Name: swacktech.com (root domain)
+Add all these records:
+- 216.239.32.21
+- 216.239.34.21
+- 216.239.36.21
+- 216.239.38.21
+Proxy status: Proxied (orange cloud)
+TTL: Auto
+
+3. Add AAAA Records:
+Name: swacktech.com (root domain)
+Add all these records:
+- 2001:4860:4802:32::15
+- 2001:4860:4802:34::15
+- 2001:4860:4802:36::15
+- 2001:4860:4802:38::15
+Proxy status: Proxied (orange cloud)
+TTL: Auto
+
+4. SSL/TLS Settings:
+- Set SSL/TLS encryption mode to "Full (strict)"
+- Enable "Always Use HTTPS"
+- Set Minimum TLS Version to 1.2
+- Enable Automatic HTTPS Rewrites
+
+After configuring:
+1. Wait for DNS propagation (5-10 minutes)
+2. Wait for Google Cloud Run SSL certificate provisioning
+3. Test using: curl -I https://swacktech.com
+
+Note: These are Google's load balancer IPs specifically assigned for your Cloud Run service. Using these direct A and AAAA records will allow Google to provision the SSL certificate and properly route traffic to your service.
