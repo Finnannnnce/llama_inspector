@@ -18,7 +18,7 @@ spec:
       containers:
         - image: gcr.io/homelab-424523/swacktech-frontend:latest
           ports:
-            - containerPort: 8000
+            - containerPort: 8501
           resources:
             limits:
               cpu: "1"
@@ -32,14 +32,14 @@ spec:
           startupProbe:
             httpGet:
               path: /_stcore/health
-              port: 8000
+              port: 8501
             failureThreshold: 30
             periodSeconds: 1
             timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /_stcore/health
-              port: 8000
+              port: 8501
             initialDelaySeconds: 0
             periodSeconds: 10
             timeoutSeconds: 10
@@ -47,7 +47,7 @@ spec:
           livenessProbe:
             httpGet:
               path: /_stcore/health
-              port: 8000
+              port: 8501
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 10
