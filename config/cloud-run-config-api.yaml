@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: swacktech-frontend
+  name: swacktech-api
   annotations:
     run.googleapis.com/ingress: all
     run.googleapis.com/ingress-status: all
@@ -16,9 +16,9 @@ spec:
         autoscaling.knative.dev/maxScale: "10"
     spec:
       containers:
-        - image: gcr.io/homelab-424523/swacktech-frontend:latest
+        - image: gcr.io/homelab-424523/swacktech-api:latest
           ports:
-            - containerPort: 8501
+            - containerPort: 8000
           resources:
             limits:
               cpu: "1"
@@ -27,27 +27,27 @@ spec:
               cpu: "500m"
               memory: "512Mi"
           env:
-            - name: BASE_URL
-              value: "https://swacktech-api-330135650610.us-central1.run.app"
+            - name: FORWARDED_ALLOW_IPS
+              value: "*"
           startupProbe:
             httpGet:
-              path: /_stcore/health
-              port: 8501
+              path: /health
+              port: 8000
             failureThreshold: 30
             periodSeconds: 1
             timeoutSeconds: 1
           readinessProbe:
             httpGet:
-              path: /_stcore/health
-              port: 8501
+              path: /health
+              port: 8000
             initialDelaySeconds: 0
             periodSeconds: 10
             timeoutSeconds: 10
             failureThreshold: 3
           livenessProbe:
             httpGet:
-              path: /_stcore/health
-              port: 8501
+              path: /health
+              port: 8000
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 10

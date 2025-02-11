@@ -1,138 +1,65 @@
-# SwackTech API Platform
+# SwackTech Analytics API
 
-## Overview
+API for querying blockchain lending vault information.
 
-SwackTech provides enterprise-grade blockchain analytics APIs and tools. Our platform consists of:
+## API Documentation
 
-1. Analytics API (swacktech.com)
-   - Real-time lending protocol analytics
-   - Vault statistics and monitoring
-   - User position tracking
-   - Multi-token support
+The API is deployed at:
+- Base URL: https://swacktech-api-330135650610.us-central1.run.app
+- Swagger UI: https://swacktech-api-330135650610.us-central1.run.app/api/v1/docs
+- OpenAPI Schema: https://swacktech-api-330135650610.us-central1.run.app/api/v1/openapi.json
 
-2. API Hub Frontend (swacktech.net)
-   - Central access point for API documentation
-   - Integration guides and examples
-   - Real-time API status monitoring
+## Endpoints
 
-## Architecture
+### Health Check
+- `GET /health`: Check API health status
 
-### Components
-
-1. Backend Services
-   - FastAPI-based REST API
-   - Multi-source price feeds (Chainlink/CoinGecko)
-   - SQLite and Redis caching
-   - Cloud Run deployment with zero-downtime updates
-
-2. Frontend Interface
-   - Streamlit-based web application
-   - Clean, modern UI
-   - Documentation integration
-   - Quick-start guides
-
-3. Infrastructure
-   - Google Cloud Run with rolling updates
-   - Cloudflare DNS/CDN
-   - Automated deployments
-   - Health monitoring
-
-## Documentation
-
-- [API Reference](docs/api_reference.md) - Complete API documentation
-- [Frontend Guide](docs/frontend.md) - Frontend implementation details
-- [Architecture Overview](ai_context/architecture.md) - System architecture
-- [Configuration Guide](ai_context/configuration.md) - System configuration
-- [System Context](ai_context/system_context.md) - Comprehensive system context
-- [Custom Domain Setup](docs/custom_domain_setup.md) - Domain configuration
-- [Deployment Context](docs/deployment_context.md) - Deployment and SSL configuration
-- [Cloud Run DNS Setup](docs/cloud_run_dns_setup.md) - Cloud Run DNS configuration
-
-## Deployment
-
-### Backend API
-```bash
-# Deploy API service with rolling updates
-gcloud run services replace cloud-run-config.yaml
-```
-
-### Frontend
-```bash
-# Deploy frontend with zero-downtime updates
-gcloud run services replace cloud-run-config-streamlit.yaml --platform managed --region us-central1
-```
-
-### Domain Configuration
-```bash
-# Verify domain mapping
-gcloud beta run domain-mappings describe --domain swacktech.com --platform managed --region us-central1
-
-# Check DNS and SSL
-./scripts/verify_root_dns.sh
-./scripts/verify_ssl_fix.sh
-```
+### API v1 Endpoints
+- `GET /api/v1/rpc-nodes`: List available Ethereum RPC nodes
+- `GET /api/v1/vaults`: List all vaults with token information
+- `GET /api/v1/vaults/{vault_address}/stats`: Get statistics for a specific vault
+- `GET /api/v1/vaults/{vault_address}/users`: List users with positions in a vault
+- `GET /api/v1/vaults/{vault_address}/users/{user_address}`: Get user's position in a vault
+- `GET /api/v1/users/{user_address}/positions`: Get all positions for a user across vaults
 
 ## Development
 
-### Prerequisites
-- Python 3.9+
-- Google Cloud SDK
-- Docker (with amd64 platform support)
-- Access to required API keys
-
 ### Local Setup
-The project includes a start script that handles the development environment:
+1. Install dependencies:
 ```bash
-# Run the application (creates venv and installs dependencies if needed)
-./start.sh
+pip install -r requirements.txt
 ```
 
-This will:
+2. Run development server:
 ```bash
-- Set up Python virtual environment
-- Install all dependencies (including watchdog for better performance)
-- Start both API (port 8000) and Frontend (port 8501) servers
+uvicorn src.api.app:app --reload --port 8000
 ```
 
-## Infrastructure
+### Docker Build
+```bash
+docker build -f deployment/Dockerfile.api -t swacktech-api .
+```
 
-### Domains
-- swacktech.com - API service
-- swacktech.net - Frontend interface
+### Deployment
+Deploy to Google Cloud Run:
+```bash
+./scripts/deploy_api.sh
+```
 
-### Cloud Resources
-- Cloud Run services with rolling updates
-- Container Registry
-- Secret Manager
-- Cloud Monitoring
+## Architecture
 
-### Security
-- SSL/TLS encryption (Cloudflare Full mode)
-- Cloudflare protection
-- Regular security updates
-- Automated health checks
-- TLS 1.2+ support
+The API is built with:
+- FastAPI for the web framework
+- Python 3.9 for the runtime
+- Docker for containerization
+- Google Cloud Run for serverless deployment
 
-## Monitoring
-
-### Health Checks
-- API endpoint: http://localhost:8000/health
-- Frontend: http://localhost:8501/_stcore/health
-- Automated monitoring
-
-### Metrics
-- Request latency
-- Error rates
-- Instance count
-- Resource utilization
-
-## Support
-
-For technical support or inquiries:
-1. Review the [API Documentation](docs/api_reference.md)
-2. Check [Frontend Guide](docs/frontend.md)
-3. Visit the API Hub at [swacktech.net](https://swacktech.net)
-
-## License
-
-Copyright © 2025 SwackTech. All rights reserved.
+Key features:
+- API versioning with /api/v1 prefix
+- Interactive Swagger UI documentation
+- OpenAPI schema generation
+- Health check endpoint for monitoring
+- CORS middleware for cross-origin requests
+- Error handling middleware
+- Request validation
+- Response serialization

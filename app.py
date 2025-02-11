@@ -8,6 +8,9 @@ import signal
 # Add project root to Python path for API imports
 project_root = str(Path(__file__).parent)
 
+# Get base URL from environment or default to local development
+BASE_URL = os.getenv("BASE_URL", "http://localhost:8000")
+
 # Page config
 st.set_page_config(
     page_title="SwackTech API Hub",
@@ -63,22 +66,23 @@ with st.container():
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.markdown("[📚 API Documentation](https://swacktech.com/api/docs)")
+        st.markdown(f"[📚 API Documentation]({BASE_URL}/api/v1/docs)")
     with col2:
-        st.markdown("[🔍 API Reference](https://swacktech.com/api/redoc)")
+        st.markdown(f"[🔍 API Reference]({BASE_URL}/api/v1/redoc)")
     with col3:
-        st.markdown("[⚙️ OpenAPI Spec](https://swacktech.com/api/openapi.json)")
+        st.markdown(f"[⚙️ OpenAPI Spec]({BASE_URL}/api/v1/openapi.json)")
     st.markdown("</div>", unsafe_allow_html=True)
 
 # Integration Section
 st.markdown("## Quick Integration")
-st.code("""
+st.code(f"""
 # Example: Fetch vault statistics
 import requests
 
 VAULT_ADDRESS = "0x..."  # Your vault address
+BASE_URL = "{BASE_URL}"  # Or your API endpoint
 response = requests.get(
-    f"https://swacktech.com/api/v1/vaults/{VAULT_ADDRESS}/stats"
+    f"{{BASE_URL}}/api/v1/vaults/{{VAULT_ADDRESS}}/stats"
 )
 stats = response.json()
 """, language="python")
@@ -107,10 +111,10 @@ with col2:
 
 # Footer
 st.markdown("---")
-st.markdown("""
+st.markdown(f"""
 <div class='centered-text'>
     <p>© 2025 SwackTech. All rights reserved.</p>
-    <p>For support or inquiries, please visit our <a href="https://swacktech.com/api/docs">documentation</a>.</p>
+    <p>For support or inquiries, please visit our <a href="{BASE_URL}/api/v1/docs">documentation</a>.</p>
 </div>
 """, unsafe_allow_html=True)
 
