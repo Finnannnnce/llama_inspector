@@ -5,8 +5,8 @@ from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 from .routes import router
 
 app = FastAPI(
-    title="Ethereum Analyzer API",
-    description="API for querying Ethereum lending vault information",
+    title="SwackTech Analytics API",
+    description="API for querying blockchain lending vault information",
     version="1.0.0",
     docs_url="/api/docs",
     redoc_url="/api/redoc",
@@ -16,7 +16,7 @@ app = FastAPI(
 # Security middleware
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=[
     "swacktech.com",
-    "ethereum-analyzer-oacz5ektba-ue.a.run.app"
+    "analyzer-oacz5ektba-ue.a.run.app"
 ])
 app.add_middleware(HTTPSRedirectMiddleware)
 
@@ -25,7 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://swacktech.com",
-        "https://ethereum-analyzer-oacz5ektba-ue.a.run.app"
+        "https://analyzer-oacz5ektba-ue.a.run.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],

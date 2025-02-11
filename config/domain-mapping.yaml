@@ -4,4 +4,4 @@ metadata:
   name: swacktech.com
   namespace: default
 spec:
-  routeName: ethereum-analyzer
+  routeName: analyzer

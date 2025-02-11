@@ -1,7 +1,7 @@
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: ethereum-analyzer
+  name: analyzer
   annotations:
     run.googleapis.com/ingress: all  # Allow both internal and external traffic
 spec:
@@ -9,10 +9,10 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/maxScale: "10"
-        run.googleapis.com/client-name: "ethereum-analyzer"
+        run.googleapis.com/client-name: "analyzer"
     spec:
       containers:
-        - image: us-east1-docker.pkg.dev/homelab-424523/ethereum-analyzer/analyzer:latest
+        - image: us-east1-docker.pkg.dev/homelab-424523/analyzer/analyzer:latest
           ports:
             - containerPort: 8000
           env:
