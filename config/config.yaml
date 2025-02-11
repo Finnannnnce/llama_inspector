@@ -1,20 +1,19 @@
+api_keys:
+  etherscan: "NBEEDNWAS211ZCUH812MFS1HQ73A615IYD"
+
 rpc_nodes:
-  -- name: Erigon
-     url: https://192.168.40.201:8545
-  # - name: "Ankr Mainnet"
-  #   url: "https://rpc.ankr.com/eth"
-  # - name: "Cloudflare Mainnet"
-  #   url: "https://cloudflare-eth.com"
-  # - name: "Public Node 1"
-  #   url: "https://eth.llamarpc.com"
-  # - name: "Public Node 2"
-  #   url: "https://ethereum.publicnode.com"
-  # - name: "Public Node 3"
-  #   url: "https://rpc.flashbots.net"
-  # - name: "Alchemy Mainnet"
-  #   url: "https://eth-mainnet.g.alchemy.com/v2/demo"
-  # - name: "Infura Mainnet"
-  #   url: "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
+  - name: Erigon
+    url: https://192.168.40.201:8545
+
+# Token mappings for CoinGecko API
+coingecko_tickers:
+  "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2": "ethereum"  # WETH
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": "usd-coin"  # USDC
+  "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599": "wrapped-bitcoin"  # WBTC
+
+# Known stablecoins with fixed prices
+stable_tokens:
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48": 1.0  # USDC
 
 vaults:
   base_contract:
@@ -185,26 +184,3 @@ vaults:
     controller: "0xB4544e705665e0856961a51F7E86Ccf633404b86"
     collateral_token: "0x2103E845C5E135493Bb6c2A4f0B8651956eA8682"
     borrowed_token: "0x57B96D4aF698605563A4653D882635da59Bf11AF"
-
-stable_tokens:
-  "0xf939e0a03fb07f59a73314e73794be0e57ac1b4e": 1.0  # crvUSD
-  "0x4c9edd5852cd905f086c759e8383e09bff1e68b3": 1.0  # USDe
-  "0x9d39a5de30e57443bff2a8307a4256c8797a3497": 1.0  # sUSDe
-  "0xa663b02cf0a4b149d2ad41910cb81e23e1c41c32": 1.0  # sFRAX
-  "0xb45ad160634c528cc3d2926d9807104fa3157305": 1.0  # sDOLA
-  "0x1d08e7adc263cfc70b1babe6dc5bb339c16eec52": 1.0  # USD0/USD0++
-
-default_prices:
-  "WETH": 2500.0
-  "wstETH": 2600.0
-  "CRV": 0.5
-  "WBTC": 43000.0
-  "UwU": 1.5
-  "pufETH": 2400.0
-  "ezETH": 2450.0
-  "ETHFI": 10.0
-  "swBTC": 42500.0
-  "ynETH": 2550.0
-  "LBTC": 42800.0
-  "RCH": 5.0
-  "XAUM": 2000.0

@@ -15,7 +15,7 @@ app = FastAPI(
 
 # Security middleware
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=[
-    "ethereum.swacktech.com",
+    "swacktech.com",
     "ethereum-analyzer-oacz5ektba-ue.a.run.app"
 ])
 app.add_middleware(HTTPSRedirectMiddleware)
@@ -24,7 +24,7 @@ app.add_middleware(HTTPSRedirectMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://ethereum.swacktech.com",
+        "https://swacktech.com",
         "https://ethereum-analyzer-oacz5ektba-ue.a.run.app"
     ],
     allow_credentials=True,
